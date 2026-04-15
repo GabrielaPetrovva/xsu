@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новини | СУ „Йордан Йовков"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+    <style>
+    :root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+    :root { --green:#1D7A50; --green-light:#e1f5ee; --gold:#C9A84C; --dark:#1a2e24; --gray:#555; --light:#f0f7f3; --white:#fff; --nav-h:72px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    * { scrollbar-width: thin; scrollbar-color: #8fcfb8 #eaf4ef; }
+    *::-webkit-scrollbar { width: 10px; height: 10px; }
+    *::-webkit-scrollbar-track { background: #eaf4ef; border-radius: 10px; }
+    *::-webkit-scrollbar-thumb { background: #8fcfb8; border-radius: 10px; border: 2px solid #eaf4ef; }
+    *::-webkit-scrollbar-thumb:hover { background: #68b697; }
+    html{scroll-behavior:smooth}
+    body{font-family:'Manrope',sans-serif;color:var(--dark);background:#fff;padding-top:var(--nav-h)}
+    a{text-decoration:none;color:inherit}
+    .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.5}
+    .dropdown{position:absolute;top:calc(var(--nav-h) - 2px);left:50%;transform:translateX(-50%) translateY(8px);background:#fff;border:1px solid #e8e8e8;border-top:2px solid var(--green);min-width:180px;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 8px 32px rgba(0,0,0,.1);border-radius:0 0 12px 12px}
+    .nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+    .dropdown a{display:block;padding:.65rem 1.1rem;font-size:.88rem;border-bottom:1px solid #f0f0f0}
+    .dropdown a:last-child{border-bottom:none}
+    .layout{display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:2rem;padding:1.5rem 8vw 4rem}
+    .side-nav{position:sticky;top:calc(var(--nav-h) + 1rem);background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:1rem;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+    .side-nav h3{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem}
+    .side-nav ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+    .side-nav a{display:block;padding:.55rem .7rem;border-radius:8px;font-size:.88rem}
+    .side-nav a:hover,.side-nav a.active{background:var(--green-light);color:var(--green);font-weight:600}
+    .side-divider{border:none;border-top:1px solid #e8efeb;margin:1rem 0}
+    .hero{min-height:220px;background:var(--green-dark);border-radius:16px;display:flex;align-items:center;padding:2.5rem 3rem;color:#fff}
+    .hero h1{font-size:clamp(2rem,4.8vw,3.1rem)}
+    .news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+    .news-card{background:#fff;border:1px solid #e8efeb;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.05);display:flex;flex-direction:column;transition:transform .25s, box-shadow .25s}
+    .news-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.09)}
+    .news-media{height:190px;background:#eaf4ef}
+    .news-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .news-body{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+    .news-card .tag{display:inline-block;background:var(--green-light);color:var(--green);font-size:.72rem;padding:.25rem .6rem;border-radius:20px}
+    .news-card h3{font-size:1.05rem;margin:0}
+    .news-card p{color:var(--gray);line-height:1.65;font-size:.92rem;margin:0}
+    .btn-more{margin-top:.35rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1.5px solid var(--green);color:var(--green);padding:.7rem 1rem;border-radius:999px;font-weight:700;font-size:.82rem;letter-spacing:.03em;text-transform:uppercase;transition:background .2s,color .2s}
+    .btn-more:hover{background:var(--green);color:#fff}
+    .latest{background:#fff7d6;border:1px solid #f2e7a1;border-radius:14px;padding:1rem}
+    .latest h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem}
+    .latest-list{display:flex;flex-direction:column;gap:.65rem}
+    .latest-item{padding:.6rem .7rem;border-radius:10px;border:1px solid rgba(29,122,80,.12);background:rgba(255,255,255,.7);transition:transform .2s,background .2s}
+    .latest-item:hover{transform:translateY(-2px);background:#fff}
+    .latest-item .t{font-weight:800;font-size:.9rem;margin-bottom:.25rem;display:block;color:var(--dark)}
+    .latest-item .d{font-size:.75rem;color:var(--gray)}
+    .pagination{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:1.5rem;position:relative;z-index:0}
+    .pagination a,.pagination span{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;font-size:.88rem;font-weight:600;border:1.5px solid #e8efeb;color:var(--gray);transition:background .2s,color .2s,border-color .2s}
+    .pagination a:hover{background:var(--green-light);color:var(--green);border-color:var(--green)}
+    .pagination span.active{background:var(--green);color:#fff;border-color:var(--green)}
+    .pagination .dots{border:none;color:var(--gray);cursor:default}
+    @media(max-width:1100px){.layout{grid-template-columns:1fr}.side-nav{position:relative;top:auto}.news-grid,.footer-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){.nav-links{display:none}}
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+  <div class="layout">
+    <aside class="side-nav">
+      <h3>Категории</h3>
+      <ul>
+        <li><a href="#" class="active">Новини</a></li>
+        <li><a href="#">Олимпиади, състезания и конкурси</a></li>
+        <li><a href="#">Постижения</a></li>
+        <li><a href="#">Съобщения</a></li>
+        <li><a href="#">Твоят час</a></li>
+        <li><a href="#">Занимания по интереси</a></li>
+        <li><a href="#">Събития</a></li>
+        <li><a href="#">Твоят час</a></li>
+      </ul>
+      <hr class="side-divider">
+      <div class="latest">
+        <h4>Последни 3 новини</h4>
+        <div class="latest-list">
+          <a href="#" class="latest-item">
+            <span class="t">Начало на кампанията за прием</span>
+            <span class="d">Днес</span>
+          </a>
+          <a href="#" class="latest-item">
+            <span class="t">Отлично представяне на областен кръг</span>
+            <span class="d">Вчера</span>
+          </a>
+          <a href="#" class="latest-item">
+            <span class="t">Награда за иновативен проект</span>
+            <span class="d">Преди 3 дни</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <section class="hero"><h1>Новини и събития</h1></section>
+      <section class="news-grid">
+        <article class="news-card">
+          <div class="news-media"><img src="images/concurs.jpg" alt="Новини"></div>
+          <div class="news-body">
+            <span class="tag">Новини</span>
+            <h3>Национално отличие за ученици от СУ Йордан Йовков" – Сливен</h3>
+            <p>Даниел Константинов и Венцислав Колев от СУ „Йордан Йовков“ – Сливен завоюваха второ място в националния конкурс „Аз и изкуственият интелект след 10 години“.</p>
+            <a href="statiq.html" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-media"><img src="images/3-mart.jpg" alt="Олимпиади"></div>
+          <div class="news-body">
+            <span class="tag">Олимпиади</span>
+            <h3>Отлично представяне на областен кръг</h3>
+            <p>Ученици от училището се класираха за националния етап.</p>
+            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-media"><img src="images/levski.jpg" alt="Постижения"></div>
+          <div class="news-body">
+            <span class="tag">Постижения</span>
+            <h3>Награда за иновативен проект</h3>
+            <p>Екипът по информатика спечели награда за ученическа разработка.</p>
+            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-media"><img src="images/concurs.jpg" alt="Събития"></div>
+          <div class="news-body">
+            <span class="tag">Събития</span>
+            <h3>Ден на отворените врати</h3>
+            <p>Посрещаме родители и бъдещи ученици с демонстрации и срещи.</p>
+            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+      </section>
+      <nav class="pagination" aria-label="Страници">
+        <a href="#" aria-label="Предишна">&#8592;</a>
+        <span class="active" aria-current="page">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <span class="dots">…</span>
+        <a href="#">8</a>
+        <a href="#" aria-label="Следваща">&#8594;</a>
+      </nav>
+    </main>
+  </div>
+
+  <footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+  <script>const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40));</script>
+</body>
+</html>

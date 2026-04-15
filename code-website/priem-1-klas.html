@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Прием в 1-ви клас | СУ „Йордан Йовков"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+    <style>
+    :root {
+      --green: #1D7A50;
+      --green-dark: #0F5438;
+      --green-light: #e1f5ee;
+      --gold: #C9A84C;
+      --dark: #1a2e24;
+      --gray: #555;
+      --light: #f0f7f3;
+      --white: #fff;
+      --nav-h: 72px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { scrollbar-width: thin; scrollbar-color: #8fcfb8 #eaf4ef; }
+    *::-webkit-scrollbar { width: 10px; }
+    *::-webkit-scrollbar-track { background: #eaf4ef; border-radius: 10px; }
+    *::-webkit-scrollbar-thumb { background: #8fcfb8; border-radius: 10px; border: 2px solid #eaf4ef; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+ 
+    /* ── PAGE WRAPPER ── */
+    .page-wrapper {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+ 
+    /* ── HERO ── */
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'"';position:absolute;right:4vw;top:-2rem;font-family:'Playfair Display',serif;font-size:28rem;color:rgba(255,255,255,.04);line-height:1;pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero h1 em{font-style:italic;color:var(--gold)}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:520px;line-height:1.7;font-weight:300}
+ 
+    /* ── CONTENT LAYOUT ── */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1fr minmax(200px, 260px);
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+ 
+    /* ── SIDEBAR ── */
+    .priem-side-nav {
+      position: sticky;
+      top: calc(var(--nav-h) + 1rem);
+      align-self: start;
+      background: var(--white);
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      padding: 1.15rem 1rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .priem-side-title {
+      font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1rem; padding-bottom: .75rem;
+      border-bottom: 1px solid rgba(29,122,80,.15);
+    }
+    .priem-side-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .priem-side-list a {
+      display: block; padding: .55rem .7rem; border-radius: 8px; font-size: .88rem; color: var(--dark);
+      transition: background .15s, color .15s;
+    }
+    .priem-side-list a:hover { background: var(--green-light); color: var(--green); }
+    .priem-side-list a.is-active { background: var(--green-light); color: var(--green); font-weight: 600; border-left: 3px solid var(--green); padding-left: calc(.7rem - 3px); }
+ 
+    /* ── MAIN CONTENT ── */
+    .priem-main { min-width: 0; }
+    .section { padding: 2.5rem 0; }
+    .section h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+    .section p { line-height: 1.8; color: var(--gray); }
+ 
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
+.brochure {
+  border: none; background: transparent;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 0; transition: transform .25s; cursor: pointer;
+  width: 100%;
+}
+.brochure:hover { transform: translateY(-4px); }
+.brochure-thumb {
+  width: 100%; max-width: 100%; aspect-ratio: 4/3;
+  overflow: hidden; border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.15);
+  position: relative;
+}
+.brochure-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; top: 0; left: 0;
+  transition: opacity 0.7s ease-in-out;
+}
+.brochure-thumb img.hidden { opacity: 0; }
+.brochure-hint {
+  margin-top: .75rem; font-size: .82rem; color: var(--green);
+  font-weight: 600; letter-spacing: .04em;
+}
+ 
+/* Modal */
+.brochure-modal {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,.75); align-items: center; justify-content: center;
+}
+.brochure-modal.open { display: flex; }
+.brochure-modal-content {
+  position: relative; width: 90vw; height: 90vh;
+  background: #fff; border-radius: 12px; overflow: hidden;
+}
+.close-btn {
+  position: absolute; top: 10px; right: 14px; font-size: 2rem;
+  background: none; border: none; cursor: pointer; color: var(--dark); line-height: 1;
+}
+.download-btn {
+  position: absolute; bottom: 14px; right: 14px;
+  background: var(--green); color: #fff; padding: .5rem 1.1rem;
+  border-radius: 8px; font-size: .88rem; font-weight: 600;
+}
+.download-btn:hover { background: var(--green-dark); }
+    .card { background: #fff; border: 1px solid #e6eee9; border-radius: 16px; padding: 1.3rem; box-shadow: 0 3px 18px rgba(0,0,0,.05); }
+    .info-list { margin-top: 1rem; display: grid; gap: .7rem; }
+    .info-list li { list-style: none; color: var(--gray); font-size: .92rem; }
+ 
+    .table-section { background: var(--light); border-radius: 14px; padding: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 14px rgba(0,0,0,.05); }
+    th, td { padding: .85rem .9rem; border-bottom: 1px solid #edf2ef; text-align: left; font-size: .9rem; }
+    th { background: #f4faf7; color: var(--green); }
+    tr:last-child td { border-bottom: none; }
+ 
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: .6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nav-item > a { padding: 0 .6rem; font-size: .85rem; }
+    }
+    @media (max-width: 960px) {
+      .content-layout { grid-template-columns: 1fr; }
+      .priem-side-nav { position: relative; top: auto; order: -1; }
+      .priem-side-list { flex-direction: row; flex-wrap: wrap; gap: .5rem; }
+      .priem-side-list li { flex: 1 1 auto; min-width: 140px; }
+      .two-col { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+ 
+ <!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+  <!-- PAGE WRAPPER -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <span>/</span>
+    <a href="#">ПРИЕМ</a>
+    <span>/</span>
+    <span style="color:var(--gold)">ПРИЕМ В I КЛАС</span>
+  </div>
+  <div class="page-hero-label">Прием · I клас</div>
+  <h1>Прием в <em>I клас</em></h1>
+  <p class="page-hero-sub">Информация за кандидатстване, срокове и класиране за учебната година.</p>
+</section>
+
+  <div class="page-wrapper">
+ 
+    <!-- HERO -->
+    <!-- CONTENT + SIDEBAR -->
+    <div class="content-layout">
+ 
+      <!-- MAIN -->
+<!-- MAIN -->
+<main class="priem-main">
+  <section class="section">
+    <div class="table-section">
+      <div class="brochure reveal" onclick="openBrochure()">
+        <div class="brochure-thumb">
+          <img id="brochureImg1" src="images/1-class-img.png" alt="Брошура 1">
+          <img id="brochureImg2" src="images/1-class-img2.png" alt="Брошура 2" class="hidden">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Modal -->
+    <div id="brochureModal" class="brochure-modal" onclick="closeBrochure()">
+      <div class="brochure-modal-content" onclick="event.stopPropagation()">
+        <iframe src="broshure-1-class.pdf" width="100%" height="100%"></iframe>
+        <button class="close-btn" onclick="closeBrochure()">×</button>
+      </div>
+    </div>
+  </section>
+ 
+<section class="section">
+  <div class="table-section">
+    <h2 class="reveal">Първо класиране</h2>
+    <table class="reveal">
+      <thead><tr><th>№</th><th>Дата</th><th>Дейност</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>19 май 2025</td><td>Обявяване на свободните места (до 12:00) и отваряне на системата (от 13:00)</td></tr>
+        <tr><td>2</td><td>28 май 2025</td><td>Крайна дата за подаване на заявления (до 23:59)</td></tr>
+        <tr><td>3</td><td>30 май 2025</td><td>Обявяване на резултатите от класирането (до 14:00)</td></tr>
+        <tr><td>4</td><td>2 юни 2025</td><td>Начална дата на записване</td></tr>
+        <tr><td>5</td><td>6 юни 2025</td><td>Крайна дата на записване (до 17:00)</td></tr>
+      </tbody>
+    </table>
+ 
+    <h2 class="reveal" style="margin-top:2rem">Второ класиране</h2>
+    <table class="reveal">
+      <thead><tr><th>№</th><th>Дата</th><th>Дейност</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>10 юни 2025</td><td>Обявяване на свободните места (до 12:00) и отваряне на системата (от 13:00)</td></tr>
+        <tr><td>2</td><td>11 юни 2025</td><td>Крайна дата за подаване на заявления (до 23:59)</td></tr>
+        <tr><td>3</td><td>12 юни 2025</td><td>Обявяване на резултатите от класирането (до 14:00)</td></tr>
+        <tr><td>4</td><td>13 юни 2025</td><td>Начална дата на записване</td></tr>
+        <tr><td>5</td><td>16 юни 2025</td><td>Крайна дата на записване (до 17:00)</td></tr>
+      </tbody>
+    </table>
+ 
+    <h2 class="reveal" style="margin-top:2rem">Трето класиране</h2>
+    <table class="reveal">
+      <thead><tr><th>№</th><th>Дата</th><th>Дейност</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>18 юни 2025</td><td>Обявяване на свободните места (до 12:00) и отваряне на системата (от 13:00)</td></tr>
+        <tr><td>2</td><td>19 юни 2025</td><td>Крайна дата за подаване на заявления (до 23:59)</td></tr>
+        <tr><td>3</td><td>20 юни 2025</td><td>Обявяване на резултатите от класирането (до 14:00)</td></tr>
+        <tr><td>4</td><td>23 юни 2025</td><td>Начална дата на записване</td></tr>
+        <tr><td>5</td><td>24 юни 2025</td><td>Крайна дата на записване (до 17:00)</td></tr>
+      </tbody>
+    </table>
+ 
+    <p class="reveal" style="margin-top:1.5rem; font-size:.85rem; color:var(--gray); line-height:1.7">
+      <strong>Забележка:</strong> След третото класиране родителите на незаписаните деца подават заявления за записване в училищата, в които има свободни места.
+    </p>
+  </div>
+</section>
+      </main>
+ 
+      <!-- SIDEBAR -->
+      <aside class="priem-side-nav" aria-label="Навигация прием">
+        <p class="priem-side-title">Прием</p>
+        <ul class="priem-side-list">
+          <li><a href="priem-1-klas.html" class="is-active">Прием в I клас</a></li>
+          <li><a href="priem-5-klas.html">Прием в V клас</a></li>
+          <li><a href="priem-8-klas.html">Прием в VIII клас</a></li>
+          <li><a href="dokumenti.html">Необходими документи</a></li>
+          <li><a href="faq.html">Често задавани въпроси</a></li>
+        </ul>
+      </aside>
+ 
+    </div><!-- /content-layout -->
+ 
+  </div><!-- /page-wrapper -->
+ 
+  <!-- FOOTER — outside page-wrapper so it goes full-width -->
+  <footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+ <script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Смяна на снимките
+  const img1 = document.getElementById('brochureImg1');
+  const img2 = document.getElementById('brochureImg2');
+  let showingFirst = true;
+  setInterval(() => {
+    if (showingFirst) {
+      img1.classList.add('hidden');
+      img2.classList.remove('hidden');
+    } else {
+      img2.classList.add('hidden');
+      img1.classList.remove('hidden');
+    }
+    showingFirst = !showingFirst;
+  }, 3000);
+
+  // Modal
+  function openBrochure() {
+    document.getElementById('brochureModal').classList.add('open');
+  }
+  function closeBrochure() {
+    document.getElementById('brochureModal').classList.remove('open');
+  }
+</script>
+</body>
+</html>

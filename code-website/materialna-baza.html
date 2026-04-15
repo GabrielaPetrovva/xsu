@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Материална база | СУ „Йордан Йовков" – Сливен</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --gold-light: #f0e2b8;
+  --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#8fcfb8 #eaf4ef}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  margin-top: var(--nav-h);
+  background: var(--green-dark);
+  padding: 5.5rem 8vw 5rem;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 75% 40%, rgba(201,168,76,.13) 0%, transparent 60%);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold), transparent 65%);
+}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb svg{width:11px;height:11px;opacity:.4}
+.breadcrumb span{color:var(--gold)}
+.page-hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.2rem);color:var(--white);line-height:1.1;margin-bottom:1.2rem}
+.page-hero h1 em{color:var(--gold);font-style:italic}
+.page-hero-lead{font-size:1rem;color:rgba(255,255,255,.7);max-width:560px;line-height:1.8}
+
+/* ─── STATS STRIP ─── */
+.stats-strip {
+  background: var(--dark);
+  padding: 0 8vw;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-block {
+  padding: 2.2rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  display: flex; flex-direction: column; gap: .3rem;
+}
+.stat-block:last-child { border-right: none; }
+.stat-block .n {
+  font-size: 2.6rem; font-weight: 800; color: var(--gold);
+  line-height: 1; letter-spacing: -.02em;
+}
+.stat-block .l {
+  font-size: .78rem; color: rgba(255,255,255,.45); line-height: 1.5;
+}
+
+/* ─── SECTION UTILS ─── */
+.section-label{font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:.8rem}
+.section-label::before{content:'';width:22px;height:2px;background:var(--gold);flex-shrink:0}
+.section-label.light{color:var(--gold)}
+.section-label.light::before{background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:.9rem}
+.section-sub{font-size:.93rem;color:var(--gray);max-width:580px;line-height:1.8}
+
+/* ─── OVERVIEW SECTION ─── */
+.overview-section { padding: 5.5rem 8vw; background: var(--white); }
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-top: 3.5rem;
+}
+.overview-text p {
+  font-size: .93rem; color: var(--gray); line-height: 1.88; margin-bottom: 1.1rem;
+}
+.highlight-box {
+  margin: 2rem 0;
+  padding: 1.8rem 2rem;
+  background: var(--green-light);
+  border-left: 4px solid var(--green);
+  border-radius: 0 14px 14px 0;
+}
+.highlight-box p {
+  font-size: 1.08rem !important;
+  font-style: italic;
+  color: var(--dark) !important;
+  font-weight: 600;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+/* Feature list */
+.feature-list { display: flex; flex-direction: column; gap: 1rem; }
+.feature-item {
+  display: flex; gap: 1.1rem; align-items: flex-start;
+  padding: 1.3rem 1.5rem;
+  background: var(--white);
+  border: 1px solid rgba(29,122,80,.13);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: transform .28s, box-shadow .28s, border-color .28s;
+}
+.feature-item:hover { transform: translateX(5px); box-shadow: 0 5px 22px rgba(29,122,80,.1); border-color: rgba(29,122,80,.3); }
+.feature-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 12px; background: var(--green-light);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .28s;
+}
+.feature-item:hover .feature-icon { background: var(--green); }
+.feature-icon svg { width: 20px; height: 20px; color: var(--green); transition: color .28s; }
+.feature-item:hover .feature-icon svg { color: var(--white); }
+.feature-body h4 { font-size: .95rem; font-weight: 700; color: var(--dark); margin-bottom: .25rem; }
+.feature-body p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+
+/* ─── SPACES SECTION ─── */
+.spaces-section { padding: 5.5rem 8vw; background: var(--light); }
+.spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin-top: 3.5rem;
+}
+.space-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  transition: transform .35s, box-shadow .35s;
+  position: relative;
+}
+.space-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.1); }
+.space-card-img {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.space-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s;
+}
+.space-card:hover .space-card-img img { transform: scale(1.05); }
+.space-img-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: .7rem;
+  color: rgba(255,255,255,.4); width: 100%; height: 100%; min-height: 200px;
+}
+.space-img-placeholder svg { width: 40px; height: 40px; }
+.space-img-placeholder span { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+.space-tag {
+  position: absolute; top: 1rem; right: 1rem;
+  background: rgba(201,168,76,.92);
+  color: var(--dark); font-size: .6rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 50px;
+}
+.space-card-body { padding: 1.5rem; }
+.space-card-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
+.space-card-body p { font-size: .82rem; color: var(--gray); line-height: 1.65; margin-bottom: .9rem; }
+.space-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.space-meta-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: .73rem; color: var(--green); font-weight: 600;
+}
+.space-meta-item svg { width: 12px; height: 12px; }
+
+/* Wide card spanning 2 cols */
+.space-card.wide { grid-column: span 2; }
+.space-card.wide .space-card-img { aspect-ratio: 16/7; }
+
+/* ─── TECH SECTION ─── */
+.tech-section {
+  padding: 5.5rem 8vw;
+  background: linear-gradient(150deg, var(--green-dark) 0%, #156642 100%);
+  position: relative; overflow: hidden;
+}
+.tech-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 15% 80%, rgba(201,168,76,.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+.tech-section .section-title { color: var(--white); }
+.tech-section .section-sub { color: rgba(255,255,255,.58); }
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.3rem;
+  margin-top: 3.5rem;
+}
+.tech-card {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 16px;
+  padding: 1.7rem;
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  transition: background .28s, transform .28s;
+}
+.tech-card:hover { background: rgba(255,255,255,.13); transform: translateY(-3px); }
+.tech-icon {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: rgba(201,168,76,.16);
+  border: 1px solid rgba(201,168,76,.28);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tech-icon svg { width: 20px; height: 20px; color: var(--gold); }
+.tech-body h4 { font-size: .97rem; font-weight: 600; color: var(--white); margin-bottom: .35rem; }
+.tech-body p { font-size: .82rem; color: rgba(255,255,255,.58); line-height: 1.62; }
+
+/* ─── GALLERY ─── */
+.gallery-section { padding: 5.5rem 8vw; background: var(--light); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.g-item {
+  background: rgba(29,122,80,.1);
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .3s;
+}
+.g-item:hover { transform: scale(1.02); }
+.g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.g-item:hover img { transform: scale(1.06); }
+.g-item.tall { grid-row: span 2; }
+.g-item.wide { grid-column: span 2; }
+.g-item { aspect-ratio: 1; }
+.g-item.tall { aspect-ratio: auto; }
+.g-item.wide { aspect-ratio: 2/1; }
+.g-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: .6rem;
+  color: var(--green); opacity: .35;
+  width: 100%; min-height: 160px; padding: 2rem;
+}
+.g-placeholder svg { width: 30px; height: 30px; }
+.g-placeholder span { font-size: .68rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.g-overlay {
+  position: absolute; inset: 0;
+  background: rgba(15,84,56,0);
+  transition: background .3s;
+}
+.g-item:hover .g-overlay { background: rgba(15,84,56,.14); }
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s,transform .65s}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s,transform .7s}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s,transform .7s}
+.reveal-right.visible{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .overview-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .spaces-grid { grid-template-columns: 1fr 1fr; }
+  .space-card.wide { grid-column: span 2; }
+  .tech-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .g-item.tall { grid-row: span 1; aspect-ratio: 1; }
+  .g-item.wide { grid-column: span 2; }
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .stats-strip{grid-template-columns:1fr 1fr}
+  .stat-block:nth-child(2){border-right:none}
+  .stat-block:nth-child(3){border-top:1px solid rgba(255,255,255,.07)}
+  .spaces-grid,.extra-grid{grid-template-columns:1fr}
+  .space-card.wide{grid-column:span 1}
+  .space-card.wide .space-card-img{aspect-ratio:4/3}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .g-item.tall,.g-item.wide{grid-column:span 1;grid-row:span 1;aspect-ratio:1}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  section,.overview-section,.spaces-section,.tech-section,.extra-section,.gallery-section{padding-left:5vw;padding-right:5vw}
+  .page-hero{padding-left:5vw;padding-right:5vw}
+  .stats-strip{padding-left:5vw;padding-right:5vw}
+  footer{padding-left:5vw;padding-right:5vw}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="history.html">История</a>
+      <a href="ekip.html">Екип</a>
+      <a href="uniformi.html">Униформи</a>
+      <a href="materialna-baza.html">Материална база</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    <a href="#">ЗА НАС</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    <span>МАТЕРИАЛНА БАЗА</span>
+  </div>
+  <div class="page-hero-eyebrow">Инфраструктура · Технологии · Среда</div>
+  <h1>Нашата<br><em>материална</em> база</h1>
+  <p class="page-hero-lead">Модерна учебна среда, оборудвана с най-новите технологии — за да могат учениците да учат, творят и се развиват в пространство, достойно за техния потенциал.</p>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-block">
+    <div class="n">30+</div>
+    <div class="l">Учебни кабинета и класни стаи</div>
+  </div>
+  <div class="stat-block">
+    <div class="n">5</div>
+    <div class="l">Компютърни лаборатории</div>
+  </div>
+  <div class="stat-block">
+    <div class="n">800+</div>
+    <div class="l">Ученици в модерна среда всяка година</div>
+  </div>
+  <div class="stat-block">
+    <div class="n">2</div>
+    <div class="l">Спортни зали и открити игрища</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="overview-section">
+  <div class="section-label reveal">Обща информация</div>
+  <h2 class="section-title reveal">Пространство за<br>успех и развитие</h2>
+
+  <div class="overview-grid">
+    <div class="reveal-left">
+      <div class="overview-text">
+        <p>СУ „Йордан Йовков" разполага с просторна и добре поддържана сграда, осигуряваща комфортна и безопасна среда за над 800 ученици. Благодарение на последователни инвестиции в инфраструктурата, днес училището предлага модерно оборудвани пространства, отговарящи на изискванията на съвременното образование.</p>
+        <p>В центъра на нашата стратегия стои убеждението, че добрата материална база е фундамент на качественото обучение. Затова непрекъснато обновяваме и разширяваме възможностите — от дигитализирани класни стаи до специализирани лаборатории по програмиране.</p>
+        <div class="highlight-box">
+          <p>Учебната среда трябва да вдъхновява. Ние вярваме, че пространството, в което учи детето, оформя начина, по който то мисли и твори.</p>
+        </div>
+        <p>Сградният фонд е разпределен на няколко етажа с ясна функционална логика — учебни кабинети, лаборатории, спортни съоръжения и административни помещения, свързани с добро вертикално и хоризонтално движение.</p>
+      </div>
+    </div>
+
+    <div class="feature-list reveal-right">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="feature-body">
+          <h4>Просторна учебна сграда</h4>
+          <p>Многоетажна сграда с добре организирани класни стаи, коридори и общи пространства за учениците.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="feature-body">
+          <h4>Дигитализирани класни стаи</h4>
+          <p>Интерактивни дъски, проектори и мултимедийно оборудване в учебните кабинети.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="feature-body">
+          <h4>Специализирани лаборатории</h4>
+          <p>Компютърни зали, кабинети по природни науки и технологии с актуално оборудване.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="feature-body">
+          <h4>Достъпна среда</h4>
+          <p>Адаптирани пространства и осигурен достъп за ученици с различни потребности.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature-body">
+          <h4>Сигурна и безопасна среда</h4>
+          <p>Видеонаблюдение, контролиран достъп и поддържан безопасен периметър за учениците.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACES -->
+<section class="spaces-section">
+  <div class="section-label reveal">Учебни пространства</div>
+  <h2 class="section-title reveal">Нашите помещения</h2>
+  <p class="section-sub reveal">Всяко пространство е проектирано и оборудвано с конкретна цел — да подпомага учебния процес и да стимулира любопитството.</p>
+
+  <div class="spaces-grid">
+
+    <!-- Wide card -->
+    <div class="space-card wide reveal">
+      <div class="space-card-img">
+        <!-- <img src="kabineti-programirane.jpg" alt="Компютърни лаборатории"> -->
+        <div class="space-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="space-tag">Дигитален център</span>
+      </div>
+      <div class="space-card-body">
+        <h3>Компютърни лаборатории по програмиране</h3>
+        <p>Пет напълно оборудвани компютърни зали с актуална техника, осигуряващи практическо обучение по „Визуално програмиране", КМИТ и специалност „Приложен програмист". Всяко работно място разполага с модерен компютър и необходимия лицензиран софтуер.</p>
+        <div class="space-meta">
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            5 зали
+          </div>
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            до 30 работни места / зала
+          </div>
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Бърз интернет · Проектор
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-card reveal" style="transition-delay:.1s">
+      <div class="space-card-img">
+        <div class="space-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="space-tag">Обучение</span>
+      </div>
+      <div class="space-card-body">
+        <h3>Класни стаи и учебни кабинети</h3>
+        <p>Над 30 просторни класни стаи с интерактивни дъски, оформени за ефективно и вдъхновяващо обучение.</p>
+        <div class="space-meta">
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            30+ стаи
+          </div>
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+            Интерактивни дъски
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-card reveal" style="transition-delay:.2s">
+      <div class="space-card-img">
+        <div class="space-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="space-tag">Наука</span>
+      </div>
+      <div class="space-card-body">
+        <h3>Кабинети по природни науки</h3>
+        <p>Оборудвани лаборатории по химия, биология и физика за практически експерименти и нагледно обучение.</p>
+        <div class="space-meta">
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+            Химия · Биология · Физика
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-card reveal" style="transition-delay:.05s">
+      <div class="space-card-img">
+        <div class="space-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="space-tag">Култура</span>
+      </div>
+      <div class="space-card-body">
+        <h3>Библиотека и медиатека</h3>
+        <p>Богат фонд от учебна и художествена литература, достъпна за всички ученици в приятна читалня.</p>
+        <div class="space-meta">
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/></svg>
+            Книги · Периодика · Медии
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-card reveal" style="transition-delay:.15s">
+      <div class="space-card-img">
+        <div class="space-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="space-tag">Хранене</span>
+      </div>
+      <div class="space-card-body">
+        <h3>Стол и бюфет</h3>
+        <p>Просторен ученически стол с разнообразно и балансирано меню, осигуряващ комфортна среда за почивка.</p>
+        <div class="space-meta">
+          <div class="space-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+            Топла храна · Бюфет
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="tech-section">
+  <div class="section-label light reveal">Технологии</div>
+  <h2 class="section-title reveal">Дигитална инфраструктура</h2>
+  <p class="section-sub reveal">Инвестираме непрекъснато в технологична модернизация — защото подготовката на програмисти и дигитални специалисти изисква първокласна техника.</p>
+
+  <div class="tech-grid">
+    <div class="tech-card reveal">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Интерактивни дъски и проектори</h4>
+        <p>Модерни интерактивни дъски в учебните кабинети, позволяващи динамично и ангажиращо преподаване с мултимедийно съдържание.</p>
+      </div>
+    </div>
+    <div class="tech-card reveal" style="transition-delay:.1s">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Компютри и работни станции</h4>
+        <p>Актуални компютърни конфигурации в петте специализирани лаборатории, осигуряващи плавна работа с иновативен образователен софтуер.</p>
+      </div>
+    </div>
+    <div class="tech-card reveal" style="transition-delay:.05s">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/><path d="M1 18l5.5-5.5L12 18l5.5-5.5L23 18"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Безжична мрежа (Wi-Fi)</h4>
+        <p>Покритие на целия учебен корпус с бърз и стабилен безжичен интернет за учениците и педагогическия персонал.</p>
+      </div>
+    </div>
+    <div class="tech-card reveal" style="transition-delay:.15s">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Електронен дневник</h4>
+        <p>Дигитална платформа за управление на учебния процес, осигуряваща прозрачна и навременна комуникация с родителите.</p>
+      </div>
+    </div>
+    <div class="tech-card reveal" style="transition-delay:.1s">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Система за видеонаблюдение</h4>
+        <p>Модерна система за видеонаблюдение в целия периметър на училището, гарантираща безопасността на учениците.</p>
+      </div>
+    </div>
+    <div class="tech-card reveal" style="transition-delay:.2s">
+      <div class="tech-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+      </div>
+      <div class="tech-body">
+        <h4>Лицензиран образователен софтуер</h4>
+        <p>Пълен пакет от лицензирани програмни продукти за обучение по програмиране, офис приложения и творчески дисциплини.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="section-label reveal">Галерия</div>
+  <h2 class="section-title reveal">Снимки от пространствата</h2>
+  <p class="section-sub reveal">Разгледайте нашите учебни, спортни и творчески пространства — среда, в която децата прекарват своите учебни години.</p>
+
+  <div class="gallery-grid reveal">
+    <!-- Tall card (row span 2) -->
+    <div class="g-item tall">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Компютърна зала</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+    <!-- Wide -->
+    <div class="g-item wide">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Спортна зала</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+    <!-- Normal -->
+    <div class="g-item">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Класна стая</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Библиотека</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Актова зала</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item">
+      <div class="g-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Двор и игрище</span>
+      </div>
+      <div class="g-overlay"></div>
+    </div>
+  </div>
+
+  <p style="font-size:.76rem;color:var(--gray);margin-top:1.2rem;font-style:italic" class="reveal">
+    * Заменете placeholder блоковете с реални снимки — добавете <code style="background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px">&lt;img src="..." alt="..."&gt;</code> вътре в съответния <code style="background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px">.g-item</code>.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  hamburger.classList.toggle('open', menuOpen);
+  mobileMenu.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+function toggleMobSub(btn) {
+  const item = btn.closest('.mobile-menu-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.mobile-menu-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учебни планове | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:600px;line-height:1.7;font-weight:300}
+
+/* CONTENT */
+.content-wrap{max-width:1100px;margin:0 auto;padding:4rem 8vw}
+
+/* SECTION LABEL */
+.section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+
+/* DOWNLOAD HERO CARD */
+.download-hero{background:var(--green-dark);border-radius:20px;padding:3rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;margin-bottom:3.5rem;position:relative;overflow:hidden}
+.download-hero::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.download-hero-label{font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.download-hero h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:#fff;line-height:1.2;margin-bottom:.7rem}
+.download-hero p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.7;max-width:460px}
+.download-hero-meta{display:flex;gap:1.5rem;margin-top:1.2rem;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:rgba(255,255,255,.45)}
+.meta-item svg{width:13px;height:13px;color:var(--gold)}
+.btn-download{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--dark);padding:1rem 1.8rem;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:50px;white-space:nowrap;transition:opacity .3s,transform .2s;flex-shrink:0}
+.btn-download:hover{opacity:.88;transform:translateY(-2px)}
+.btn-download svg{width:16px;height:16px}
+
+/* ETAP TABS */
+.etap-nav{display:flex;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.etap-btn{padding:.55rem 1.2rem;font-size:.8rem;font-weight:600;border-radius:50px;border:1.5px solid rgba(0,0,0,.12);background:transparent;color:var(--gray);cursor:pointer;transition:all .2s;font-family:'Manrope',sans-serif}
+.etap-btn.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark)}
+.etap-btn:hover:not(.active){border-color:var(--green);color:var(--green)}
+.etap-section{display:none}
+.etap-section.active{display:block}
+
+/* PLAN CARDS GRID */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.plan-card{background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:1.2rem 1.3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:box-shadow .2s,transform .2s,border-color .2s}
+.plan-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);transform:translateY(-2px);border-color:rgba(29,122,80,.25)}
+.plan-card-left{display:flex;align-items:center;gap:.9rem}
+.plan-icon{width:38px;height:38px;background:var(--green-light);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.plan-icon svg{width:16px;height:16px;color:var(--green)}
+.plan-klas{font-size:.88rem;font-weight:600;color:var(--dark);line-height:1.3}
+.plan-sub{font-size:.72rem;color:var(--gray);margin-top:.15rem}
+.plan-badge{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(29,122,80,.08);color:var(--green);border:1px solid rgba(29,122,80,.2);padding:2px 8px;border-radius:50px;display:inline-block;margin-top:.3rem}
+.plan-badge.prof{background:rgba(201,168,76,.1);color:#8a6610;border-color:rgba(201,168,76,.3)}
+.plan-dl{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;color:var(--green);white-space:nowrap;transition:color .2s}
+.plan-dl:hover{color:var(--green-dark)}
+.plan-dl svg{width:14px;height:14px}
+
+/* ETAP HEADER */
+.etap-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.etap-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-dark);color:#fff;font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;padding:.45rem 1.2rem;border-radius:50px}
+.etap-badge-sub{font-size:.6rem;font-family:'Manrope',sans-serif;font-style:normal;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-left:.2rem}
+.etap-line{flex:1;height:1px;background:rgba(0,0,0,.08)}
+
+/* INFO NOTE */
+.info-note{background:var(--light);border-radius:12px;padding:1.2rem 1.5rem;margin-top:2.5rem;display:flex;align-items:flex-start;gap:1rem}
+.info-note-icon{width:36px;height:36px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-note-icon svg{width:16px;height:16px;color:#fff}
+.info-note p{font-size:.83rem;color:var(--gray);line-height:1.7}
+.info-note strong{color:var(--dark)}
+.info-note a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){.plans-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .download-hero{grid-template-columns:1fr;gap:1.5rem}
+  .plans-grid{grid-template-columns:1fr}
+  .content-wrap{padding-left:5vw;padding-right:5vw}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="vanshno-otsenqvane.html">Външно оценяване</a>
+      <a href="uchebni-planove.html">Учебни планове</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a><span>/</span>
+    <a href="#">Обучение</a><span>/</span>
+    <span style="color:var(--gold)">Учебни планове</span>
+  </div>
+  <div class="page-hero-label">Обучение · 2025/2026</div>
+  <h1>Учебни<br>планове</h1>
+  <p class="page-hero-sub">Училищните учебни планове за учебната 2025/2026 година, утвърдени от директора и съгласувани с Обществения съвет.</p>
+</section>
+
+<div class="content-wrap">
+
+  <!-- DOWNLOAD HERO -->
+  <div class="download-hero reveal">
+    <div>
+      <div class="download-hero-label">PDF документ · 2025/2026</div>
+      <h2>Всички учебни планове<br>в един файл</h2>
+      <p>Пълният архив с утвърдените учебни планове за всички паралелки — от I до XII клас, учебна година 2025/2026.</p>
+      <div class="download-hero-meta">
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+          <span>PDF формат</span>
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <span>Утвърдени 05.09.2025 г.</span>
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span>Диана Кънева-Директор</span>
+        </div>
+      </div>
+    </div>
+    <a href="uchebni-planove-2025-2026.pdf" download class="btn-download">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Изтегли PDF
+    </a>
+  </div>
+
+  <!-- TABS -->
+  <div class="section-label reveal">По клас</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);margin-bottom:1.5rem" class="reveal">Учебни планове по етап</h2>
+
+  <div class="etap-nav reveal">
+    <button class="etap-btn active" onclick="showEtap('nachaLen')">Начален етап (I–IV)</button>
+    <button class="etap-btn" onclick="showEtap('progim')">Прогимназиален (V–VII)</button>
+    <button class="etap-btn" onclick="showEtap('gim')">Гимназиален (VIII–XII)</button>
+  </div>
+
+  <!-- НАЧАЛЕН ЕТАП -->
+  <div class="etap-section active" id="etap-nachaLen">
+    <div class="etap-header">
+      <div class="etap-badge">I–IV клас <span class="etap-badge-sub">Начален етап</span></div>
+      <div class="etap-line"></div>
+    </div>
+    <div class="plans-grid">
+
+      <div class="plan-card reveal">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">I А клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">22 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=1" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.06s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">II А клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">23 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=4" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.09s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">III А клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">27 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=7" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.12s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">III Б клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">27 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=10" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.15s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">IV А клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">27 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=13" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.18s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">IV Б клас</div>
+            <div class="plan-sub">Начален етап · Целодневна</div>
+            <span class="plan-badge">27 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=16" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ПРОГИМНАЗИАЛЕН -->
+  <div class="etap-section" id="etap-progim">
+    <div class="etap-header">
+      <div class="etap-badge">V–VII клас <span class="etap-badge-sub">Прогимназиален етап</span></div>
+      <div class="etap-line"></div>
+    </div>
+    <div class="plans-grid">
+
+      <div class="plan-card reveal">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">V А клас</div>
+            <div class="plan-sub">Прогимназиален · Дневна</div>
+            <span class="plan-badge">32 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=19" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.06s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">VI А клас</div>
+            <div class="plan-sub">Прогимназиален · Дневна</div>
+            <span class="plan-badge">32 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=22" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.09s">
+        <div class="plan-card-left">
+          <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">VII А клас</div>
+            <div class="plan-sub">Прогимназиален · Дневна</div>
+            <span class="plan-badge">36 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=25" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ГИМНАЗИАЛЕН -->
+  <div class="etap-section" id="etap-gim">
+    <div class="etap-header">
+      <div class="etap-badge" style="background:var(--green)">VIII–XII клас <span class="etap-badge-sub">Гимназиален етап</span></div>
+      <div class="etap-line"></div>
+    </div>
+    <div class="plans-grid">
+
+      <div class="plan-card reveal">
+        <div class="plan-card-left">
+          <div class="plan-icon" style="background:rgba(201,168,76,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6610" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">VIII А клас</div>
+            <div class="plan-sub">Приложен програмист · Дневна</div>
+            <span class="plan-badge prof">Проф. образование</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=28" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.06s">
+        <div class="plan-card-left">
+          <div class="plan-icon" style="background:rgba(201,168,76,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6610" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">IX А клас</div>
+            <div class="plan-sub">Приложен програмист · Дневна</div>
+            <span class="plan-badge prof">Проф. образование</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=33" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.09s">
+        <div class="plan-card-left">
+          <div class="plan-icon" style="background:rgba(201,168,76,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6610" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">X А клас</div>
+            <div class="plan-sub">Приложен програмист · Дневна</div>
+            <span class="plan-badge prof">Проф. образование</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=38" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.12s">
+        <div class="plan-card-left">
+          <div class="plan-icon" style="background:rgba(201,168,76,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6610" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">XI А клас</div>
+            <div class="plan-sub">Приложен програмист · Дневна</div>
+            <span class="plan-badge prof">Проф. образование</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=43" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+      <div class="plan-card reveal" style="transition-delay:.15s">
+        <div class="plan-card-left">
+          <div class="plan-icon" style="background:rgba(201,168,76,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6610" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div>
+            <div class="plan-klas">XII А клас</div>
+            <div class="plan-sub">Софтуерни и хардуерни науки</div>
+            <span class="plan-badge">32 ч/седм.</span>
+          </div>
+        </div>
+        <a href="uchebni-planove-2025-2026.pdf#page=48" download class="plan-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          PDF
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INFO NOTE -->
+  <div class="info-note reveal">
+    <div class="info-note-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    </div>
+    <div>
+      <p><strong>Забележка:</strong> Учебните планове са утвърдени със заповед на директора и са съгласувани с Обществения съвет на СУ „Йордан Йовков" – Сливен (Протокол № 5/05.09.2025 г.). За допълнителна информация се обърнете към <a href="contacts.html">канцеларията на училището</a>.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+
+function showEtap(id) {
+  document.querySelectorAll('.etap-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.etap-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('etap-'+id).classList.add('active');
+  event.target.classList.add('active');
+  document.querySelectorAll('#etap-'+id+' .reveal').forEach(el=>{
+    el.classList.remove('visible');
+    setTimeout(()=>el.classList.add('visible'),50);
+  });
+}
+
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

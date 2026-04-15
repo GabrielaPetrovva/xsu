@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учебници – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);position:relative;overflow:hidden;padding:5rem 8vw 4rem}
+.page-hero-deco{position:absolute;right:8vw;top:50%;transform:translateY(-50%);font-size:18rem;font-weight:800;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;font-family:'Manrope',sans-serif;letter-spacing:-.05em}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;opacity:.6}
+.breadcrumb a,.breadcrumb span{font-size:.75rem;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase}
+.breadcrumb svg{width:10px;height:10px;color:rgba(255,255,255,.4)}
+.page-hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.page-hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}
+.page-hero p{font-size:.95rem;color:rgba(255,255,255,.65);max-width:500px;line-height:1.75}
+
+/* FILTER / TABS */
+.tabs-bar{background:#fff;border-bottom:2px solid rgba(0,0,0,.07);padding:0 8vw;position:sticky;top:var(--nav-h);z-index:90;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:1.1rem 1.4rem;font-size:.82rem;font-weight:600;color:var(--gray);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:color .2s,border-color .2s;letter-spacing:.04em;font-family:'Manrope',sans-serif;white-space:nowrap;margin-bottom:-2px}
+.tab-btn:hover{color:var(--green)}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+
+/* SEARCH */
+.search-bar-wrap{background:var(--light);padding:2rem 8vw;border-bottom:1px solid rgba(0,0,0,.06)}
+.search-input-wrap{position:relative;max-width:480px}
+.search-input-wrap svg{position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray);pointer-events:none}
+.search-input{width:100%;padding:.8rem 1rem .8rem 2.8rem;border:1.5px solid rgba(0,0,0,.1);border-radius:50px;font-size:.88rem;font-family:'Manrope',sans-serif;color:var(--dark);background:#fff;transition:border-color .2s,box-shadow .2s;outline:none}
+.search-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,122,80,.1)}
+
+/* MAIN CONTENT */
+.content-wrap{padding:4rem 8vw 6rem}
+
+/* CLASS SECTION */
+.class-section{margin-bottom:4rem;scroll-margin-top:calc(var(--nav-h) + 60px)}
+.class-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--green-light)}
+.class-badge{width:56px;height:56px;background:var(--green);color:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;flex-shrink:0;box-shadow:0 4px 16px rgba(29,122,80,.3)}
+.class-title{font-size:1.6rem;font-weight:700;color:var(--dark)}
+.class-count{font-size:.78rem;color:var(--gray);margin-top:.2rem;font-weight:500}
+
+/* TABLE */
+.textbook-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.textbook-table thead{background:var(--green-dark)}
+.textbook-table thead th{padding:1rem 1.2rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);text-align:left}
+.textbook-table thead th:first-child{color:var(--gold)}
+.textbook-table tbody tr{border-bottom:1px solid rgba(0,0,0,.05);transition:background .15s}
+.textbook-table tbody tr:last-child{border-bottom:none}
+.textbook-table tbody tr:hover{background:var(--green-light)}
+.textbook-table td{padding:.9rem 1.2rem;font-size:.87rem;vertical-align:top}
+.td-subject{font-weight:600;color:var(--dark);min-width:160px}
+.td-publisher{color:var(--gray);font-size:.82rem;min-width:180px}
+.td-book{color:var(--dark);line-height:1.5}
+.td-book em{font-style:normal;font-weight:500}
+.td-book .authors{display:block;font-size:.78rem;color:var(--gray);margin-top:.2rem}
+.subject-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--green-light);margin-right:.5rem;flex-shrink:0;vertical-align:middle}
+.subject-icon svg{width:14px;height:14px;color:var(--green)}
+
+/* CARDS FOR SUBJECTS */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.book-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:1.2rem 1.4rem;transition:box-shadow .25s,transform .25s,border-color .25s;display:flex;flex-direction:column;gap:.5rem}
+.book-card:hover{box-shadow:0 6px 24px rgba(29,122,80,.12);transform:translateY(-2px);border-color:rgba(29,122,80,.2)}
+.book-card-subject{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.2rem}
+.book-card-title{font-size:.92rem;font-weight:600;color:var(--dark);line-height:1.35}
+.book-card-authors{font-size:.78rem;color:var(--gray);line-height:1.45}
+.book-card-publisher{display:inline-flex;align-items:center;gap:5px;margin-top:.4rem;background:var(--light);border-radius:50px;padding:.25rem .7rem;font-size:.7rem;font-weight:500;color:var(--green);align-self:flex-start}
+
+/* HIDE CLASSES */
+.class-section.hidden{display:none}
+.book-card.search-hidden{display:none}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* SUMMARY BANNER */
+.summary-banner{background:var(--green-dark);border-radius:20px;padding:2.5rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-bottom:4rem;position:relative;overflow:hidden}
+.summary-banner::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
+.summary-stat{text-align:center}
+.summary-stat .num{font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1}
+.summary-stat .lbl{font-size:.75rem;color:rgba(255,255,255,.55);margin-top:.3rem;letter-spacing:.06em}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .summary-banner{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links,.nav-search{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text strong{font-size:.95rem}
+  .nav-logo-text span{display:none}
+
+  .page-hero{padding:3.5rem 5vw 3rem}
+  .page-hero-deco{display:none}
+  .page-hero h1{font-size:clamp(2rem,8vw,2.8rem)}
+
+  .tabs-bar{padding:0 5vw}
+  .search-bar-wrap{padding:1.5rem 5vw}
+  .content-wrap{padding:2.5rem 5vw 4rem}
+  .summary-banner{grid-template-columns:repeat(2,1fr);padding:1.8rem 1.5rem;gap:1.4rem;margin-bottom:2.5rem}
+  .summary-stat .num{font-size:1.8rem}
+
+  .class-badge{width:46px;height:46px;font-size:1.1rem;border-radius:12px}
+  .class-title{font-size:1.3rem}
+
+  .textbook-table{font-size:.82rem}
+  .textbook-table thead th,.textbook-table td{padding:.75rem .9rem}
+  .td-publisher{display:none}
+  .books-grid{grid-template-columns:1fr}
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .summary-banner{grid-template-columns:repeat(2,1fr);gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="history.html">История</a><a href="mision-vision.html">Мисия и визия</a><a href="ekip.html">Педагогически екип</a><a href="contacts.html">Контакти</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti.html">Необходими документи</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="uchebnici.html">Учебници</a><a href="#">Учебни планове</a><a href="#">Разписание</a><a href="#">Електронен дневник</a></div></div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions"><a href="priem-1-klas.html" class="btn-green">Прием I клас</a><a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-deco">УЧ</div>
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    <span>ОБУЧЕНИЕ</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    <span>УЧЕБНИЦИ</span>
+  </div>
+  <div class="page-hero-eyebrow">Учебна година 2024/2025</div>
+  <h1>Учебници</h1>
+  <p>Списък на одобрените учебници и учебни помагала по класове и учебни предмети за текущата учебна година.</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs-bar" id="tabsBar">
+  <button class="tab-btn active" data-class="all">Всички класове</button>
+  <button class="tab-btn" data-class="1">I клас</button>
+  <button class="tab-btn" data-class="2">II клас</button>
+  <button class="tab-btn" data-class="3">III клас</button>
+  <button class="tab-btn" data-class="4">IV клас</button>
+  <button class="tab-btn" data-class="5">V клас</button>
+  <button class="tab-btn" data-class="6">VI клас</button>
+  <button class="tab-btn" data-class="7">VII клас</button>
+  <button class="tab-btn" data-class="8">VIII клас</button>
+  <button class="tab-btn" data-class="9">IX клас</button>
+  <button class="tab-btn" data-class="10">X клас</button>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar-wrap">
+  <div class="search-input-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="Търси учебник, автор или предмет...">
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- SUMMARY -->
+  <div class="summary-banner reveal">
+    <div class="summary-stat"><div class="num">10</div><div class="lbl">Класа</div></div>
+    <div class="summary-stat"><div class="num">100+</div><div class="lbl">Учебника</div></div>
+    <div class="summary-stat"><div class="num">6</div><div class="lbl">Издателства</div></div>
+    <div class="summary-stat"><div class="num">I–X</div><div class="lbl">Обхват</div></div>
+  </div>
+
+  <!-- I КЛАС -->
+  <div class="class-section reveal" data-class="1" id="class-1">
+    <div class="class-header">
+      <div class="class-badge">I</div>
+      <div><div class="class-title">Първи клас</div><div class="class-count">10 учебника и помагала</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Буквар</div><div class="book-card-authors">Пенка Димитрова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Читанка</div><div class="book-card-authors">Пенка Димитрова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Учебни тетрадки № 1, 2, 3</div><div class="book-card-authors">П. Димитрова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Учебни тетрадки № 1, 2</div><div class="book-card-authors">В. Ангелова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Околен свят</div><div class="book-card-title">Околен свят</div><div class="book-card-authors">Е. Василева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">Г. Калоферова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">П. Цанев</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество</div><div class="book-card-authors">Л. Витанов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+    </div>
+  </div>
+
+  <!-- II КЛАС -->
+  <div class="class-section reveal" data-class="2" id="class-2">
+    <div class="class-header">
+      <div class="class-badge">II</div>
+      <div><div class="class-title">Втори клас</div><div class="class-count">11 учебника и помагала</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език + Читанка + Тетрадки № 1, 2, 3</div><div class="book-card-authors">П. Димитрова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Blue Skies for Bulgaria – 2nd grade</div><div class="book-card-authors">Р. Холт</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика + Учебни тетрадки № 1, 2</div><div class="book-card-authors">В. Ангелова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Околен свят</div><div class="book-card-title">Околен свят + Учебна тетрадка</div><div class="book-card-authors">Е. Василева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">Г. Калоферова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">П. Цанев</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество</div><div class="book-card-authors">Л. Витанов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+    </div>
+  </div>
+
+  <!-- III КЛАС -->
+  <div class="class-section reveal" data-class="3" id="class-3">
+    <div class="class-header">
+      <div class="class-badge">III</div>
+      <div><div class="class-title">Трети клас</div><div class="class-count">11 учебника и помагала</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език + Учебни тетрадки № 1, 2, 3</div><div class="book-card-authors">П. Димитрова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Blue Skies for Bulgaria – 3rd grade</div><div class="book-card-authors">Р. Холт</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика + Учебни тетрадки № 1, 2</div><div class="book-card-authors">В. Ангелова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и обществото</div><div class="book-card-title">Човекът и обществото + Учебна тетрадка</div><div class="book-card-authors">С. Цветанска и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и природата</div><div class="book-card-title">Човекът и природата + Учебна тетрадка</div><div class="book-card-authors">М. Кабасанова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">Г. Калоферова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">П. Цанев</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество</div><div class="book-card-authors">Т. Николова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Бит и техника</div></div>
+      <div class="book-card"><div class="book-card-subject">Компютърно моделиране</div><div class="book-card-title">Компютърно моделиране</div><div class="book-card-authors">А. Миланова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+    </div>
+  </div>
+
+  <!-- IV КЛАС -->
+  <div class="class-section reveal" data-class="4" id="class-4">
+    <div class="class-header">
+      <div class="class-badge">IV</div>
+      <div><div class="class-title">Четвърти клас</div><div class="class-count">12 учебника и помагала</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език + Читанка + Тетрадки № 1, 2, 3</div><div class="book-card-authors">П. Димитрова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Blue Skies for Bulgaria – 4th grade</div><div class="book-card-authors">Р. Холт</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика + Учебни тетрадки № 1, 2</div><div class="book-card-authors">В. Ангелова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и обществото</div><div class="book-card-title">Човекът и обществото + Учебна тетрадка</div><div class="book-card-authors">С. Цветанска и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и природата</div><div class="book-card-title">Човекът и природата + Учебна тетрадка</div><div class="book-card-authors">М. Кабасанова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">Г. Калоферова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">П. Цанев</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество + Албум</div><div class="book-card-authors">Л. Витанов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Компютърно моделиране</div><div class="book-card-title">Компютърно моделиране</div><div class="book-card-authors">А. Миланова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+    </div>
+  </div>
+
+  <!-- V КЛАС -->
+  <div class="class-section reveal" data-class="5" id="class-5">
+    <div class="class-header">
+      <div class="class-badge">V</div>
+      <div><div class="class-title">Пети клас</div><div class="class-count">11 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">М. Васева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Азбуки</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">А. Хранова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Energy for Bulgaria – 5th grade</div><div class="book-card-authors">С. Елсуърт и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">Т. Витанов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">История и цивилизация</div><div class="book-card-title">История и цивилизация</div><div class="book-card-authors">Леков и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и природата</div><div class="book-card-title">Човекът и природата</div><div class="book-card-authors">М. Максимов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">В. Сотирова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">Л. Цанев и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество</div><div class="book-card-authors">Л. Витанов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">А. Ангелов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+    </div>
+  </div>
+
+  <!-- VI КЛАС -->
+  <div class="class-section reveal" data-class="6" id="class-6">
+    <div class="class-header">
+      <div class="class-badge">VI</div>
+      <div><div class="class-title">Шести клас</div><div class="class-count">11 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">Т. Ангелова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">В. Михайлова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Английски език</div><div class="book-card-authors">И. Фрийберн</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">Е. Колев и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">История и цивилизация</div><div class="book-card-title">История и цивилизация</div><div class="book-card-authors">П. Павлов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Човекът и природата</div><div class="book-card-title">Човекът и природата</div><div class="book-card-authors">М. Максимов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">В. Сотирова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">П. Цанев и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии и предприемачество</div><div class="book-card-title">Технологии и предприемачество</div><div class="book-card-authors">Т. Николова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Бит и техника</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">И. Иванов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Нова звезда</div></div>
+    </div>
+  </div>
+
+  <!-- VII КЛАС -->
+  <div class="class-section reveal" data-class="7" id="class-7">
+    <div class="class-header">
+      <div class="class-badge">VII</div>
+      <div><div class="class-title">Седми клас</div><div class="class-count">13 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">М. Васева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">В. Михайлова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-Плюс</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Английски език</div><div class="book-card-authors">И. Фрейиберн</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pearson Longman</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">Т. Витанов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">История и цивилизация</div><div class="book-card-title">История и цивилизация</div><div class="book-card-authors">Г. Якимов и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Биология и здравно образование</div><div class="book-card-title">Биология и здравно образование</div><div class="book-card-authors">В. Овчаров и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Химия</div><div class="book-card-title">Химия и опазване на околната среда</div><div class="book-card-authors">С. Цаковски</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Физика и астрономия</div><div class="book-card-title">Физика и астрономия</div><div class="book-card-authors">М. Максимов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Музика</div><div class="book-card-title">Музика</div><div class="book-card-authors">В. Сотирова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">О. Занков и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Технологии</div><div class="book-card-title">Технологии</div><div class="book-card-authors">Т. Николова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Бит и техника</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">В. Петров</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+    </div>
+  </div>
+
+  <!-- VIII КЛАС -->
+  <div class="class-section reveal" data-class="8" id="class-8">
+    <div class="class-header">
+      <div class="class-badge">VIII</div>
+      <div><div class="class-title">Осми клас</div><div class="class-count">12 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">М. Васева, Т. Велева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета Азбуки</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">И. Иванчева, К. Мерджански и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Английски език</div><div class="book-card-title">Legacy</div><div class="book-card-authors">В. Евънс, Дж. Дули</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Express Publishing</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">К. Банков, Т. Стоева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета-София</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">проф. К. Манев, проф. К. Гъров, проф. Н. Манева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Изкуства (електр.)</div></div>
+      <div class="book-card"><div class="book-card-subject">История и цивилизации</div><div class="book-card-title">История и цивилизации</div><div class="book-card-authors">А. Пантев</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева, П. Събева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Философия</div><div class="book-card-title">Философия</div><div class="book-card-authors">Л. Андреева, Р. Найденова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Биология и здравно образование</div><div class="book-card-title">Биология и здравно образование</div><div class="book-card-authors">В. Овчаров</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Физика и астрономия</div><div class="book-card-title">Физика и астрономия</div><div class="book-card-authors">М. Максимов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Химия</div><div class="book-card-title">Химия и опазване на околната среда</div><div class="book-card-authors">С. Бенева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">Б. Дамянов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+    </div>
+  </div>
+
+  <!-- IX КЛАС -->
+  <div class="class-section reveal" data-class="9" id="class-9">
+    <div class="class-header">
+      <div class="class-badge">IX</div>
+      <div><div class="class-title">Девети клас</div><div class="class-count">12 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">В. Михайлова, Й. Тишева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">А. Хранова, Л. Шишкова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">К. Банков, И. Цветкова, Д. Петрова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">проф. К. Гъров, доц. С. Анева, доц. Г. Стоицов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Изкуства (електр.)</div></div>
+      <div class="book-card"><div class="book-card-subject">История и цивилизации</div><div class="book-card-title">История и цивилизации</div><div class="book-card-authors">И. Баева и колектив</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева, П. Събева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Философия</div><div class="book-card-title">Философия</div><div class="book-card-authors">И. Колев и колектив</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Биология и здравно образование</div><div class="book-card-title">Биология и здравно образование</div><div class="book-card-authors">В. Овчаров</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Физика и астрономия</div><div class="book-card-title">Физика и астрономия</div><div class="book-card-authors">М. Максимов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Химия</div><div class="book-card-title">Химия и опазване на околната среда</div><div class="book-card-authors">Л. Овчарова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">Б. Дамянов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+    </div>
+  </div>
+
+  <!-- X КЛАС -->
+  <div class="class-section reveal" data-class="10" id="class-10">
+    <div class="class-header">
+      <div class="class-badge">X</div>
+      <div><div class="class-title">Десети клас</div><div class="class-count">12 учебника</div></div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card"><div class="book-card-subject">Български език</div><div class="book-card-title">Български език</div><div class="book-card-authors">В. Михайлова, Й. Тишева и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Литература</div><div class="book-card-title">Литература</div><div class="book-card-authors">А. Хранова, Л. Шишкова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Математика</div><div class="book-card-title">Математика</div><div class="book-card-authors">К. Банков, И. Цветкова и др.</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Информатика</div><div class="book-card-title">Основи на програмирането със C#</div><div class="book-card-authors">Д-р Светлин Наков и колектив</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Електронно издание</div></div>
+      <div class="book-card"><div class="book-card-subject">Информационни технологии</div><div class="book-card-title">Информационни технологии</div><div class="book-card-authors">проф. К. Гъров, доц. С. Анева, доц. Г. Стоицов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Изкуства (електр.)</div></div>
+      <div class="book-card"><div class="book-card-subject">География и икономика</div><div class="book-card-title">География и икономика</div><div class="book-card-authors">С. Дерменджиева, П. Събева</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Просвета 1945</div></div>
+      <div class="book-card"><div class="book-card-subject">Философия</div><div class="book-card-title">Философия</div><div class="book-card-authors">И. Колев и колектив</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Биология и здравно образование</div><div class="book-card-title">Биология и здравно образование</div><div class="book-card-authors">В. Овчаров, К. Йотовска</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Физика и астрономия</div><div class="book-card-title">Физика и астрономия</div><div class="book-card-authors">М. Максимов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Булвест 2000</div></div>
+      <div class="book-card"><div class="book-card-subject">Химия</div><div class="book-card-title">Химия и опазване на околната среда</div><div class="book-card-authors">С. Цаковски, А. Генджова</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+      <div class="book-card"><div class="book-card-subject">Изобразително изкуство</div><div class="book-card-title">Изобразително изкуство</div><div class="book-card-authors">Б. Дамянов</div><div class="book-card-publisher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5А2.5 2.5 0 014 19.5v-15А2.5 2.5 0 016.5 2z"/></svg>Анубис</div></div>
+    </div>
+  </div>
+
+  <!-- NO RESULTS -->
+  <div id="noResults" style="display:none;text-align:center;padding:4rem 0;color:var(--gray)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto 1rem;color:#ccc"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <p style="font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:.5rem">Няма намерени резултати</p>
+    <p style="font-size:.88rem">Опитайте с различни ключови думи</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40));
+
+// HAMBURGER
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+function openMenu(){menuOpen=true;hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');mobileMenu.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){menuOpen=false;hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>menuOpen?closeMenu():openMenu());
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('click',(e)=>{if(menuOpen&&!mobileMenu.contains(e.target)&&!hamburger.contains(e.target))closeMenu()});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+
+// REVEAL
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+
+// TABS
+const tabs=document.querySelectorAll('.tab-btn');
+const sections=document.querySelectorAll('.class-section');
+tabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const cls=tab.dataset.class;
+    sections.forEach(s=>{
+      if(cls==='all'||s.dataset.class===cls){s.classList.remove('hidden')}
+      else{s.classList.add('hidden')}
+    });
+    document.getElementById('searchInput').value='';
+    document.querySelectorAll('.book-card').forEach(c=>c.classList.remove('search-hidden'));
+    document.getElementById('noResults').style.display='none';
+  });
+});
+
+// SEARCH
+const searchInput=document.getElementById('searchInput');
+searchInput.addEventListener('input',()=>{
+  const q=searchInput.value.toLowerCase().trim();
+  // reset class filter
+  tabs.forEach(t=>t.classList.remove('active'));
+  document.querySelector('[data-class="all"]').classList.add('active');
+  sections.forEach(s=>s.classList.remove('hidden'));
+
+  if(!q){
+    document.querySelectorAll('.book-card').forEach(c=>c.classList.remove('search-hidden'));
+    document.getElementById('noResults').style.display='none';
+    return;
+  }
+  let anyVisible=false;
+  sections.forEach(section=>{
+    const cards=section.querySelectorAll('.book-card');
+    let sectionHasVisible=false;
+    cards.forEach(card=>{
+      const text=card.textContent.toLowerCase();
+      if(text.includes(q)){card.classList.remove('search-hidden');sectionHasVisible=true;anyVisible=true}
+      else{card.classList.add('search-hidden')}
+    });
+    section.classList.toggle('hidden',!sectionHasVisible);
+  });
+  document.getElementById('noResults').style.display=anyVisible?'none':'block';
+});
+</script>
+</body>
+</html>

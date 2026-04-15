@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стипендии – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:5rem 8vw 4rem;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+.breadcrumb a{color:rgba(255,255,255,.5);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.25)}
+.page-hero h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}
+.page-hero p{font-size:1rem;color:rgba(255,255,255,.65);max-width:560px;line-height:1.75;margin-bottom:2rem}
+
+/* DEADLINE BANNER */
+.deadline-banner{background:linear-gradient(135deg,#C9A84C 0%,#E8C86A 50%,#C9A84C 100%);padding:1.1rem 2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.deadline-banner-label{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.deadline-banner-label svg{flex-shrink:0}
+.deadline-banner-label span{font-size:.78rem;font-weight:700;color:#5a3e08;letter-spacing:.1em;text-transform:uppercase}
+.deadline-divider{width:1px;height:36px;background:rgba(90,62,8,.25)}
+.deadline-slots{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center}
+.deadline-slot{text-align:center}
+.deadline-slot-label{font-size:.68rem;font-weight:700;color:#7a5a10;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.deadline-slot-date{font-size:1.05rem;font-weight:700;color:#3a2505}
+.deadline-sep{display:flex;align-items:center;gap:8px}
+.deadline-sep-line{width:28px;height:1.5px;background:rgba(90,62,8,.35)}
+.deadline-sep-dot{width:6px;height:6px;border-radius:50%;background:rgba(90,62,8,.4)}
+
+/* MAIN LAYOUT — full width, no sidebar */
+.page-body{display:block}
+
+/* CONTENT */
+.page-content{padding:3.5rem 8vw 5rem;max-width:1200px;margin:0 auto}
+
+/* SECTION LABEL */
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:.8rem}
+.section-label::before{content:'';width:26px;height:2px;background:var(--green);flex-shrink:0}
+
+/* SCHOLARSHIP CARDS */
+.stip-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:3.5rem}
+.stip-card{background:#fff;border:1.5px solid rgba(29,122,80,.12);border-radius:16px;padding:1.8rem;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden}
+.stip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.stip-card.type-excellent::before{background:linear-gradient(90deg,var(--gold),#e8c86a)}
+.stip-card.type-excellent2::before{background:linear-gradient(90deg,#f0a500,#f5c842)}
+.stip-card.type-social::before{background:linear-gradient(90deg,#4a9eff,#7bbfff)}
+.stip-card.type-special::before{background:linear-gradient(90deg,var(--green),#3aad7a)}
+.stip-card.type-orphan::before{background:linear-gradient(90deg,#e07b54,#f0a884)}
+.stip-card.type-oneparent::before{background:linear-gradient(90deg,#9b59b6,#c39bd3)}
+.stip-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1);border-color:var(--green)}
+.stip-type-badge{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:50px;margin-bottom:1rem}
+.type-excellent .stip-type-badge{background:rgba(201,168,76,.12);color:#a07830;border:1px solid rgba(201,168,76,.3)}
+.type-excellent2 .stip-type-badge{background:rgba(240,165,0,.12);color:#8a5f00;border:1px solid rgba(240,165,0,.3)}
+.type-social .stip-type-badge{background:rgba(74,158,255,.1);color:#2176cc;border:1px solid rgba(74,158,255,.25)}
+.type-special .stip-type-badge{background:var(--green-light);color:var(--green);border:1px solid rgba(29,122,80,.2)}
+.type-orphan .stip-type-badge{background:rgba(224,123,84,.1);color:#b05030;border:1px solid rgba(224,123,84,.25)}
+.type-oneparent .stip-type-badge{background:rgba(155,89,182,.1);color:#7b3fa0;border:1px solid rgba(155,89,182,.25)}
+.stip-card h3{font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem;line-height:1.3}
+.stip-card p{font-size:.84rem;color:var(--gray);line-height:1.7;margin-bottom:1.2rem}
+.stip-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:1rem}
+.stip-amount .num{font-size:1.9rem;font-weight:800;color:var(--green);line-height:1}
+.stip-amount .unit{font-size:.8rem;color:var(--gray);font-weight:500}
+.stip-conditions{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.stip-conditions li{display:flex;align-items:flex-start;gap:8px;font-size:.8rem;color:var(--gray)}
+.stip-conditions li::before{content:'✓';flex-shrink:0;font-size:.75rem;color:var(--green);font-weight:700;margin-top:1px}
+
+/* SECTION DIVIDER */
+.section-divider{margin:2rem 0 2.5rem;border:none;border-top:1.5px solid rgba(29,122,80,.1)}
+
+/* ONE-TIME SCHOLARSHIPS */
+.onetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:3.5rem}
+.onetime-card{background:#fff;border:1.5px solid rgba(29,122,80,.12);border-radius:16px;padding:1.6rem;position:relative;overflow:hidden}
+.onetime-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,#6c9f7a,#a8d5b5)}
+.onetime-card h3{font-size:.98rem;font-weight:700;color:var(--dark);margin-bottom:.5rem;line-height:1.35}
+.onetime-card p{font-size:.82rem;color:var(--gray);line-height:1.7}
+.onetime-amount{font-size:.85rem;font-weight:700;color:var(--green);margin-top:.8rem}
+
+/* PROCESS STEPS */
+.process-section{margin-bottom:3.5rem}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(29,122,80,.1);border:1px solid rgba(29,122,80,.12);border-radius:16px;overflow:hidden;margin-top:1.8rem}
+.step-card{background:#fff;padding:1.8rem 1.4rem;position:relative}
+.step-num{font-size:3rem;font-weight:800;color:rgba(29,122,80,.08);line-height:1;margin-bottom:.6rem}
+.step-card h4{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+.step-card p{font-size:.78rem;color:var(--gray);line-height:1.65}
+.step-arrow{position:absolute;top:50%;right:-1px;transform:translateY(-50%);width:20px;height:20px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+.step-arrow svg{width:10px;height:10px;color:var(--green)}
+.step-card:last-child .step-arrow{display:none}
+
+/* DOCS TABLE */
+.docs-section{margin-bottom:3.5rem}
+.docs-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden;border:1px solid rgba(29,122,80,.12);margin-top:1.8rem}
+.docs-table thead{background:var(--green);color:#fff}
+.docs-table th{padding:.9rem 1.2rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-align:left}
+.docs-table td{padding:1rem 1.2rem;font-size:.86rem;border-bottom:1px solid rgba(29,122,80,.07);vertical-align:middle}
+.docs-table tbody tr:last-child td{border-bottom:none}
+.docs-table tbody tr{transition:background .15s}
+.docs-table tbody tr:hover{background:var(--green-light)}
+.doc-pill{display:inline-block;padding:2px 8px;border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.06em}
+.doc-pill.pdf{background:#fee;color:#c0392b;border:1px solid rgba(192,57,43,.2)}
+.doc-pill.doc{background:#e8f4ff;color:#2176cc;border:1px solid rgba(33,118,204,.2)}
+
+/* DOWNLOAD CARD */
+.download-card{background:linear-gradient(135deg,rgba(29,122,80,.06),rgba(29,122,80,.02));border:1.5px solid rgba(29,122,80,.2);border-radius:14px;padding:1.6rem;display:flex;align-items:center;gap:1.4rem;margin-bottom:2.5rem;transition:box-shadow .2s}
+.download-card:hover{box-shadow:0 4px 20px rgba(29,122,80,.12)}
+.download-icon{width:52px;height:52px;background:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.download-icon svg{width:24px;height:24px;color:#fff}
+.download-info{flex:1}
+.download-info h4{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.25rem}
+.download-info p{font-size:.8rem;color:var(--gray)}
+.btn-download{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.7rem 1.4rem;font-size:.8rem;font-weight:600;border-radius:50px;transition:background .2s;white-space:nowrap;flex-shrink:0}
+.btn-download:hover{background:var(--green-dark)}
+.btn-download svg{width:14px;height:14px}
+
+/* FAQ ACCORDION */
+.faq-section{margin-bottom:3.5rem}
+.faq-list{margin-top:1.8rem;display:flex;flex-direction:column;gap:2px;background:rgba(29,122,80,.07);border-radius:14px;overflow:hidden;border:1px solid rgba(29,122,80,.1)}
+.faq-item{background:#fff}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 1.4rem;font-size:.9rem;font-weight:600;color:var(--dark);cursor:pointer;transition:background .2s;user-select:none}
+.faq-q:hover{background:var(--green-light)}
+.faq-item.open .faq-q{background:var(--green-light);color:var(--green)}
+.faq-chevron{width:20px;height:20px;flex-shrink:0;border-radius:50%;border:1.5px solid rgba(29,122,80,.25);display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s,border-color .2s}
+.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--green);border-color:var(--green)}
+.faq-chevron svg{width:10px;height:10px;color:var(--green);transition:color .2s}
+.faq-item.open .faq-chevron svg{color:#fff}
+.faq-a{display:none;padding:0 1.4rem 1.2rem;font-size:.85rem;color:var(--gray);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+
+/* NOTICE BOX */
+.notice-box{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(201,168,76,.04));border:1.5px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);border-radius:12px;padding:1.4rem 1.6rem;margin-bottom:2.5rem;display:flex;gap:1rem;align-items:flex-start}
+.notice-box svg{width:22px;height:22px;color:var(--gold);flex-shrink:0;margin-top:2px}
+.notice-box p{font-size:.85rem;color:var(--gray);line-height:1.7}
+.notice-box strong{color:var(--dark)}
+
+/* BUTTONS */
+.btn-green{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s}
+.btn-green:hover{background:transparent;color:var(--green)}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--gold);border-radius:50px;transition:background .3s,color .3s}
+.btn-gold:hover{background:transparent;color:var(--gold)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .stip-grid{grid-template-columns:1fr}
+  .onetime-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .page-hero{padding:3.5rem 5vw 3rem}
+  .page-content{padding:2.5rem 5vw 4rem}
+  .stip-grid{grid-template-columns:1fr}
+  .onetime-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .step-arrow{display:none}
+  .download-card{flex-direction:column;align-items:flex-start}
+  .deadline-banner{gap:1rem;padding:.9rem 1.2rem}
+  .deadline-divider{display:none}
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="history.html">История</a><a href="mision-vision.html">Мисия и визия</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="priem-1-klas.html">Прием в I клас</a><a href="priem-8-klas.html">Прием в VIII клас</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="pravilnitsi.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="dokumenti.html">Необходими документи</a></div></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions"><a href="priem-1-klas.html" class="btn-green">Прием I клас</a><a href="pravilnitsi.html" class="btn-gold">Правилници</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a>
+    <span>›</span>
+    <a href="dokumenti.html">Документи</a>
+    <span>›</span>
+    <span style="color:var(--gold)">Стипендии</span>
+  </div>
+  <h1>Стипендии</h1>
+  <p>Информация за видовете стипендии, условията за кандидатстване, необходимите документи и сроковете за подаване.</p>
+</section>
+
+<!-- DEADLINE BANNER -->
+<div class="deadline-banner">
+  <div class="deadline-banner-label">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7a5a10" stroke-width="2.2">
+      <rect x="3" y="4" width="18" height="18" rx="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    <span>Срокове за кандидатстване</span>
+  </div>
+  <div class="deadline-divider"></div>
+  <div class="deadline-slots">
+    <div class="deadline-slot">
+      <div class="deadline-slot-label">I учебен срок</div>
+      <div class="deadline-slot-date">3 – 11 октомври</div>
+    </div>
+    <div class="deadline-sep">
+      <div class="deadline-sep-line"></div>
+      <div class="deadline-sep-dot"></div>
+      <div class="deadline-sep-line"></div>
+    </div>
+    <div class="deadline-slot">
+      <div class="deadline-slot-label">II учебен срок</div>
+      <div class="deadline-slot-date">25 февруари – 14 март</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+  <main class="page-content">
+
+    <!-- NOTICE -->
+    <div class="notice-box reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <p><strong>Важно:</strong> Стипендиите се отпускат съгласно <strong>Наредба за условията и реда за получаване на стипендии от учениците след завършено основно образование</strong> (ПМС № 33/2013 г.). Размерите и правилата са утвърдени от Директора на СУ „Йордан Йовков" – Диана Кънева.</p>
+    </div>
+
+    <!-- PDF DOWNLOAD -->
+    <div class="download-card reveal">
+      <div class="download-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div class="download-info">
+        <h4>Правила за условия за получаване на месечни стипендии</h4>
+        <p>Утвърден документ от Директора на СУ „Йордан Йовков" – Сливен · PDF формат</p>
+      </div>
+      <a href="pravila-stipendii_2025-2026.pdf" download class="btn-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Изтегли PDF
+      </a>
+    </div>
+
+    <!-- I. MONTHLY SCHOLARSHIPS -->
+    <div class="section-label reveal">I. Месечни стипендии за постигнати образователни резултати</div>
+    <div class="stip-grid reveal">
+
+      <div class="stip-card type-excellent">
+        <span class="stip-type-badge">За отличен успех</span>
+        <h3>Стипендия за отличен успех</h3>
+        <p>За ученици с отличен успех. При кандидатстване за I срок се взема успехът от предходната учебна година, а за II срок – от предходния срок.</p>
+        <div class="stip-amount">
+          <span class="num">23,01</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Успех не по-малко от 5,50</li>
+          <li>Успехът се изчислява средно-аритметично от всички учебни предмети</li>
+          <li>Кандидатите се класират по низходящ ред (от най-висок успех)</li>
+          <li>Заявление по образец – Приложение 1, удостоверено от класния ръководител</li>
+        </ul>
+      </div>
+
+      <div class="stip-card type-excellent2">
+        <span class="stip-type-badge">За много добър успех</span>
+        <h3>Стипендия за много добър успех</h3>
+        <p>За ученици с много добър успех. При кандидатстване за I срок се взема успехът от предходната учебна година, а за II срок – от предходния срок.</p>
+        <div class="stip-amount">
+          <span class="num">20,45</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Успех от 5,00 до 5,49</li>
+          <li>Кандидатите се класират по низходящ ред (от най-висок успех)</li>
+          <li>Заявление по образец – Приложение 1, удостоверено от класния ръководител</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- II. SOCIAL -->
+    <div class="section-label reveal">II. Стипендии за подпомагане на достъпа до образование</div>
+    <div class="stip-grid reveal">
+
+      <div class="stip-card type-social">
+        <span class="stip-type-badge">Социална месечна</span>
+        <h3>Месечна стипендия (чл. 4, ал. 1, т. 2)</h3>
+        <p>За ученици от семейства с ниски доходи. Необходимо е кандидатите да отговарят и на двата критерия едновременно.</p>
+        <div class="stip-amount">
+          <span class="num">17,90</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Успех не по-малко от 4,50</li>
+          <li>Месечен доход на член от семейството под осреднения размер на МРЗ за предходните 6 месеца</li>
+          <li>За I срок: доход от април до септември; за II срок: от август до януари</li>
+          <li>Кандидатите се класират по възходящ ред (от най-нисък доход)</li>
+          <li>Заявление-декларация по образец – Приложение № 3</li>
+        </ul>
+      </div>
+
+      <div class="stip-card type-social">
+        <span class="stip-type-badge">Целева месечна</span>
+        <h3>Месечна целева стипендия (чл. 6)</h3>
+        <p>За покриване на конкретни разходи, свързани с обучението на ученика. Разходите се доказват с разходо-оправдателни документи.</p>
+        <div class="stip-amount">
+          <span class="num">—</span>
+          <span class="unit">по решение на комисия</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Заявление в свободен текст от ученика</li>
+          <li>Заявление-декларация за дохода – Приложение № 3, подписана от родител</li>
+          <li>Разходо-оправдателни документи, удостоверяващи изразходването</li>
+          <li>Класирането е отделно от месечната стипендия по чл. 4, ал. 1, т. 2</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- III. SPECIAL & ORPHAN -->
+    <div class="section-label reveal">III. Стипендии по специални обстоятелства</div>
+    <div class="stip-grid reveal">
+
+      <div class="stip-card type-special">
+        <span class="stip-type-badge">Трайни увреждания</span>
+        <h3>Стипендия за ученици с трайни увреждания (чл. 4, ал. 1, т. 3)</h3>
+        <p>Целогодишна стипендия за ученици с телково решение. За отпускането не се извършва класиране.</p>
+        <div class="stip-amount">
+          <span class="num">20,45</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>ТЕЛК решение с 50% и над 50% степен на увреждане</li>
+          <li>Заявление – Приложение № 4</li>
+          <li>Стипендията е целогодишна</li>
+          <li>Не се извършва класиране</li>
+        </ul>
+      </div>
+
+      <div class="stip-card type-orphan">
+        <span class="stip-type-badge">Без родители</span>
+        <h3>Стипендия за ученици без родители (чл. 4, ал. 1, т. 4)</h3>
+        <p>Целогодишна стипендия, отпускана от месеца следващ месеца на възникване на обстоятелството. Подаването на заявлението е еднократно.</p>
+        <div class="stip-amount">
+          <span class="num">20,45</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Смъртни актове на двамата родители или документи за лишаване от родителски права</li>
+          <li>Заявление – Приложение № 4</li>
+          <li>Стипендията е целогодишна</li>
+          <li>Не се извършва класиране</li>
+        </ul>
+      </div>
+
+      <div class="stip-card type-oneparent">
+        <span class="stip-type-badge">Само с един родител</span>
+        <h3>Стипендия за ученици само с един родител (чл. 4, ал. 2)</h3>
+        <p>Целогодишна стипендия, отпускана от месеца следващ месеца на възникване на обстоятелството. Подаването на заявлението е еднократно.</p>
+        <div class="stip-amount">
+          <span class="num">20,45</span>
+          <span class="unit">евро / месец</span>
+        </div>
+        <ul class="stip-conditions">
+          <li>Смъртен акт на родителя</li>
+          <li>Заявление – Приложение № 4</li>
+          <li>Стипендията е целогодишна</li>
+          <li>Не се извършва класиране</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ONE-TIME SCHOLARSHIPS -->
+    <div class="section-label reveal">IV. Еднократни стипендии</div>
+    <div class="onetime-grid reveal">
+      <div class="onetime-card">
+        <h3>За преодоляване на еднократни социални обстоятелства (чл. 5, ал. 1, т. 1)</h3>
+        <p>Заявление – Приложение № 5, придружено с мотивирано становище от класния ръководител. Отпуска се по реда на постъпване и до изчерпване на средствата. За един ученик – само веднъж в рамките на един учебен срок.</p>
+        <div class="onetime-amount">До 17,90 евро</div>
+      </div>
+      <div class="onetime-card">
+        <h3>За постигнати високи резултати в учебната, извънкласната или извънучилищната дейност (чл. 5, ал. 1, т. 2)</h3>
+        <p>Заявление – Приложение № 2, с мотивирано становище от класния ръководител. Взема се предвид: призови места в конкурси и активно участие в извънкласни дейности. Отпуска се до изчерпване на средствата.</p>
+        <div class="onetime-amount">До 17,90 евро</div>
+      </div>
+    </div>
+
+    <!-- SPECIAL RULE -->
+    <div class="notice-box reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><strong>При класиране за повече от една месечна стипендия:</strong> Комисията уведомява ученика и го изисква да заяви (Приложение № 6) кой вид стипендия избира. Учениците с право на стипендия по чл. 4, ал. 1, т. 3 и 4 или ал. 2, при класиране за стипендия за постигнати образователни резултати, <strong>имат право да получават и 50% от размера й</strong>.</p>
+    </div>
+
+    <!-- PROCESS -->
+    <div class="process-section">
+      <div class="section-label reveal">Как да кандидатствате</div>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4>Подгответе документи</h4>
+          <p>Съберете всички необходими документи според вида стипендия – заявление, служебни бележки, декларации.</p>
+          <div class="step-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4>Попълнете заявление</h4>
+          <p>Попълнете стандартния формуляр (Приложение 1, 2, 3 или 4 в зависимост от вида стипендия).</p>
+          <div class="step-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4>Подайте в срок</h4>
+          <p>Предайте документите в канцеларията. Заявленията се вписват в специален дневник, съхраняван при касиер-домакина.</p>
+          <div class="step-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h4>Решение на комисия</h4>
+          <p>Комисията обявява окончателното класиране до края на месеца, в който се кандидатства. Резултатите се публикуват на видно място.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCS TABLE -->
+    <div class="docs-section" id="apply">
+      <div class="section-label reveal">Необходими документи</div>
+      <table class="docs-table reveal">
+        <thead>
+          <tr>
+            <th>Документ / Приложение</th>
+            <th>Вид стипендия</th>
+            <th>Формат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Заявление – Приложение № 1 (с посочен успех, удостоверен от класния ръководител)</td>
+            <td>За отличен / много добър успех</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+          <tr>
+            <td>Заявление – Приложение № 2 (с мотивирано становище от класния ръководител)</td>
+            <td>Еднократна за високи резултати</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+          <tr>
+            <td>Заявление-декларация – Приложение № 3 (подписана от родител/настойник)</td>
+            <td>Социална / Целева</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+          <tr>
+            <td>Служебни бележки за доходи на родителите (трудови правоотношения, ЕТ, наеми и др.)</td>
+            <td>Социална</td>
+            <td>Оригинал</td>
+          </tr>
+          <tr>
+            <td>Служебна бележка от Дирекция „Социални грижи" / НОИ / РСПО (при необходимост)</td>
+            <td>Социална</td>
+            <td>Оригинал</td>
+          </tr>
+          <tr>
+            <td>Заявление – Приложение № 4 (за трайни увреждания / без родители / само с един родител)</td>
+            <td>Трайни увреждания / Без родители / Един родител</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+          <tr>
+            <td>Копие от ТЕЛК решение (50% и над 50% увреждане)</td>
+            <td>Трайни увреждания</td>
+            <td>Копие</td>
+          </tr>
+          <tr>
+            <td>Смъртен акт на родителя/родителите</td>
+            <td>Без родители / Само с един родител</td>
+            <td>Копие</td>
+          </tr>
+          <tr>
+            <td>Заявление – Приложение № 5 (с мотивирано становище от класния ръководител)</td>
+            <td>Еднократна за социални обстоятелства</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+          <tr>
+            <td>Декларация за избор на стипендия – Приложение № 6</td>
+            <td>При класиране за повече от една стипендия</td>
+            <td><span class="doc-pill pdf">Формуляр</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <div class="section-label reveal">Чести въпроси</div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Мога ли да получавам две стипендии едновременно?
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a">При класиране за повече от една месечна стипендия, комисията уведомява ученика и той избира кой вид да получава (Приложение № 6). Изключение: ученици с право на стипендия по чл. 4, ал. 1, т. 3 и 4 или ал. 2 могат допълнително да получават и 50% от стипендията за постигнати образователни резултати.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Кога са сроковете за кандидатстване?
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a">За I учебен срок: от 3 до 11 октомври. За II учебен срок: от 25 февруари до 14 март. Комисията обявява окончателното класиране до края на месеца, в който се кандидатства.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Какви доходи се включват в изчислението за социалната стипендия?
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a">Включват се всички доходи от предходните 6 месеца: трудови правоотношения, наеми, лихви, парични награди от конкурси (без работодателски), производствени дивиденти, пенсии без добавки за чужда помощ, семейни помощи за деца, обезщетения по КСО, присъдени издръжки. Не се включват стипендии по силата на постановлението. Членове на семейството са баща, майка, непълнолетните братя/сестри, а ако учат за средно образование до 20 г. – и пълнолетните.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Трябва ли да кандидатствам всеки срок?
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a">Да, за стипендиите за образователни резултати и социалните стипендии се кандидатства за всеки срок поотделно. Целогодишните стипендии (за трайни увреждания, без родители, само с един родител) се подават еднократно.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            До кого подавам документите?
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a">Документите се подават в канцеларията на СУ „Йордан Йовков", ет. 1. Заявленията се вписват в специален дневник по реда на подаване, съхраняван при касиер-домакина. Можете да се обърнете и към класния ръководител за насоки при попълване.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="reveal" style="display:flex;gap:1rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid rgba(29,122,80,.1)">
+      <a href="kontakti.html" class="btn-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.63a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.99 15z"/></svg>
+        Свържете се с нас
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="mailto:info@su-yovkov.com">info@su-yovkov.com</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+function openMenu(){menuOpen=true;hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');mobileMenu.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){menuOpen=false;hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>{menuOpen?closeMenu():openMenu()});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('click',(e)=>{if(menuOpen&&!mobileMenu.contains(e.target)&&!hamburger.contains(e.target))closeMenu()});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>

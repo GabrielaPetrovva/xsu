@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Външно оценяване | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:600px;line-height:1.7;font-weight:300}
+
+/* MAIN */
+.content-wrap{max-width:1000px;margin:0 auto;padding:4rem 8vw}
+
+/* SECTION LABEL */
+.section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+
+/* CLASS BLOCK */
+.class-block{margin-bottom:2.5rem}
+.class-block-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.class-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-dark);color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;padding:.5rem 1.3rem;border-radius:50px}
+.class-badge-sub{font-size:.65rem;font-family:'Manrope',sans-serif;font-style:normal;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem}
+.class-block-line{flex:1;height:1px;background:rgba(0,0,0,.08)}
+
+/* EXAM ROWS */
+.exam-list{display:flex;flex-direction:column;gap:.7rem}
+.exam-row{background:var(--white);border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:1rem 1.3rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem;transition:box-shadow .2s}
+.exam-row:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.exam-row-left{display:flex;align-items:center;gap:.9rem}
+.exam-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.exam-icon.bg-lang{background:rgba(29,122,80,.1)}
+.exam-icon.bg-math{background:rgba(201,168,76,.12)}
+.exam-icon.bg-lang svg{color:var(--green)}
+.exam-icon.bg-math svg{color:#8a6610}
+.exam-icon.bg-it{background:rgba(29,74,122,.1)}
+.exam-icon.bg-it svg{color:#1a4a7a}
+.exam-icon.bg-lang2{background:rgba(122,29,80,.1)}
+.exam-icon.bg-lang2 svg{color:#7a1d50}
+.exam-icon svg{width:16px;height:16px}
+.exam-subject{font-size:.92rem;font-weight:600;color:var(--dark);line-height:1.3}
+.exam-note{font-size:.75rem;color:var(--gray);margin-top:.15rem}
+.exam-date-wrap{text-align:right;flex-shrink:0}
+.exam-date{font-size:.9rem;font-weight:700;color:var(--green);white-space:nowrap}
+.exam-time{font-size:.75rem;color:var(--gray);margin-top:.1rem}
+
+/* OPTIONAL BADGE */
+.opt-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(201,168,76,.1);color:#8a6610;border:1px solid rgba(201,168,76,.3);padding:.18rem .55rem;border-radius:50px;margin-top:.3rem}
+
+/* SUBLEVEL ROW — за нивата на чужд език -->
+.exam-sub-levels{background:var(--light);border-radius:10px;padding:.8rem 1rem;margin-top:.5rem;display:flex;flex-direction:column;gap:.4rem}
+.sub-level-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem}
+.sub-level-name{color:var(--gray)}
+.sub-level-time{font-weight:600;color:var(--dark)}
+
+/* DECREE BANNER */
+.decree-banner{background:var(--light);border-radius:16px;padding:1.5rem 1.8rem;margin-top:3rem;display:flex;align-items:flex-start;gap:1.2rem}
+.decree-icon{width:44px;height:44px;background:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.decree-icon svg{width:20px;height:20px;color:#fff}
+.decree-text p{font-size:.85rem;color:var(--gray);line-height:1.7}
+.decree-text strong{color:var(--dark);font-weight:600}
+.decree-text a{color:var(--green);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.decree-text a:hover{color:var(--green-dark)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text span{display:none}
+  .content-wrap{padding:3rem 5vw}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .exam-row{grid-template-columns:1fr;gap:.5rem}
+  .exam-date-wrap{text-align:left}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .decree-banner{flex-direction:column}
+}
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="history.html">История</a><a href="ekip.html">Екип</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="paralelki.html">Паралелки</a><a href="vanshno-otsenqvane.html">Външно оценяване</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="priem-1-klas.html">Прием</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a><span>/</span>
+    <a href="#">ОБУЧЕНИЕ</a><span>/</span>
+    <span style="color:var(--gold)">ВЪНШНО ОЦЕНЯВАНЕ</span>
+  </div>
+  <div class="page-hero-label">Обучение · НВО 2025/2026</div>
+  <h1>Външно оценяване</h1>
+  <p class="page-hero-sub">Дати за провеждане на национално външно оценяване на учениците в ІV, VІІ и Х клас през учебната 2025/2026 година.</p>
+</section>
+
+<div class="content-wrap">
+
+  <!-- ІV КЛАС -->
+  <div class="class-block reveal">
+    <div class="class-block-header">
+      <div class="class-badge">
+        ІV клас
+        <span class="class-badge-sub">Начален етап</span>
+      </div>
+      <div class="class-block-line"></div>
+    </div>
+    <div class="exam-list">
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Български език и литература</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">03 юни 2026 г.</div>
+          <div class="exam-time">10:00 ч.</div>
+        </div>
+      </div>
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-math">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Математика</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">04 юни 2026 г.</div>
+          <div class="exam-time">10:00 ч.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VІІ КЛАС -->
+  <div class="class-block reveal">
+    <div class="class-block-header">
+      <div class="class-badge">
+        VІІ клас
+        <span class="class-badge-sub">Прогимназиален етап</span>
+      </div>
+      <div class="class-block-line"></div>
+    </div>
+    <div class="exam-list">
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Български език и литература</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">17 юни 2026 г.</div>
+          <div class="exam-time">09:00 ч.</div>
+        </div>
+      </div>
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-math">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Математика с интегриране на други учебни предмети</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">19 юни 2026 г.</div>
+          <div class="exam-time">09:00 ч.</div>
+        </div>
+      </div>
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-lang2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Чужд език</div>
+            <div class="opt-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:9px;height:9px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              по желание на ученика
+            </div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">22 юни 2026 г.</div>
+          <div class="exam-time">09:00 ч.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Х КЛАС -->
+  <div class="class-block reveal">
+    <div class="class-block-header">
+      <div class="class-badge" style="background:var(--green)">
+        Х клас
+        <span class="class-badge-sub">Гимназиален етап</span>
+      </div>
+      <div class="class-block-line"></div>
+    </div>
+    <div class="exam-list">
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Български език и литература</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">17 юни 2026 г.</div>
+          <div class="exam-time">08:00 ч.</div>
+        </div>
+      </div>
+      <div class="exam-row">
+        <div class="exam-row-left">
+          <div class="exam-icon bg-math">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="exam-subject">Математика с интегриране на други учебни предмети</div>
+          </div>
+        </div>
+        <div class="exam-date-wrap">
+          <div class="exam-date">19 юни 2026 г.</div>
+          <div class="exam-time">08:00 ч.</div>
+        </div>
+      </div>
+
+      <!-- Чужд език -->
+<div class="exam-row" style="display:block;padding:0;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.3rem">
+    <div class="exam-row-left">
+      <div class="exam-icon bg-lang2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      </div>
+      <div>
+        <div class="exam-subject">Чужд език — писмена част</div>
+        <div class="opt-badge">по желание на ученика</div>
+      </div>
+    </div>
+    <div class="exam-date" style="flex-shrink:0">22 юни 2026 г.</div>
+  </div>
+  <div style="border-top:1px solid rgba(0,0,0,.07)">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;border-bottom:1px solid rgba(0,0,0,.07);font-size:.83rem">
+      <span style="color:var(--gray)">Ниво В1 и В1.1</span><span style="font-weight:600;color:var(--dark)">09:30 ч.</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;border-bottom:1px solid rgba(0,0,0,.07);font-size:.83rem">
+      <span style="color:var(--gray)">Ниво А2</span><span style="font-weight:600;color:var(--dark)">10:00 ч.</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;border-bottom:1px solid rgba(0,0,0,.07);font-size:.83rem">
+      <span style="color:var(--gray)">Ниво А1</span><span style="font-weight:600;color:var(--dark)">10:30 ч.</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;font-size:.83rem">
+      <span style="color:var(--gray);font-style:italic">Компонент „Говорене"</span><span style="color:var(--gray)">по график на директора</span>
+    </div>
+  </div>
+</div>
+
+<!-- Информационни технологии -->
+<div class="exam-row" style="display:block;padding:0;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.3rem">
+    <div class="exam-row-left">
+      <div class="exam-icon bg-it">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div>
+        <div class="exam-subject">Информационни технологии</div>
+        <div class="exam-note">Измерване на дигитални компетентности</div>
+        <div class="opt-badge">по желание на ученика</div>
+      </div>
+    </div>
+    <div class="exam-date" style="flex-shrink:0">23 юни 2026 г.</div>
+  </div>
+  <div style="border-top:1px solid rgba(0,0,0,.07)">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;border-bottom:1px solid rgba(0,0,0,.07);font-size:.83rem">
+      <span style="color:var(--gray)">Сесия 1</span><span style="font-weight:600;color:var(--dark)">09:00 ч.</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:.65rem 1.3rem;font-size:.83rem">
+      <span style="color:var(--gray)">Сесия 2</span><span style="font-weight:600;color:var(--dark)">14:30 ч.</span>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <!-- DECREE BANNER -->
+  <div class="decree-banner reveal">
+    <div class="decree-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+    </div>
+    <div class="decree-text">
+      <p><strong>Заповед № РД09-2074/26.08.2025 г.</strong> за утвърждаване на график за провеждане на НВО през учебната 2025–2026 година (публ. 26.08.2025 г.)</p>
+      <p style="margin-top:.5rem">Повече информация можете да намерите на сайта на <a href="https://www.mon.bg" target="_blank">Министерство на образованието и науката</a>.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

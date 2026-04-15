@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Извънкласни дейности – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+ 
+/* === PAGE HERO === */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3.5rem;position:relative;overflow:hidden}
+.page-hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:10px}
+.page-hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}
+.page-hero h1 em{color:var(--gold);font-style:italic}
+.page-hero p{font-size:.95rem;color:rgba(255,255,255,.65);max-width:520px;line-height:1.7}
+ 
+/* === SUBCATEGORY TABS === */
+.sub-tabs-wrapper{background:#fff;border-bottom:2px solid var(--green-light);position:sticky;top:var(--nav-h);z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.06)}
+.sub-tabs-inner{display:flex;padding:0 8vw;gap:0;overflow-x:auto;scrollbar-width:none}
+.sub-tabs-inner::-webkit-scrollbar{display:none}
+.sub-tab-btn{display:flex;align-items:center;gap:8px;padding:1rem 1.4rem;font-size:.88rem;font-weight:600;color:var(--gray);background:none;border:none;cursor:pointer;white-space:nowrap;font-family:'Manrope',sans-serif;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;margin-bottom:-2px}
+.sub-tab-btn:hover{color:var(--green)}
+.sub-tab-btn:hover svg{opacity:1}
+.sub-tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.sub-tab-btn.active svg{opacity:1}
+ 
+/* === MAIN CONTENT === */
+.ext-content{padding:4rem 8vw 6rem;background:var(--light)}
+.sub-panel{display:none}
+.sub-panel.active{display:block}
+ 
+/* Section header */
+.section-head{margin-bottom:3rem}
+.section-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:.7rem}
+.section-eyebrow::before{content:'';width:26px;height:2px;background:var(--green);flex-shrink:0}
+.section-head h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.15}
+.section-head p{font-size:.95rem;color:var(--gray);line-height:1.75;max-width:620px;margin-top:.8rem}
+ 
+/* === SPORT SECTION === */
+.sport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-bottom:4rem}
+.sport-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);transition:transform .3s,box-shadow .3s;position:relative}
+.sport-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.13)}
+.sport-card-top{padding:2rem 1.8rem 1.4rem;position:relative}
+.sport-card-top::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--green);border-radius:20px 20px 0 0}
+.sport-icon{width:56px;height:56px;background:var(--green-light);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;border:1px solid rgba(29,122,80,.15)}
+.sport-icon svg{width:26px;height:26px;color:var(--green)}
+.sport-card h3{font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+.sport-card p{font-size:.84rem;color:var(--gray);line-height:1.7}
+.sport-card-footer{padding:1rem 1.8rem 1.4rem;border-top:1px solid var(--green-light);display:flex;flex-wrap:wrap;gap:.5rem}
+.info-chip{display:inline-flex;align-items:center;gap:5px;background:var(--green-light);color:var(--green);font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:50px;border:1px solid rgba(29,122,80,.15)}
+.info-chip svg{width:12px;height:12px;flex-shrink:0}
+ 
+/* === THEATRE SECTION === */
+.theatre-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin-bottom:4rem}
+.theatre-card{background:#fff;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.07);overflow:hidden;transition:transform .3s,box-shadow .3s;position:relative}
+.theatre-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.13)}
+.theatre-card-accent{height:5px;background:linear-gradient(90deg,var(--gold),#e8c86e)}
+.theatre-card-body{padding:2rem 2rem 1.6rem}
+.theatre-card-num{font-size:3rem;font-weight:700;color:rgba(201,168,76,.15);line-height:1;margin-bottom:.5rem}
+.theatre-card h3{font-size:1.35rem;font-weight:700;color:var(--dark);margin-bottom:.8rem}
+.theatre-card p{font-size:.88rem;color:var(--gray);line-height:1.75;margin-bottom:1.2rem}
+.theatre-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.theatre-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.1);color:#7a5c10;font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:50px;border:1px solid rgba(201,168,76,.25)}
+.theatre-card-footer{padding:1.2rem 2rem 1.6rem;border-top:1px solid #faf3e0}
+.theatre-detail{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--gray);margin-bottom:.5rem}
+.theatre-detail:last-child{margin-bottom:0}
+.theatre-detail svg{width:14px;height:14px;color:var(--gold);flex-shrink:0}
+ 
+/* === INTERESTS SECTION === */
+.interests-intro{background:#fff;border-radius:20px;padding:2.5rem;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:2.5rem;border-left:4px solid var(--gold)}
+.interests-intro h3{font-size:1.2rem;font-weight:700;margin-bottom:.7rem}
+.interests-intro p{font-size:.9rem;color:var(--gray);line-height:1.75}
+.interests-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.interest-card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 3px 16px rgba(0,0,0,.06);border:1px solid transparent;transition:border-color .3s,transform .3s,box-shadow .3s}
+.interest-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.interest-card-head{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.interest-num{width:36px;height:36px;background:var(--green);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;flex-shrink:0}
+.interest-card h4{font-size:1.05rem;font-weight:700;color:var(--dark)}
+.interest-card p{font-size:.84rem;color:var(--gray);line-height:1.7;margin-bottom:1rem}
+.interest-meta{display:flex;flex-wrap:wrap;gap:.5rem}
+.meta-pill{display:inline-flex;align-items:center;gap:4px;background:var(--green-light);color:var(--green);font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:50px}
+ 
+/* Responsive */
+@media(max-width:1100px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-item>a{padding:0 .6rem;font-size:.85rem}
+  .sport-grid{grid-template-columns:1fr 1fr}
+  .trips-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links,.nav-search{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text strong{font-size:.95rem}
+  .nav-logo-text span{display:none}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .sub-tabs-inner{padding:0 5vw}
+  .ext-content{padding:2.5rem 5vw 4rem}
+  .sport-grid{grid-template-columns:1fr}
+  .theatre-grid{grid-template-columns:1fr}
+  .interests-grid{grid-template-columns:1fr}
+  .trips-grid{grid-template-columns:1fr}
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.5rem}
+}
+ 
+/* BREADCRUMB inside hero */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="history.html">История</a>
+      <a href="mision-vision.html">Мисия и визия</a>
+      <a href="ekip.html">Педагогически екип</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="priem-1-klas.html">Прием в I клас</a>
+      <a href="priem-5-klas.html">Прием в V клас</a>
+      <a href="priem-8-klas.html">Прием в VIII клас</a>
+      <a href="dokumenti.html">Необходими документи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Учебни планове</a>
+      <a href="sedmichno-razpisanie.html">Разписание</a>
+      <a href="#">Електронен дневник</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Родители <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Наредби</a><a href="#">Родителска среща</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Ученици <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="school-council.html">Ученически съвет</a>
+      <a href="extracurricular-activities.html">Извънкласни дейности</a>
+      <a href="#">Спорт</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="dokumenti.html">Необходими документи</a>
+      <a href="faq.html">ЧЗВ</a>
+      <a href="#">Формуляри</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions">
+    <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
+    <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
+ 
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <span>/</span>
+    <a href="#">УЧЕНИЦИ</a>
+    <span>/</span>
+    <span style="color:var(--gold)">ИЗВЪНКЛАСНИ ДЕЙНОСТИ</span>
+  </div>
+  <div class="page-hero-eyebrow">Ученици · Дейности</div>
+  <h1>Извънкласни <em>дейности</em></h1>
+  <p>Образованието се случва и извън класната стая — в спортни зали, на сцената, сред природата и в света. Открий своето място!</p>
+</div>
+ 
+<!-- SUB-CATEGORY TABS -->
+<div class="sub-tabs-wrapper">
+  <div class="sub-tabs-inner">
+    <button class="sub-tab-btn active" data-sub="sport">Спорт и изкуство</button>
+    <button class="sub-tab-btn" data-sub="interests">Занимания по интереси</button>
+  </div>
+</div>
+ 
+<!-- CONTENT -->
+<div class="ext-content">
+ 
+  <!-- СПОРТ -->
+  <div class="sub-panel active" id="sub-sport">
+    <div class="section-head">
+      <div class="section-eyebrow">Физическо развитие</div>
+      <h2>Спортни дейности</h2>
+      <p>Нашето училище предлага разнообразни спортни секции за всички ученици. Физическата активност е неотменна част от цялостното развитие на всеки ученик.</p>
+    </div>
+ 
+    <div class="sport-grid">
+      <div class="sport-card">
+        <div class="sport-card-top">
+          <div class="sport-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Волейбол</h3>
+          <p>Динамичен отборен спорт за ученици с желание да развиват реакция, прецизност и сплотеност. Участваме в общинското първенство.</p>
+        </div>
+        <div class="sport-card-footer">
+          <span class="info-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Понеделник и сряда</span>
+          <span class="info-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>15:00–17:00 ч.</span>
+          <span class="info-chip">VI – XII клас</span>
+        </div>
+      </div>
+ 
+      <div class="sport-card">
+        <div class="sport-card-top">
+          <div class="sport-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M5 12h14"/><path d="M12 5a7 7 0 010 14"/></svg>
+          </div>
+          <h3>Баскетбол</h3>
+          <p>Подходящ за ученици от всички ръстове и темпераменти. Развива пространственото мислене, прецизността и тактическото разузнаване.</p>
+        </div>
+        <div class="sport-card-footer">
+          <span class="info-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Петък</span>
+          <span class="info-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>14:30–16:30 ч.</span>
+          <span class="info-chip">V – XII клас</span>
+        </div>
+      </div>
+    </div><!-- end sport-grid -->
+ 
+    <!-- Theatre subsection inside Sport panel -->
+    <div class="section-head" style="margin-top:1rem">
+      <div class="section-eyebrow">Изкуство и сцена</div>
+      <h2>Театрални трупи</h2>
+      <p>Две самостоятелни театрални трупи дават сцена на всеки, който иска да открие своя глас — чрез думи, движение и емоция.</p>
+    </div>
+ 
+    <div class="theatre-grid">
+      <div class="theatre-card">
+        <div class="theatre-card-accent"></div>
+        <div class="theatre-card-body">
+          <div class="theatre-card-num">01</div>
+          <h3>Театрална трупа „Йовков"</h3>
+          <p>Основната театрална трупа на училището работи с ученици от V до XII клас. Репертоарът включва адаптации на класически произведения от българската и световната литература, включително произведения на патрона ни Йордан Йовков. Трупата участва ежегодно в регионални театрални фестивали.</p>
+          <div class="theatre-tags">
+            <span class="theatre-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
+              V – XII клас
+            </span>
+            <span class="theatre-tag">Класически репертоар</span>
+            <span class="theatre-tag">Регионални фестивали</span>
+          </div>
+        </div>
+        <div class="theatre-card-footer">
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Репетиции всяка сряда от 14:00 – 16:30 ч.
+          </div>
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Ръководител: учителят по литература
+          </div>
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+            Актова зала, етаж 2
+          </div>
+        </div>
+      </div>
+ 
+      <div class="theatre-card">
+        <div class="theatre-card-accent"></div>
+        <div class="theatre-card-body">
+          <div class="theatre-card-num">02</div>
+          <h3>Театрална работилница „Млади гласове"</h3>
+          <p>Трупата за начинаещи работи с ученици от I до IV клас. Чрез игрови методи, импровизация и кратките постановки децата развиват говорна култура, самочувствие и творческо мислене. Специален акцент е поставен върху работата с тялото и глас.</p>
+          <div class="theatre-tags">
+            <span class="theatre-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
+              I – IV клас
+            </span>
+            <span class="theatre-tag">Импровизация</span>
+            <span class="theatre-tag">Игрови методи</span>
+          </div>
+        </div>
+        <div class="theatre-card-footer">
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Репетиции всеки петък от 13:00 – 15:00 ч.
+          </div>
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Ръководител: учителят по изобразително изкуство
+          </div>
+          <div class="theatre-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+            Зала за извънкласни дейности, партер
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div><!-- end sub-sport -->
+ 
+  <!-- ЗАНИМАНИЯ ПО ИНТЕРЕСИ -->
+  <div class="sub-panel" id="sub-interests">
+    <div class="section-head">
+      <div class="section-eyebrow">Творчество и развитие</div>
+      <h2>Занимания по интереси</h2>
+      <p>Разнообразни ателиета, клубове и секции, в които учениците развиват своите таланти и намират своите страсти извън задължителните учебни часове.</p>
+    </div>
+ 
+    <div class="interests-intro">
+      <h3>Как работи?</h3>
+      <p>Заниманията по интереси се провеждат ежедневно в рамките на целодневната организация на учебния ден за учениците от I до IV клас, а за учениците от V до XII клас — след края на учебните часове. Записването се извършва в началото на всеки учебен срок при класния ръководител.</p>
+    </div>
+ 
+    <div class="interests-grid">
+ 
+      <div class="interest-card">
+        <div class="interest-card-head">
+          <div class="interest-num">01</div>
+          <h4>Дигитално творчество и програмиране</h4>
+        </div>
+        <p>Ученици от всички класове се запознават с основите на програмирането чрез Scratch, Python и визуални инструменти. Акцент върху творческото решаване на проблеми.</p>
+        <div class="interest-meta">
+          <span class="meta-pill">III – VIII клас</span>
+          <span class="meta-pill">Понеделник и четвъртък</span>
+          <span class="meta-pill">14:00–15:30 ч.</span>
+        </div>
+      </div>
+ 
+      <div class="interest-card">
+        <div class="interest-card-head">
+          <div class="interest-num">02</div>
+          <h4>Клуб „Млади възрожденци"</h4>
+        </div>
+        <p>Изучаване на националните традиции, история и народна памет. Клубът подготвя чествания по национални и регионални празници и участва в конкурси.</p>
+        <div class="interest-meta">
+          <span class="meta-pill">V – XII клас</span>
+          <span class="meta-pill">Вторник</span>
+          <span class="meta-pill">14:00–15:30 ч.</span>
+        </div>
+      </div>
+ 
+    </div>
+  </div><!-- end sub-interests -->
+ 
+</div><!-- end ext-content -->
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40) });
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+function openMenu() { menuOpen = true; hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden' }
+function closeMenu() { menuOpen = false; hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); mobileMenu.classList.remove('open'); document.body.style.overflow = '' }
+hamburger.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu() });
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('click', (e) => { if (menuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu() });
+function toggleMobSub(btn) {
+  const item = btn.closest('.mobile-menu-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.mobile-menu-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Sub-tabs
+const subBtns = document.querySelectorAll('.sub-tab-btn');
+const subPanels = document.querySelectorAll('.sub-panel');
+subBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    subBtns.forEach(b => b.classList.remove('active'));
+    subPanels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('sub-' + btn.dataset.sub).classList.add('active');
+    document.querySelector('.ext-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Педагогически екип – СУ „Йордан Йовков" Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50;
+  --green-dark: #0F5438;
+  --green-light: #e1f5ee;
+  --teal: #1D9E75;
+  --teal-light: #9FE1CB;
+  --gold: #C9A84C;
+  --gold-light: #f0e2b8;
+  --dark: #1a2e24;
+  --gray: #555;
+  --light: #f0f7f3;
+  --white: #ffffff;
+  --footer-bg: #0b3224;
+  --nav-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════
+   АНИМАЦИИ
+═══════════════════════════════════════ */
+
+/* --- Fade-up: базов клас --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes lineExpand {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero елементи — зареждат се при load */
+.hero-breadcrumb  { animation: slideDown 0.55s cubic-bezier(.22,.68,0,1.2) 0.15s both; }
+.hero-eyebrow     { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.30s both; }
+.hero-title       { animation: fadeUp   0.65s cubic-bezier(.22,.68,0,1.2) 0.45s both; }
+.hero-desc        { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.62s both; }
+
+/* Hero overlay blur reveal */
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(rgba(0,0,0,0.473), rgba(0,0,0,0.733));
+  animation: fadeIn 0.9s ease 0s both;
+}
+
+/* Stats числа */
+.stat-item {
+  animation: countUp 0.5s cubic-bezier(.22,.68,0,1.2) both;
+}
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.22s; }
+.stat-item:nth-child(3) { animation-delay: 0.34s; }
+.stat-item:nth-child(4) { animation-delay: 0.46s; }
+
+/* Filter bar */
+.filter-btn {
+  animation: fadeUp 0.4s cubic-bezier(.22,.68,0,1.2) both;
+}
+.filter-btn:nth-child(1) { animation-delay: 0.05s; }
+.filter-btn:nth-child(2) { animation-delay: 0.12s; }
+.filter-btn:nth-child(3) { animation-delay: 0.19s; }
+.filter-btn:nth-child(4) { animation-delay: 0.26s; }
+.filter-btn:nth-child(5) { animation-delay: 0.33s; }
+.filter-btn:nth-child(6) { animation-delay: 0.40s; }
+
+/* Scroll reveal — базово скрит стейт */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.55s cubic-bezier(.22,.68,0,1.2),
+              transform 0.55s cubic-bezier(.22,.68,0,1.2);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Group header линия */
+.group-line {
+  transform-origin: left center;
+}
+.reveal.visible .group-line {
+  animation: lineExpand 0.6s cubic-bezier(.22,.68,0,1.2) 0.2s both;
+}
+
+/* Карти — stagger при reveal на групата */
+.member-card {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.45s cubic-bezier(.22,.68,0,1.2),
+              transform 0.45s cubic-bezier(.22,.68,0,1.2),
+              box-shadow 0.3s, border-color 0.3s;
+}
+.member-card.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ═══════════════════════════════════════
+   PAGE HERO
+═══════════════════════════════════════ */
+.page-hero {
+  margin-top: var(--nav-h);
+  padding: 3rem 8vw 6rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--green-dark);
+  color: white;
+  text-align: left;
+}
+
+.page-hero > * {
+  position: relative;
+  z-index: 2; 
+}
+
+/* малък текст */
+.page-hero-eyebrow {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+/* заглавие */
+.page-hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  text-align: left;
+}
+
+.page-hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* текст */
+.page-hero p {
+  font-size: 1rem;
+  color: rgba(255,255,255,.85);
+  max-width: 520px;
+  line-height: 1.75;
+  text-align: left;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+/* breadcrumb */
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.breadcrumb a {
+  font-size: .78rem;
+  color: rgba(255,255,255,.45);
+  transition: color .2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb span {
+  font-size: .78rem;
+  color: rgba(255,255,255,.25);
+}
+/* ═══════════════════════════════════════
+   FILTER BAR
+═══════════════════════════════════════ */
+.filter-section {
+  background: var(--white);
+  border-bottom: 1px solid rgba(29,122,80,.12);
+  padding: 0 8vw;
+  position: sticky; top: var(--nav-h); z-index: 90;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.filter-inner {
+  display: flex; align-items: center; gap: .5rem;
+  overflow-x: auto; padding: 1rem 0;
+  scrollbar-width: none;
+}
+.filter-inner::-webkit-scrollbar { display: none; }
+.filter-btn {
+  flex-shrink: 0;
+  padding: .55rem 1.2rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: .82rem; font-weight: 600; letter-spacing: .04em;
+  border: 1.5px solid rgba(29,122,80,.25);
+  background: transparent; color: var(--gray);
+  border-radius: 50px; cursor: pointer;
+  white-space: nowrap;
+  /* transition само за hover — анимацията е отделна */
+  transition: background .25s, color .25s, border-color .25s, transform .2s;
+}
+.filter-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); transform: translateY(-2px); }
+.filter-btn.active { background: var(--green); color: var(--white); border-color: var(--green); }
+.filter-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: .68rem; font-weight: 700; margin-left: 5px;
+  background: rgba(255,255,255,.25); color: inherit;
+  transition: background .25s;
+}
+.filter-btn:not(.active) .filter-count { background: rgba(29,122,80,.1); color: var(--green); }
+
+/* ═══════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════ */
+.team-section { padding: 4rem 8vw 6rem; background: var(--light); }
+.group-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1rem; 
+  padding-top: 1.5rem;  /* разстояние от картите отгоре */
+
+}
+.group-header:first-of-type { margin-top: 0; }
+.group-line { flex: 1; height: 1px; background: rgba(29,122,80,.15); }
+.group-title {
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--green); white-space: nowrap;
+}
+.group-num {
+  background: var(--green); color: var(--white);
+  font-size: .65rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 50px;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 4rem;
+}
+.member-card {
+  background: var(--white);
+  border: 1px solid rgba(29,122,80,.1);
+  border-radius: 16px;
+  padding: 1.5rem 1.2rem;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.member-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--green);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .3s;
+}
+.member-card:hover { transform: translateY(-5px) !important; box-shadow: 0 12px 36px rgba(29,122,80,.12); border-color: rgba(29,122,80,.25); }
+.member-card:hover::before { transform: scaleX(1); }
+.member-card.is-leader {
+  border-color: rgba(201,168,76,.3);
+  background: linear-gradient(135deg, #fffdf5 0%, #fff 100%);
+}
+.member-card.is-leader::before { background: var(--gold); }
+.member-card.is-leader:hover { border-color: rgba(201,168,76,.5); box-shadow: 0 12px 36px rgba(201,168,76,.15); }
+.avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 1rem; flex-shrink: 0;
+  background: var(--green-light); color: var(--green);
+  border: 2px solid rgba(29,122,80,.15);
+  letter-spacing: .02em;
+  transition: transform .3s, box-shadow .3s;
+}
+.member-card:hover .avatar { transform: scale(1.08); box-shadow: 0 4px 16px rgba(29,122,80,.18); }
+.is-leader .avatar {
+  background: var(--gold-light); color: #8a6a1a;
+  border-color: rgba(201,168,76,.3);
+}
+.is-leader:hover .avatar { box-shadow: 0 4px 16px rgba(201,168,76,.25); }
+.role-badge {
+  display: inline-block;
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 50px;
+  margin-bottom: .6rem;
+  background: var(--green-light); color: var(--green);
+}
+.is-leader .role-badge { background: var(--gold-light); color: #7a5d18; }
+.member-name { font-size: .95rem; font-weight: 700; color: var(--dark); line-height: 1.3; margin-bottom: .35rem; }
+.member-subject { font-size: .78rem; color: var(--gray); line-height: 1.5; }
+.member-group { transition: opacity .3s; }
+.member-group.hidden { display: none; }
+
+/* ═══════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════ */
+.stats-bar {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  padding: 2rem 8vw;
+  background: var(--white);
+  border-bottom: 1px solid rgba(29,122,80,.1);
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-item .num {
+  font-size: 2rem; font-weight: 700; color: var(--green); line-height: 1;
+  display: inline-block;
+}
+.stat-item .lbl { font-size: .75rem; color: var(--gray); margin-top: .2rem; }
+
+/* Пулсиращ ефект на числото при появяване */
+@keyframes numPop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  70%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.stat-item.visible .num {
+  animation: numPop 0.55s cubic-bezier(.22,.68,0,1.2) both;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center; padding: 4rem 2rem; color: var(--gray);
+  display: none;
+}
+.empty-state svg { width: 48px; height: 48px; opacity: .25; margin: 0 auto 1rem; }
+.empty-state p { font-size: .9rem; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .page-hero { padding: 3rem 1.5rem 2.5rem; }
+  .filter-section { padding: 0 1rem; }
+  .team-section { padding: 2rem 1.5rem 4rem; }
+  .stats-bar { padding: 1.5rem; gap: 1.5rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb hero-breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <span>/</span>
+    <a href="za-nas.html">ЗА НАС</a>
+    <span>/</span>
+    <a href="ekip.html" style="color:rgba(255,255,255,.7)">УЧИЛИЩЕН ЕКИП</a>
+  </div>
+  <div class="page-hero-eyebrow hero-eyebrow">СУ „Йордан Йовков" · Сливен</div>
+  <h1 class="hero-title">Нашият <em>екип</em></h1>
+  <p class="hero-desc">Над 30 отдадени педагози и специалисти, които всеки ден работят за развитието на нашите ученици.</p>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal"><span class="num">4</span><span class="lbl">Ръководен екип</span></div>
+  <div class="stat-item reveal"><span class="num">10</span><span class="lbl">Начални учители</span></div>
+  <div class="stat-item reveal"><span class="num">16</span><span class="lbl">Предметни учители</span></div>
+  <div class="stat-item reveal"><span class="num">4</span><span class="lbl">Специалисти и администрация</span></div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-section">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">
+      Всички <span class="filter-count" id="cnt-all">37</span>
+    </button>
+    <button class="filter-btn" data-filter="leadership">
+      Ръководство <span class="filter-count">4</span>
+    </button>
+    <button class="filter-btn" data-filter="nachalenA">
+      Начален етап <span class="filter-count">10</span>
+    </button>
+    <button class="filter-btn" data-filter="subjects">
+      Предметни учители <span class="filter-count">16</span>
+    </button>
+    <button class="filter-btn" data-filter="specialists">
+      Специалисти <span class="filter-count">4</span>
+    </button>
+    <button class="filter-btn" data-filter="admin">
+      Администрация <span class="filter-count">3</span>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN TEAM GRID -->
+<main class="team-section">
+
+  <!-- РЪКОВОДСТВО -->
+  <div class="member-group reveal" data-group="leadership">
+    <div class="group-header">
+      <div class="group-title">Ръководство</div>
+      <div class="group-line"></div>
+      <div class="group-num">4</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card is-leader">
+        <div class="avatar">ДК</div>
+        <span class="role-badge">Директор</span>
+        <div class="member-name">Диана Кънева</div>
+        <div class="member-subject">Директор на училището</div>
+      </div>
+      <div class="member-card is-leader">
+        <div class="avatar">НК</div>
+        <span class="role-badge">Зам.-директор</span>
+        <div class="member-name">Невелина Кикьова</div>
+        <div class="member-subject">Учебна дейност</div>
+      </div>
+      <div class="member-card is-leader">
+        <div class="avatar">ИР</div>
+        <span class="role-badge">Зам.-директор</span>
+        <div class="member-name">Илиян Рундев</div>
+        <div class="member-subject">Административно-стопанска дейност</div>
+      </div>
+      <div class="member-card is-leader">
+        <div class="avatar">АВ</div>
+        <span class="role-badge">Ръководител</span>
+        <div class="member-name">Антон Веснаков</div>
+        <div class="member-subject">Направление „ИКТ"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- НАЧАЛНИ УЧИТЕЛИ -->
+  <div class="member-group reveal" data-group="nachalenA">
+    <div class="group-header">
+      <div class="group-title">Начални учители</div>
+      <div class="group-line"></div>
+      <div class="group-num">6</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card"><div class="avatar">СК</div><span class="role-badge">Начален учител</span><div class="member-name">Събина Кутрова</div></div>
+      <div class="member-card"><div class="avatar">ТЧ</div><span class="role-badge">Начален учител</span><div class="member-name">Таня Чотова</div></div>
+      <div class="member-card"><div class="avatar">МП</div><span class="role-badge">Начален учител</span><div class="member-name">Мария Панова</div></div>
+      <div class="member-card"><div class="avatar">ДГ</div><span class="role-badge">Начален учител</span><div class="member-name">Дора Георгиева</div></div>
+      <div class="member-card"><div class="avatar">МГ</div><span class="role-badge">Начален учител</span><div class="member-name">Мария Грунова</div></div>
+      <div class="member-card"><div class="avatar">БД</div><span class="role-badge">Начален учител</span><div class="member-name">Бояна Данева</div></div>
+    </div>
+
+    <div class="group-header" style="margin-top:2rem">
+      <div class="group-title">Учители ЦДОУД</div>
+      <div class="group-line"></div>
+      <div class="group-num">4</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card"><div class="avatar">ПК</div><span class="role-badge">Учител ЦДОУД</span><div class="member-name">Пламена Кирова</div><div class="member-subject">Целодневна организация</div></div>
+      <div class="member-card"><div class="avatar">МM</div><span class="role-badge">Учител ЦДОУД</span><div class="member-name">Мария Монева</div><div class="member-subject">Целодневна организация</div></div>
+      <div class="member-card"><div class="avatar">ЗМ</div><span class="role-badge">Учител ЦДОУД</span><div class="member-name">Здравка Монева</div><div class="member-subject">Целодневна организация</div></div>
+      <div class="member-card"><div class="avatar">СК</div><span class="role-badge">Учител ЦДОУД</span><div class="member-name">Снежана Колева</div><div class="member-subject">Целодневна организация</div></div>
+    </div>
+  </div>
+
+  <!-- ПРЕДМЕТНИ УЧИТЕЛИ -->
+  <div class="member-group reveal" data-group="subjects">
+    <div class="group-header">
+      <div class="group-title">Предметни учители</div>
+      <div class="group-line"></div>
+      <div class="group-num">16</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card"><div class="avatar">ИА</div><span class="role-badge">БЕЛ</span><div class="member-name">Ивелина Ангелова</div><div class="member-subject">Български език и литература</div></div>
+      <div class="member-card"><div class="avatar">ДА</div><span class="role-badge">БЕЛ</span><div class="member-name">Даниела Атанасова</div><div class="member-subject">Български език и литература</div></div>
+      <div class="member-card"><div class="avatar">СД</div><span class="role-badge">Английски</span><div class="member-name">Стоян Димитров</div><div class="member-subject">Английски език</div></div>
+      <div class="member-card"><div class="avatar">МБ</div><span class="role-badge">Английски</span><div class="member-name">Маргарита Байгуска</div><div class="member-subject">Английски език</div></div>
+      <div class="member-card"><div class="avatar">ГГ</div><span class="role-badge">Немски</span><div class="member-name">Георги Генов</div><div class="member-subject">Немски език</div></div>
+      <div class="member-card"><div class="avatar">ПГ</div><span class="role-badge">Математика</span><div class="member-name">Памела Георгиева</div><div class="member-subject">Математика</div></div>
+      <div class="member-card"><div class="avatar">НС</div><span class="role-badge">Математика · Физика</span><div class="member-name">Нина Стоянова</div><div class="member-subject">Математика, Физика и астрономия</div></div>
+      <div class="member-card"><div class="avatar">ДЖ</div><span class="role-badge">Информатика · ИТ</span><div class="member-name">Димитър Желев</div><div class="member-subject">Информатика и ИТ</div></div>
+      <div class="member-card"><div class="avatar">ВД</div><span class="role-badge">Информатика · ИТ</span><div class="member-name">Виктор Диндев</div><div class="member-subject">Информатика и ИТ</div></div>
+      <div class="member-card"><div class="avatar">СД</div><span class="role-badge">Информатика · ИТ</span><div class="member-name">Станислав Донев</div><div class="member-subject">Информатика и ИТ</div></div>
+      <div class="member-card"><div class="avatar">АД</div><span class="role-badge">Информатика · ИТ</span><div class="member-name">Аделина Дишлиева</div><div class="member-subject">Информатика и ИТ</div></div>
+      <div class="member-card"><div class="avatar">АЕ</div><span class="role-badge">История · Геогр.</span><div class="member-name">Анна Енчева</div><div class="member-subject">История и цивилизация, География и икономика</div></div>
+      <div class="member-card"><div class="avatar">ВД</div><span class="role-badge">История · Геогр. · ОН</span><div class="member-name">Велияна Добрева</div><div class="member-subject">История, География, Обществени науки</div></div>
+      <div class="member-card"><div class="avatar">АШ</div><span class="role-badge">Биология · Химия</span><div class="member-name">Анелия Шидерова</div><div class="member-subject">Биология, Химия и опазване на околната среда</div></div>
+      <div class="member-card"><div class="avatar">ДК</div><span class="role-badge">Изобр. изкуство</span><div class="member-name">Димитър Кавръков</div><div class="member-subject">Изобразително изкуство, Технологии</div></div>
+      <div class="member-card"><div class="avatar">МБ</div><span class="role-badge">Физ. възпитание</span><div class="member-name">Марио Белов</div><div class="member-subject">Физическо възпитание и спорт</div></div>
+    </div>
+  </div>
+
+  <!-- СПЕЦИАЛИСТИ -->
+  <div class="member-group reveal" data-group="specialists">
+    <div class="group-header">
+      <div class="group-title">Специалисти</div>
+      <div class="group-line"></div>
+      <div class="group-num">4</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card"><div class="avatar">ДМ</div><span class="role-badge">Психолог</span><div class="member-name">Деяна Михова</div><div class="member-subject">Училищен психолог</div></div>
+      <div class="member-card"><div class="avatar">МВ</div><span class="role-badge">Ресурсен учител</span><div class="member-name">Мария Вълева</div><div class="member-subject">Ресурсен учител</div></div>
+      <div class="member-card"><div class="avatar">НЧ</div><span class="role-badge">Ресурсен учител</span><div class="member-name">Наталия Чилова</div><div class="member-subject">Ресурсен учител</div></div>
+      <div class="member-card"><div class="avatar">МС</div><span class="role-badge">Логопед</span><div class="member-name">Марияна Стоянова</div><div class="member-subject">Логопед</div></div>
+    </div>
+  </div>
+
+  <!-- АДМИНИСТРАЦИЯ -->
+  <div class="member-group reveal" data-group="admin">
+    <div class="group-header">
+      <div class="group-title">Администрация</div>
+      <div class="group-line"></div>
+      <div class="group-num">3</div>
+    </div>
+    <div class="cards-grid">
+      <div class="member-card"><div class="avatar">ХД</div><span class="role-badge">Счетоводство</span><div class="member-name">Христина Дишлиева</div><div class="member-subject">Главен счетоводител</div></div>
+      <div class="member-card"><div class="avatar">ГД</div><span class="role-badge">ЗАС</span><div class="member-name">Гергана Димитрова-Русева</div><div class="member-subject">Завеждащ административна служба</div></div>
+      <div class="member-card"><div class="avatar">ИС</div><span class="role-badge">Касиер</span><div class="member-name">Иванка Стоянова</div><div class="member-subject">Касиер–домакин</div></div>
+    </div>
+  </div>
+
+  <div class="empty-state" id="empty-state">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    <p>Няма намерени резултати за тази категория.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+/* ── Филтриране ── */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const groups = document.querySelectorAll('.member-group');
+const emptyState = document.getElementById('empty-state');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    let visible = 0;
+    groups.forEach(g => {
+      if (filter === 'all' || g.dataset.group === filter) {
+        g.classList.remove('hidden');
+        visible++;
+        /* re-trigger card animations */
+        g.querySelectorAll('.member-card').forEach((c, i) => {
+          c.classList.remove('card-visible');
+          void c.offsetWidth;
+          setTimeout(() => c.classList.add('card-visible'), i * 55);
+        });
+      } else {
+        g.classList.add('hidden');
+      }
+    });
+    emptyState.style.display = visible === 0 ? 'block' : 'none';
+  });
+});
+
+/* ── Scroll Reveal ── */
+const revealEls = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      /* Stagger карти вътре в групата */
+      const cards = entry.target.querySelectorAll('.member-card');
+      cards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('card-visible'), i * 60);
+      });
+
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* ── Анимирани числа в stats ── */
+function animateNumber(el, target, duration) {
+  let start = 0;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const numEl = entry.target.querySelector('.num');
+      const target = parseInt(numEl.textContent, 10);
+      numEl.textContent = '0';
+      entry.target.classList.add('visible');
+      setTimeout(() => animateNumber(numEl, target, 700), 100);
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-item').forEach(el => statsObserver.observe(el));
+</script>
+</body>
+</html>

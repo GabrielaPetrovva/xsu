@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ученически съвет – СУ „Йордан Йовков" Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50;
+  --green-dark: #0F5438;
+  --green-light: #e1f5ee;
+  --teal: #1D9E75;
+  --teal-light: #9FE1CB;
+  --gold: #C9A84C;
+  --gold-light: #f0e2b8;
+  --dark: #1a2e24;
+  --gray: #555;
+  --light: #f0f7f3;
+  --white: #ffffff;
+  --footer-bg: #0b3224;
+  --nav-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { scrollbar-width: thin; scrollbar-color: #8fcfb8 #eaf4ef; }
+*::-webkit-scrollbar { width: 10px; }
+*::-webkit-scrollbar-track { background: #eaf4ef; border-radius: 10px; }
+*::-webkit-scrollbar-thumb { background: #8fcfb8; border-radius: 10px; border: 2px solid #eaf4ef; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  margin-top: var(--nav-h);
+  background: var(--green-dark);
+  position: relative; overflow: hidden;
+  padding: 6rem 8vw 5rem;
+}
+.page-hero::before {
+  content: 'УС';
+  position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+  font-size: clamp(12rem, 22vw, 22rem); font-weight: 800;
+  color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
+  letter-spacing: -.05em;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, #e8c86a 50%, var(--gold) 100%);
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .72rem; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
+  margin-bottom: 2rem;
+}
+.breadcrumb a { color: rgba(255,255,255,.5); transition: color .2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { color: var(--gold); }
+.breadcrumb-sep { opacity: .35; }
+.page-hero-label {
+  font-size: .72rem; font-weight: 600; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+}
+.page-hero-label::before { content: ''; width: 26px; height: 2px; background: var(--gold); }
+.page-hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 700;
+  color: var(--white); line-height: 1.1; margin-bottom: 1.2rem;
+}
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+.page-hero p {
+  font-size: 1rem; color: rgba(255,255,255,.7);
+  max-width: 560px; line-height: 1.75; margin-bottom: 2rem;
+}
+.hero-meta {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+}
+.hero-meta-item {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.hero-meta-item .meta-val {
+  font-size: 1.5rem; font-weight: 700; color: var(--white);
+}
+.hero-meta-item .meta-lab {
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+
+/* ─── SECTION BASE ─── */
+.section { padding: 6rem 8vw; }
+.section-label { font-size: .72rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 10px; margin-bottom: .8rem; }
+.section-label::before { content: ''; width: 26px; height: 2px; background: var(--green); flex-shrink: 0; }
+.section-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+.section-subtitle { font-size: .95rem; color: var(--gray); max-width: 560px; line-height: 1.75; }
+
+/* ─── MISSION STRIP ─── */
+.mission-strip {
+  background: var(--green);
+  padding: 3.5rem 8vw;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
+}
+.mission-strip p {
+  font-size: 1.2rem; font-style: italic; color: rgba(255,255,255,.9);
+  line-height: 1.65; font-weight: 300;
+  position: relative; padding-left: 2rem;
+}
+.mission-strip p::before {
+  content: '"'; position: absolute; left: 0; top: -0.5rem;
+  font-size: 4rem; color: var(--gold); line-height: 1; opacity: .6;
+  font-family: Georgia, serif;
+}
+.mission-pills { display: flex; flex-direction: column; gap: .6rem; flex-shrink: 0; }
+.mission-pill {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50px; padding: .5rem 1.1rem;
+  font-size: .78rem; color: rgba(255,255,255,.85); font-weight: 500;
+  white-space: nowrap;
+}
+.mission-pill svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+/* ─── STRUCTURE ─── */
+.structure-section { background: var(--light); }
+.org-chart {
+  margin-top: 3.5rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.org-level { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; position: relative; }
+.org-level + .org-level { margin-top: 2rem; }
+.org-connector {
+  width: 2px; height: 2rem; background: var(--green);
+  margin: 0 auto; opacity: .3;
+}
+.org-node {
+  background: var(--white); border: 2px solid var(--green);
+  border-radius: 16px; padding: 1.4rem 1.8rem;
+  text-align: center; min-width: 180px; max-width: 220px;
+  box-shadow: 0 4px 20px rgba(29,122,80,.1);
+  position: relative; transition: transform .3s, box-shadow .3s;
+}
+.org-node:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(29,122,80,.18); }
+.org-node.president {
+  border-color: var(--gold); border-width: 2px;
+  background: linear-gradient(135deg, #fffbf0 0%, #fff8e6 100%);
+  min-width: 220px;
+}
+.org-node.president::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gold); border-radius: 14px 14px 0 0;
+}
+.org-node-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--green-light); display: flex; align-items: center; justify-content: center;
+  margin: 0 auto .8rem;
+}
+.org-node.president .org-node-icon { background: var(--gold-light); }
+.org-node-icon svg { width: 20px; height: 20px; color: var(--green); }
+.org-node.president .org-node-icon svg { color: var(--gold); }
+.org-node h4 { font-size: .95rem; font-weight: 700; color: var(--dark); margin-bottom: .25rem; }
+.org-node .role-tag {
+  font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--green); font-weight: 600;
+}
+.org-node.president .role-tag { color: var(--gold); }
+
+/* ─── MEMBERS GRID ─── */
+.members-section { background: var(--white); }
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.member-card {
+  background: var(--light); border-radius: 20px;
+  overflow: hidden; transition: transform .35s, box-shadow .35s;
+  border: 1px solid rgba(29,122,80,.08);
+  position: relative;
+}
+.member-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+.member-avatar {
+  height: 180px;
+  background: linear-gradient(135deg, var(--green-light) 0%, #c8ecd9 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.member-avatar-inner {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--green); display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; font-weight: 700; color: var(--white);
+  border: 3px solid rgba(255,255,255,.6);
+  box-shadow: 0 4px 20px rgba(29,122,80,.3);
+}
+.member-card.president-card .member-avatar {
+  background: linear-gradient(135deg, var(--gold-light) 0%, #ffe8b0 100%);
+}
+.member-card.president-card .member-avatar-inner {
+  background: var(--gold); color: var(--dark);
+}
+.member-class-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--white); border: 1.5px solid rgba(29,122,80,.2);
+  border-radius: 50px; padding: 3px 10px;
+  font-size: .67rem; font-weight: 600; color: var(--green); letter-spacing: .06em;
+}
+.president-crown {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--gold); border-radius: 50px; padding: 3px 10px;
+  font-size: .67rem; font-weight: 700; color: var(--dark); letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.member-info { padding: 1.2rem 1.3rem 1.4rem; }
+.member-name { font-size: 1rem; font-weight: 700; margin-bottom: .2rem; }
+.member-role { font-size: .78rem; color: var(--green); font-weight: 600; margin-bottom: .5rem; }
+.member-class { font-size: .75rem; color: var(--gray); }
+.member-card.president-card .member-role { color: #a07a1a; }
+
+/* ─── INITIATIVES ─── */
+.initiatives-section { background: var(--light); }
+.initiatives-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1.8rem; margin-top: 3.5rem;
+}
+.initiative-card {
+  background: var(--white); border-radius: 20px; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  transition: transform .35s, box-shadow .35s;
+  display: flex; flex-direction: column;
+}
+.initiative-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+.initiative-img {
+  height: 160px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.initiative-img-bg {
+  position: absolute; inset: 0;
+}
+.initiative-icon-big {
+  position: relative; z-index: 1;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.3);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.initiative-icon-big svg { width: 30px; height: 30px; color: white; }
+.initiative-cat {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(0,0,0,.25); backdrop-filter: blur(8px);
+  color: var(--white); font-size: .67rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 50px;
+  border: 1px solid rgba(255,255,255,.2);
+}
+.initiative-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.initiative-date { font-size: .72rem; color: var(--gold); font-weight: 600; letter-spacing: .06em; margin-bottom: .5rem; }
+.initiative-body h3 { font-size: 1.1rem; line-height: 1.3; margin-bottom: .7rem; }
+.initiative-body p { font-size: .85rem; color: var(--gray); line-height: 1.7; flex: 1; }
+.initiative-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 1rem; padding: .3rem .8rem;
+  background: var(--green-light); border-radius: 50px;
+  font-size: .7rem; font-weight: 600; color: var(--green);
+  align-self: flex-start;
+}
+.initiative-tag svg { width: 11px; height: 11px; }
+
+/* ─── GOALS / VALUES ─── */
+.goals-section {
+  background: var(--green-dark);
+  padding: 5.5rem 8vw;
+  position: relative; overflow: hidden;
+}
+.goals-section::before {
+  content: '★';
+  position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);
+  font-size: clamp(16rem, 25vw, 26rem);
+  color: rgba(255,255,255,.03); pointer-events: none;
+}
+.goals-section .section-label { color: rgba(255,255,255,.5); }
+.goals-section .section-label::before { background: var(--gold); }
+.goals-section .section-title { color: var(--white); margin-bottom: 3rem; }
+.goals-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.goal-card {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px; padding: 2.2rem 1.8rem;
+  transition: background .3s, transform .3s;
+  position: relative; overflow: hidden;
+}
+.goal-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform .35s;
+}
+.goal-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
+.goal-card:hover::before { transform: scaleX(1); }
+.goal-num {
+  font-size: 3.5rem; font-weight: 700; color: rgba(201,168,76,.2);
+  line-height: 1; margin-bottom: .6rem; font-family: 'Manrope', sans-serif;
+}
+.goal-card h4 { font-size: 1.05rem; color: var(--white); margin-bottom: .6rem; font-weight: 600; }
+.goal-card p { font-size: .82rem; color: rgba(255,255,255,.55); line-height: 1.7; }
+.goal-icon { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid rgba(201,168,76,.3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+.goal-icon svg { width: 19px; height: 19px; color: var(--gold); }
+
+/* ─── DOCS / JOIN ─── */
+.join-section { background: var(--white); padding: 6rem 8vw; }
+.join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3.5rem; }
+.join-card {
+  border: 2px solid var(--green); border-radius: 20px; padding: 2.5rem 2rem;
+  position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s;
+}
+.join-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold); border-radius: 20px 20px 0 0; }
+.join-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(29,122,80,.14); }
+.join-card h3 { font-size: 1.45rem; margin-bottom: 1rem; }
+.join-card p { font-size: .9rem; color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; }
+.join-steps { list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-bottom: 2rem; }
+.join-steps li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: .87rem; color: var(--gray);
+}
+.step-num {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--green-light); border: 1.5px solid rgba(29,122,80,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; font-weight: 700; color: var(--green);
+  margin-top: 1px;
+}
+.contact-card {
+  background: var(--light); border-radius: 20px; padding: 2.5rem 2rem;
+}
+.contact-card h3 { font-size: 1.45rem; margin-bottom: 1.5rem; }
+.contact-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1.2rem; }
+.contact-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-icon svg { width: 16px; height: 16px; color: var(--green); }
+.contact-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+.contact-val { font-size: .9rem; color: var(--dark); }
+
+/* ─── BUTTONS ─── */
+.btn-green { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: var(--white); padding: .85rem 2rem; font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: 2px solid var(--green); border-radius: 50px; transition: background .3s, color .3s; }
+.btn-green:hover { background: transparent; color: var(--green); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--green); padding: .85rem 2rem; font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: 2px solid var(--green); border-radius: 50px; transition: background .3s, color .3s; }
+.btn-outline:hover { background: var(--green); color: var(--white); }
+.btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--dark); padding: .85rem 2rem; font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: 2px solid var(--gold); border-radius: 50px; transition: background .3s, color .3s; }
+.btn-gold:hover { background: transparent; color: var(--gold); }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s, transform .7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity .8s, transform .8s; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(36px); transition: opacity .8s, transform .8s; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .members-grid { grid-template-columns: repeat(3,1fr); }
+  .goals-grid { grid-template-columns: 1fr 1fr; }
+  .initiatives-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .mission-strip { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .members-grid { grid-template-columns: 1fr 1fr; }
+  .goals-grid, .initiatives-grid, .join-grid, .footer-grid { grid-template-columns: 1fr; }
+  .page-hero h1 { font-size: 2.4rem; }
+  .hero-meta { gap: 1.5rem; }
+}
+@media (max-width: 480px) {
+  .members-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="#">Ученици</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Ученически съвет</span>
+  </div>
+  <div class="page-hero-label">Гласът на учениците</div>
+  <h1>Ученически<br><em>съвет</em></h1>
+  <p>Ученическият съвет е органът на ученическото самоуправление в СУ „Йордан Йовков". Ние представляваме интересите на всички ученици и работим за по-добра, по-приятна и по-справедлива училищна среда.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="meta-val">15</span>
+      <span class="meta-lab">Членове</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val">2024/25</span>
+      <span class="meta-lab">Учебна година</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val">12+</span>
+      <span class="meta-lab">Инициативи</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-val">800+</span>
+      <span class="meta-lab">Представлявани ученици</span>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip reveal">
+  <p>Вярваме, че всеки ученик има право на глас. Нашата мисия е да бъдем мост между учениците и ръководството, да организираме значими инициативи и да изграждаме общност, в която всеки се чувства чут и ценен.</p>
+  <div class="mission-pills">
+    <div class="mission-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      Представителство
+    </div>
+    <div class="mission-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Инициативи
+    </div>
+    <div class="mission-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Диалог
+    </div>
+    <div class="mission-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Защита на правата
+    </div>
+  </div>
+</div>
+
+<!-- STRUCTURE -->
+<section class="section structure-section" id="struktura">
+  <div class="section-label reveal">Организация</div>
+  <h2 class="section-title reveal">Структура на съвета</h2>
+  <p class="section-subtitle reveal">Ученическият съвет е организиран демократично — всеки клас избира свой представител, а заедно те формират ръководен орган.</p>
+
+  <div class="org-chart">
+    <!-- Top: President -->
+    <div class="org-level">
+      <div class="org-node president reveal">
+        <div class="org-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h4>Председател</h4>
+        <div class="role-tag">Ръководи съвета</div>
+      </div>
+    </div>
+    <div class="org-connector"></div>
+    <!-- Vice presidents -->
+    <div class="org-level">
+      <div class="org-node reveal" style="transition-delay:.1s">
+        <div class="org-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>Зам.-председател</h4>
+        <div class="role-tag">Инициативи & Събития</div>
+      </div>
+      <div class="org-node reveal" style="transition-delay:.2s">
+        <div class="org-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h4>Секретар</h4>
+        <div class="role-tag">Документация & Протоколи</div>
+      </div>
+      <div class="org-node reveal" style="transition-delay:.3s">
+        <div class="org-node-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h4>Касиер</h4>
+        <div class="role-tag">Финанси & Бюджет</div>
+      </div>
+    </div>
+    <div class="org-connector"></div>
+    <!-- Representatives -->
+    <div class="org-level">
+      <div class="org-node reveal" style="min-width:auto;padding:1rem 1.4rem;transition-delay:.1s">
+        <div style="font-size:.75rem;color:var(--gray);line-height:1.6;text-align:center">
+          <strong style="display:block;color:var(--dark);margin-bottom:.3rem">Представители</strong>
+          по един от всяка паралелка<br>V – XII клас
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<section class="section members-section" id="members">
+  <div class="section-label reveal">Мандат 2024/2025</div>
+  <h2 class="section-title reveal">Членове на съвета</h2>
+  <p class="section-subtitle reveal">Запознайте се с учениците, които представляват своите класове и работят за по-добра училищна среда.</p>
+
+  <div class="members-grid">
+
+    <!-- President -->
+    <div class="member-card president-card reveal">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">ИД</div>
+        <span class="president-crown">★ Председател</span>
+        <span class="member-class-badge">XII А</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Иван Димитров</div>
+        <div class="member-role">Председател</div>
+        <div class="member-class">XII А клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.08s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">МС</div>
+        <span class="member-class-badge">XI Б</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Мария Стоянова</div>
+        <div class="member-role">Зам.-председател</div>
+        <div class="member-class">XI Б клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.16s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">ГП</div>
+        <span class="member-class-badge">XII Б</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Георги Петров</div>
+        <div class="member-role">Секретар</div>
+        <div class="member-class">XII Б клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.24s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">ЕН</div>
+        <span class="member-class-badge">XI А</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Елена Николова</div>
+        <div class="member-role">Касиер</div>
+        <div class="member-class">XI А клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.08s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">АВ</div>
+        <span class="member-class-badge">X А</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Антон Василев</div>
+        <div class="member-role">Представител</div>
+        <div class="member-class">X А клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.16s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">СМ</div>
+        <span class="member-class-badge">X Б</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Симона Маринова</div>
+        <div class="member-role">Представител</div>
+        <div class="member-class">X Б клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.24s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">КИ</div>
+        <span class="member-class-badge">IX А</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Калин Иванов</div>
+        <div class="member-role">Представител</div>
+        <div class="member-class">IX А клас</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal" style="transition-delay:.32s">
+      <div class="member-avatar">
+        <div class="member-avatar-inner">ДТ</div>
+        <span class="member-class-badge">IX Б</span>
+      </div>
+      <div class="member-info">
+        <div class="member-name">Дария Тодорова</div>
+        <div class="member-role">Представител</div>
+        <div class="member-class">IX Б клас</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GOALS -->
+<section class="goals-section" id="celi">
+  <div class="section-label reveal">Програма</div>
+  <h2 class="section-title reveal">Нашите цели</h2>
+  <div class="goals-grid">
+    <div class="goal-card reveal">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <div class="goal-num">01</div>
+      <h4>Диалог с ръководството</h4>
+      <p>Провеждаме редовни срещи с директора и педагогическия съвет, за да предаваме идеи и сигнали от учениците.</p>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.1s">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="goal-num">02</div>
+      <h4>Организиране на събития</h4>
+      <p>Планираме и осъществяваме тематични дни, коледни и пролетни тържества, спортни турнири и творчески конкурси.</p>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.2s">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="goal-num">03</div>
+      <h4>Защита на правата</h4>
+      <p>Наблюдаваме спазването на правилника за вътрешен ред и помагаме при разрешаването на конфликти между ученици.</p>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.1s">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="goal-num">04</div>
+      <h4>Подпомагане на учениците</h4>
+      <p>Информираме за стипендии, програми и извънучилищни възможности. Организираме взаимопомощ между класове.</p>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.2s">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <div class="goal-num">05</div>
+      <h4>Доброволчество и общност</h4>
+      <p>Участваме в благотворителни акции, екологични кампании и инициативи за по-добро местно общество.</p>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.3s">
+      <div class="goal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+      <div class="goal-num">06</div>
+      <h4>Прозрачност и отчетност</h4>
+      <p>Публикуваме протоколи от заседанията и отчети за дейността ни, за да сме близо до всеки ученик.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVES -->
+<section class="section initiatives-section" id="initiatives">
+  <div class="section-label reveal">Дейности</div>
+  <h2 class="section-title reveal">Инициативи тази година</h2>
+  <p class="section-subtitle reveal">Активни сме целогодишно — вижте какво организирахме и планираме за учениците на СУ „Йордан Йовков".</p>
+
+  <div class="initiatives-grid">
+
+    <div class="initiative-card reveal">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #1D7A50, #0d4f34)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="initiative-cat">Тържество</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">15 декември 2024</div>
+        <h3>Коледен концерт „Светлини за теб"</h3>
+        <p>Организирахме вълнуващ коледен концерт с участие на над 150 ученика. Събрахме средства за деца в нужда и изпълнихме атмосферата с празнично настроение.</p>
+        <span class="initiative-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Реализирано
+        </span>
+      </div>
+    </div>
+
+    <div class="initiative-card reveal" style="transition-delay:.12s">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #C9A84C, #9a7520)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="initiative-cat">Доброволчество</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">Октомври – ноември 2024</div>
+        <h3>Акция „Чисто училище – чист ум"</h3>
+        <p>Организирахме почистване на двора и прилежащата зона около училището. Над 80 ученика взеха участие в засаждане на цветя и декорация на коридорите.</p>
+        <span class="initiative-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Реализирано
+        </span>
+      </div>
+    </div>
+
+    <div class="initiative-card reveal" style="transition-delay:.24s">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #1a6195, #0f3d5e)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <span class="initiative-cat">Спорт</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">Февруари 2025</div>
+        <h3>Междукласен турнир по волейбол</h3>
+        <p>Организирахме турнир с участие на 12 отбора от различни паралелки. Събитието насърчи духа на fair play и партньорство между учениците.</p>
+        <span class="initiative-tag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Реализирано
+        </span>
+      </div>
+    </div>
+
+    <div class="initiative-card reveal">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #7c3aed, #4c1d95)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <span class="initiative-cat">Дигитал</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">Март – април 2025</div>
+        <h3>Дигитален вестник „Йовков Днес"</h3>
+        <p>Стартираме първия ученически онлайн медиа проект на училището — с новини, интервюта и статии, писани изцяло от ученици.</p>
+        <span class="initiative-tag" style="background: #f3e8ff; color: #7c3aed; border: 1px solid rgba(124,58,237,.2)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          В процес
+        </span>
+      </div>
+    </div>
+
+    <div class="initiative-card reveal" style="transition-delay:.12s">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #059669, #064e3b)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span class="initiative-cat">Природа</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">Май 2025</div>
+        <h3>Еко-поход „Зелен Сливен"</h3>
+        <p>Планираме еднодневен поход около Сливен с фокус върху опознаване на природата, пречистване на маршрути и фотоконкурс.</p>
+        <span class="initiative-tag" style="background: #f0e2b8; color: #8a5c0a; border: 1px solid rgba(201,168,76,.3)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Планирано
+        </span>
+      </div>
+    </div>
+
+    <div class="initiative-card reveal" style="transition-delay:.24s">
+      <div class="initiative-img">
+        <div class="initiative-img-bg" style="background: linear-gradient(135deg, #dc2626, #7f1d1d)"></div>
+        <div class="initiative-icon-big">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <span class="initiative-cat">Благотворителност</span>
+      </div>
+      <div class="initiative-body">
+        <div class="initiative-date">Юни 2025</div>
+        <h3>Благотворителен базар в края на годината</h3>
+        <p>Традиционният ни базар с ученически творби, домашни изделия и изненади. Средствата отиват за ученици в затруднено положение.</p>
+        <span class="initiative-tag" style="background: #f0e2b8; color: #8a5c0a; border: 1px solid rgba(201,168,76,.3)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Планирано
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JOIN + CONTACT -->
+<section class="join-section" id="join">
+  <div class="section-label reveal">Участие</div>
+  <h2 class="section-title reveal">Стани част от нас</h2>
+  <p class="section-subtitle reveal">Ученическият съвет е отворен за всеки, който иска да промени нещо към по-добро. Ето как можеш да се включиш.</p>
+
+  <div class="join-grid">
+    <div class="join-card reveal-left">
+      <h3>Как да се кандидатираш?</h3>
+      <p>Изборите за нови членове се провеждат в началото на всяка учебна година. Всеки клас избира свой представител чрез тайно гласуване.</p>
+      <ul class="join-steps">
+        <li>
+          <span class="step-num">1</span>
+          Обяви желанието си пред своя класен ръководител и съученици
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          Подготви кратка програма — какво искаш да промениш или подобриш
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          Участвай в изборите в своя клас (провеждат се всяка октомври)
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          При избор — участвай в учредителното заседание на новия съвет
+        </li>
+      </ul>
+    </div>
+
+    <div class="reveal-right" style="display:flex;flex-direction:column;gap:1.5rem">
+      <div class="contact-card">
+        <h3>Свържи се с нас</h3>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Имейл</div>
+            <div class="contact-val">uchsavet@suvov-sliven.bg</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Заседания</div>
+            <div class="contact-val">Всеки вторник, 16:00 ч. — стая 204</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Кутия за сигнали</div>
+            <div class="contact-val">До стая на ученическия съвет (ет. 2)</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#" class="btn-gold" style="flex:1;justify-content:center">
+          Виж протоколите
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-outline" style="flex:1;justify-content:center">
+          Изпрати сигнал
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll shadow
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+ 
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;width:40px;height:40px;border-radius:8px;transition:background .2s}
+.hamburger:hover{background:var(--green-light)}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:transform .3s,opacity .3s,width .3s;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;width:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+ 
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);z-index:998;overflow-y:auto;padding:1.5rem 1.5rem 2rem;flex-direction:column;gap:0;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu-item{border-bottom:1px solid rgba(0,0,0,.07)}
+.mobile-menu-item>a,.mobile-menu-item>button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:1rem 0;font-size:1.05rem;font-weight:600;color:var(--dark);background:none;border:none;cursor:pointer;font-family:'Manrope',sans-serif;text-align:left}
+.mob-caret{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--gray);transition:transform .25s;flex-shrink:0}
+.mobile-menu-item.open>.button .mob-caret,.mobile-menu-item.open>button .mob-caret{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 .8rem 1rem;flex-direction:column;gap:.1rem}
+.mobile-menu-item.open .mobile-submenu{display:flex}
+.mobile-submenu a{padding:.55rem 0;font-size:.92rem;color:var(--gray);border-bottom:1px solid rgba(0,0,0,.04)}
+.mobile-submenu a:hover{color:var(--green)}
+.mobile-menu-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+.mobile-menu-actions a{flex:1;min-width:140px;text-align:center;justify-content:center}
+ 
+/* HERO */
+.hero{position:relative;height:100vh;min-height:500px;overflow:hidden;margin-top:var(--nav-h)}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.hero-slide.active{opacity:1}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 8s ease}
+.hero-slide.active .hero-bg{transform:scale(1.05)}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(130deg,rgba(0,0,0,.68) 0%,rgba(0,0,0,.4) 55%,rgba(0,0,0,.18) 100%)}
+.hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:0 8vw;max-width:760px}
+.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:0;transform:translateY(24px);transition:opacity .9s .3s,transform .9s .3s}
+.hero-title{font-size:clamp(2.4rem,5.5vw,4.8rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.2rem;opacity:0;transform:translateY(24px);transition:opacity .9s .5s,transform .9s .5s;white-space:nowrap;}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-subtitle{font-size:1rem;font-weight:300;color:rgba(255,255,255,.82);line-height:1.7;margin-bottom:2.2rem;max-width:460px;opacity:0;transform:translateY(24px);transition:opacity .9s .7s,transform .9s .7s}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.9rem 1.2rem;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;width:fit-content;transition:background .3s}
+.hero-btn:hover{background:transparent}
+.hero-btn svg{width:15px;height:15px;transition:transform .3s}
+.hero-btn:hover svg{transform:translateX(4px)}
+.hero-slide.active .hero-eyebrow,.hero-slide.active .hero-title,.hero-slide.active .hero-subtitle,.hero-slide.active .hero-btn{opacity:1;transform:translateY(0)}
+.hero-indicators{position:absolute;bottom:2.5rem;left:8vw;z-index:3;display:flex;gap:10px}
+.hero-dot{width:36px;height:3px;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,width .3s;border:none;border-radius:2px}
+.hero-dot.active{background:var(--gold);width:60px}
+.hero-scroll{position:absolute;bottom:2.5rem;right:8vw;z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.scroll-line{width:1px;height:48px;background:rgba(255,255,255,.25);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;right:0;bottom:0;background:var(--gold);animation:scrollLine 2.2s infinite ease-in-out}
+@keyframes scrollLine{0%{top:-100%}100%{top:100%}}
+ 
+/* QUICK */
+.quick-section{display:grid;grid-template-columns:repeat(4,1fr);background:var(--green-dark)}
+.quick-card{padding:2.4rem 1.8rem;border-right:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .3s;display:flex;flex-direction:column;gap:.9rem;position:relative;overflow:hidden}
+.quick-card:last-child{border-right:none}
+.quick-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.quick-card:hover{background:rgba(255,255,255,.06)}
+.quick-card:hover::before{transform:scaleX(1)}
+.quick-icon{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(201,168,76,.35);display:flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s}
+.quick-card:hover .quick-icon{border-color:var(--gold);background:rgba(201,168,76,.1)}
+.quick-icon svg{width:21px;height:21px;color:var(--gold)}
+.quick-label{font-size:1.15rem;font-weight:600;color:#fff}
+.quick-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;margin-top:-.3rem}
+.quick-arrow{margin-top:auto;color:var(--gold);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:5px;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s}
+.quick-card:hover .quick-arrow{opacity:1;transform:translateX(0)}
+ 
+/* SECTIONS */
+.section{padding:6rem 8vw}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:.8rem}
+.section-label::before{content:'';width:26px;height:2px;background:var(--green);flex-shrink:0}
+.section-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.section-subtitle{font-size:.95rem;color:var(--gray);max-width:560px;line-height:1.75}
+ 
+/* ABOUT */
+.about-section{background:var(--light);position:relative;overflow:hidden}
+.about-section::before{content:'"';position:absolute;right:6vw;top:2rem;font-size:20rem;color:rgba(29,122,80,.06);line-height:1;pointer-events:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.stat-card{background:#fff;padding:1.8rem 1.4rem;border-left:3px solid var(--green);box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;border-radius:12px}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.stat-number{font-size:2.8rem;font-weight:700;color:var(--green);line-height:1}
+.stat-unit{font-size:1.1rem;color:var(--gold)}
+.stat-text{font-size:.82rem;color:var(--gray);margin-top:.4rem;line-height:1.5}
+.about-text p{font-size:.95rem;color:var(--gray);line-height:1.85;margin-bottom:1.2rem}
+.motto{margin-top:2rem;padding:1.4rem 1.8rem;border-left:3px solid var(--gold);background:rgba(201,168,76,.08);font-size:1.2rem;font-style:italic;color:var(--dark);line-height:1.5;border-radius:0 12px 12px 0}
+ 
+/* PRIEM 1 */
+.priem1-section{background:#fff}
+.priem1-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.priem1-visual{position:relative;border-radius:16px;overflow:hidden;min-height:380px;display:flex;align-items:center;justify-content:center;background:var(--green-light)}
+.priem1-visual img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.priem1-visual-placeholder{background:linear-gradient(135deg,var(--green-light) 0%,#c8ecd9 100%);width:100%;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px;border:2px dashed rgba(29,122,80,.3);gap:1rem;color:var(--green);text-align:center;padding:2rem}
+.priem1-content h3{font-size:1.6rem;margin-bottom:1rem}
+.priem1-content p{color:var(--gray);line-height:1.8;margin-bottom:1.5rem;font-size:.95rem}
+.priem1-list{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
+.priem1-list li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--gray)}
+.priem1-list li::before{content:'';flex-shrink:0;width:6px;height:6px;background:var(--green);border-radius:50%;margin-top:7px}
+ 
+/* BUTTONS */
+.btn-green,.btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s}
+.btn-green:hover,.btn-red:hover{background:transparent;color:var(--green)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--green);padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s}
+.btn-outline:hover{background:var(--green);color:#fff}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--gold);border-radius:50px;transition:background .3s,color .3s}
+.btn-gold:hover{background:transparent;color:var(--gold)}
+ 
+/* PRIEM 8 */
+.priem8-section{background:var(--green-dark);position:relative;overflow:hidden;padding:6rem 8vw}
+.priem8-section::before{content:'VIII';position:absolute;right:-2vw;top:50%;transform:translateY(-50%);font-size:22rem;font-weight:800;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;letter-spacing:-.02em}
+.priem8-section .section-label{color:var(--gold)}
+.priem8-section .section-label::before{background:var(--gold)}
+.priem8-section .section-title{color:#fff}
+.priem8-section .section-subtitle{color:rgba(255,255,255,.6)}
+.priem8-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3rem}
+.priem8-profile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2.8rem;position:relative;overflow:hidden;backdrop-filter:blur(4px)}
+.priem8-profile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
+.priem8-profile-num{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.priem8-profile h4{font-size:1.9rem;color:#fff;margin-bottom:1rem;line-height:1.2}
+.priem8-profile p{font-size:.92rem;color:rgba(255,255,255,.65);line-height:1.8}
+.priem8-features{display:flex;flex-direction:column;gap:.7rem;margin-top:1.8rem}
+.priem8-feature{display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:rgba(255,255,255,.75)}
+.priem8-feature svg{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.priem8-info{display:flex;flex-direction:column;gap:1.5rem}
+.priem8-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.priem8-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;text-align:center}
+.priem8-stat-num{font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.4rem}
+.priem8-stat-label{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.05em}
+.priem8-cta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
+.priem8-cta .btn-gold{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.priem8-cta .btn-outline-white{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#fff;padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid rgba(255,255,255,.3);border-radius:50px;transition:all .3s}
+.priem8-cta .btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.priem8-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:.6rem 1.2rem;font-size:.78rem;color:var(--gold);font-weight:600;margin-bottom:1rem}
+@media(max-width:900px){.priem8-layout{grid-template-columns:1fr}}
+ 
+/* NEWS */
+.news-section{background:var(--light)}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:3.5rem}
+.news-card{background:#fff;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:transform .35s,box-shadow .35s;display:flex;flex-direction:column;border-radius:16px}
+.news-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.news-img{height:220px;overflow:hidden;position:relative;border-radius:16px 16px 0 0}
+.news-img-inner{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .65s}
+.news-card:hover .news-img-inner{transform:scale(1.06)}
+.news-cat{position:absolute;top:1rem;left:1rem;background:var(--green);color:#fff;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:50px}
+.news-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.news-date{font-size:.73rem;color:var(--gold);font-weight:600;letter-spacing:.08em;margin-bottom:.6rem}
+.news-card h3{font-size:1.1rem;line-height:1.3;margin-bottom:.7rem}
+.news-card p{font-size:.86rem;color:var(--gray);line-height:1.7;flex:1;margin-bottom:1.2rem}
+.news-link{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:var(--green);letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid transparent;transition:border-color .2s;align-self:flex-start}
+.news-link:hover{border-color:var(--green)}
+.news-link svg{width:13px;height:13px;transition:transform .2s}
+.news-link:hover svg{transform:translateX(4px)}
+.news-more{text-align:center;margin-top:3rem}
+ 
+/* COMMUNITY */
+.community-section{background:#fff;padding:6rem 8vw}
+.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.community-img-wrap{position:relative}
+.community-img{width:100%;aspect-ratio:4/3;background-image:url('Училище__Йордан_Йовков__в_Сливен.png');background-size:cover;background-position:center;border-radius:16px}
+.community-img-deco{position:absolute;top:-18px;left:-18px;right:18px;bottom:18px;border:2px solid var(--gold);z-index:-1;border-radius:20px}
+.community-badges{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.8rem}
+.badge{background:var(--green-light);border:1px solid rgba(29,122,80,.2);padding:.35rem .9rem;font-size:.78rem;font-weight:500;color:var(--green);border-radius:50px}
+.community-text p{font-size:.95rem;color:var(--gray);line-height:1.8;margin-bottom:1rem}
+.community-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+ 
+/* PROGRAMS */
+.programs-section{background:#1a845c;padding:5rem 8vw 5.5rem;border-bottom:3px solid #d8bb68}
+.programs-section .section-label{color:#b8e6d0}
+.programs-section .section-label::before{background:var(--gold)}
+.programs-section .section-title{color:#fff;margin-bottom:3rem}
+.programs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.program-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);padding:2rem 1.4rem;transition:background .3s,transform .3s;border-radius:16px}
+.program-card:hover{background:rgba(255,255,255,.17);transform:translateY(-4px)}
+.program-icon{width:46px;height:46px;border:1.5px solid rgba(255,255,255,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.program-icon svg{width:21px;height:21px;color:var(--gold)}
+.program-card h4{font-size:1.1rem;color:#fff;margin-bottom:.5rem}
+.program-card p{font-size:.79rem;color:rgba(255,255,255,.6);line-height:1.65}
+.program-tag{display:inline-block;margin-top:1rem;background:rgba(201,168,76,.25);color:var(--gold);font-size:.68rem;padding:3px 9px;letter-spacing:.06em;border-radius:50px}
+ 
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .8s,transform .8s}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .8s,transform .8s}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+ 
+/* ── TABLET (≤1100px) ── */
+@media(max-width:1100px){
+  .nav-item>a{padding:0 .6rem;font-size:.85rem}
+  .quick-section{grid-template-columns:repeat(2,1fr)}
+  .quick-card:nth-child(2){border-right:none}
+  .quick-card:nth-child(3),.quick-card:nth-child(4){border-top:1px solid rgba(255,255,255,.1)}
+  .about-grid,.priem1-grid,.community-grid{grid-template-columns:1fr;gap:3rem}
+  .news-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .programs-grid{grid-template-columns:1fr 1fr}
+  .priem1-visual,.priem1-visual-placeholder{min-height:300px}
+  .community-img-deco{display:none}
+}
+ 
+/* ── MOBILE (≤768px) ── */
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links,.nav-search{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text strong{font-size:.95rem}
+  .nav-logo-text span{display:none}
+ 
+  .hero{min-height:480px}
+  .hero-content{padding:0 5vw;max-width:100%}
+  .hero-title{font-size:clamp(2rem,8vw,2.8rem)}
+  .hero-subtitle{font-size:.9rem;max-width:100%}
+  .hero-btn{font-size:.78rem;padding:.75rem 1rem}
+  .hero-indicators{left:5vw;bottom:1.5rem}
+  .hero-dot{width:28px}
+  .hero-dot.active{width:44px}
+  .hero-scroll{display:none}
+ 
+  .quick-section{grid-template-columns:1fr 1fr}
+  .quick-card{padding:1.6rem 1.2rem;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .quick-card:nth-child(odd){border-right:1px solid rgba(255,255,255,.1)}
+  .quick-card:nth-child(3),.quick-card:nth-child(4){border-top:1px solid rgba(255,255,255,.1)}
+  .quick-label{font-size:1rem}
+  .quick-desc{font-size:.75rem}
+ 
+  .section{padding:4rem 5vw}
+  .community-section{padding:4rem 5vw}
+  .programs-section{padding:4rem 5vw}
+  .section-title{font-size:clamp(1.6rem,6vw,2.2rem)}
+  .about-section::before{font-size:10rem;top:auto;bottom:0;right:0}
+  .priem8-section::before{font-size:14rem}
+ 
+  .about-stats{grid-template-columns:1fr 1fr;gap:1rem}
+  .stat-card{padding:1.2rem 1rem}
+  .stat-number{font-size:2.2rem}
+  .motto{font-size:1rem;padding:1rem 1.2rem}
+ 
+  .priem1-grid{grid-template-columns:1fr;gap:2rem}
+  .priem1-visual,.priem1-visual-placeholder{min-height:220px}
+  .priem1-content h3{font-size:1.3rem}
+ 
+  .priem8-cta{flex-direction:column;gap:.75rem}
+  .priem8-cta a{width:100%;justify-content:center}
+ 
+  .news-grid{grid-template-columns:1fr;gap:1.4rem}
+  .news-img{height:200px}
+ 
+  .community-grid{grid-template-columns:1fr;gap:2rem}
+  .community-img{aspect-ratio:16/9}
+  .community-btns{flex-direction:column}
+  .community-btns a{width:100%;justify-content:center;text-align:center}
+ 
+  .programs-grid{grid-template-columns:1fr;gap:1rem}
+ 
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.5rem}
+ 
+  .btn-green,.btn-red,.btn-outline,.btn-gold{font-size:.78rem;padding:.75rem 1.5rem}
+}
+ 
+/* ── SMALL MOBILE (≤480px) ── */
+@media(max-width:480px){
+  .quick-section{grid-template-columns:1fr}
+  .quick-card{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .hero-title{font-size:clamp(1.8rem,9vw,2.4rem)}
+  .hero-subtitle{display:none}
+}
+</style>
+</head>
+<body>
+ 
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="history.html">История</a>
+      <a href="mision-vision.html">Мисия и визия</a>
+      <a href="ekip.html">Педагогически екип</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="priem-1-klas.html">Прием в I клас</a>
+      <a href="priem-5-klas.html">Прием в V клас</a>
+      <a href="priem-8-klas.html">Прием в VIII клас</a>
+      <a href="dokumenti.html">Необходими документи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Учебни планове</a>
+      <a href="#">Разписание</a>
+      <a href="#">Електронен дневник</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Родители <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Наредби</a><a href="#">Родителска среща</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Ученици <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="school-council.html">Ученически съвет</a>
+      <a href="#">Извънкласни дейности</a>
+      <a href="#">Спорт</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="dokumenti.html">Необходими документи</a>
+      <a href="faq.html">ЧЗВ</a>
+      <a href="#">Формуляри</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions">
+    <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
+    <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
+ 
+<section class="hero" id="hero">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image:url('images/su.png')"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Основано 1980 · Сливен</div>
+      <h1 class="hero-title">СУ<em>"Йордан Йовков"</em></h1>
+      <p class="hero-subtitle">Място, където знанието среща характера. Изграждаме личности, готови да успеят навсякъде.</p>
+      <a href="#about" class="hero-btn">Научи повече <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-bg" style="background-image:url('images/1-klas.jpg');filter:sepia(.2) brightness(.7)"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Прием · 2024/2025</div>
+      <h1 class="hero-title">Запишете<br><em>детето си</em></h1>
+      <p class="hero-subtitle">Приемаме ученици в I и VIII клас. Качествено образование за всяко дете.</p>
+      <a href="#priem1" class="hero-btn">Към приема <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-bg" style="background-image:url('images/inovations.jpg');filter:hue-rotate(80deg) brightness(.65)"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Национални програми · Проекти</div>
+      <h1 class="hero-title">Иновации<br>в&nbsp;<em>образованието</em></h1>
+      <p class="hero-subtitle">Участваме в национални и европейски програми за модерно образование.</p>
+      <a href="#programs" class="hero-btn">Програмите <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+  <div class="hero-indicators">
+    <button class="hero-dot active" data-idx="0"></button>
+    <button class="hero-dot" data-idx="1"></button>
+    <button class="hero-dot" data-idx="2"></button>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Скрол</span></div>
+</section>
+ 
+<section class="quick-section">
+  <a href="novini.html" class="quick-card reveal">
+    <div class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"/><path d="M17 20v-8H7v8M7 4v4h8"/></svg></div>
+    <div class="quick-label">Новини</div>
+    <div class="quick-desc">Последни съобщения от живота на училището</div>
+    <div class="quick-arrow">Виж всички <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+  <a href="priem-1-klas.html" class="quick-card reveal" style="transition-delay:.1s">
+    <div class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+    <div class="quick-label">Прием</div>
+    <div class="quick-desc">Записване в I и VIII клас — условия и документи</div>
+    <div class="quick-arrow">Условия <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+  <a href="pochivni-dni.html" class="quick-card reveal" style="transition-delay:.2s">
+    <div class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="quick-label">Календар</div>
+    <div class="quick-desc">Учебни срокове, ваканции и важни дати</div>
+    <div class="quick-arrow">Виж <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+  <a href="uchebni-planove.html" class="quick-card reveal" style="transition-delay:.3s">
+    <div class="quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+    <div class="quick-label">Учебен план</div>
+    <div class="quick-desc">Програми и разпределение по предмети</div>
+    <div class="quick-arrow">Изтегли <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+</section>
+ 
+<section class="section about-section" id="about">
+  <div class="section-label reveal">За нас</div>
+  <h2 class="section-title reveal">45 години<br>качествено образование</h2>
+  <div class="about-grid">
+    <div class="about-text reveal-left">
+      <p>СУ „Йордан Йовков" е едно от утвърдените средни учебни заведения в Сливен, с богата история и традиции. От своето основаване през 1980 г., училището неизменно се придържа към мисията си — да изгражда свободни, мислещи и отговорни личности.</p>
+      <p>Нашите педагози работят с отдаденост и любов, за да осигурят среда, в която всяко дете може да разгърне пълния си потенциал — в науките, изкуствата и спорта.</p>
+      <div class="motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="about-stats reveal-right">
+      <div class="stat-card"><div class="stat-number"><span class="count-up" data-target="45">0</span><span class="stat-unit">+</span></div><div class="stat-text">Години традиция и качествено образование</div></div>
+      <div class="stat-card"><div class="stat-number"><span class="count-up" data-target="500">0</span><span class="stat-unit">+</span></div><div class="stat-text">Ученици, учещи при нас в момента</div></div>
+      <div class="stat-card"><div class="stat-number"><span class="count-up" data-target="37">0</span><span class="stat-unit">+</span></div><div class="stat-text">Опитни педагози и специалисти</div></div>
+      <div class="stat-card"><div class="stat-number"><span class="count-up" data-target="12">0</span></div><div class="stat-text">Паралелки от I до XII клас</div></div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section priem1-section" id="priem1">
+  <div class="section-label reveal">Прием 2026/2027</div>
+  <div class="priem1-grid">
+    <div class="priem1-visual reveal-left">
+      <div class="priem1-visual-placeholder"><img src="images/priem.jpg" alt=""></div>
+    </div>
+    <div class="priem1-content reveal-right">
+      <h3>Запишете детето си при нас</h3>
+      <p>Предлагаме топла, сигурна и стимулираща среда за най-малките ни ученици. Записването в I клас се извършва по електронен път или в канцеларията на училището.</p>
+      <ul class="priem1-list">
+        <li>Подаване на документи в периода май – юни</li>
+        <li>Необходими: акт за раждане, здравна карта, декларация</li>
+        <li>Записване на всички деца, навършили 7 години</li>
+        <li>Информационна среща за родители — всеки четвъртък от 17:00 ч.</li>
+      </ul>
+      <a href="dokumenti-priem.html" class="btn-red">Документи за прием <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+ 
+<section class="priem8-section" id="priem8">
+  <div class="section-label reveal">Прием</div>
+  <h2 class="section-title reveal">Прием след седми клас</h2>
+  <p class="section-subtitle reveal">Избери своя профил и стъпи уверено към бъдещето.</p>
+ 
+  <div class="priem8-layout">
+    <div class="priem8-profile reveal">
+      <div class="priem8-profile-num">Паралелка</div>
+      <h4>Интелигентни системи</h4>
+      <p>Задълбочена подготовка по математика, информационни технологии и програмиране с фокус върху изкуствен интелект и съвременни дигитални решения.</p>
+      <div class="priem8-features">
+        <div class="priem8-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Математика и ИТ — разширено ниво
+        </div>
+        <div class="priem8-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Програмиране и изкуствен интелект
+        </div>
+        <div class="priem8-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Партньорство с programisti.com
+        </div>
+        <div class="priem8-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Подготовка за НВО и олимпиади
+        </div>
+      </div>
+    </div>
+ 
+    <div class="priem8-info reveal" style="transition-delay:.15s">
+      <div class="priem8-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Учебна 2025/2026
+      </div>
+      <div class="priem8-stat-row">
+        <div class="priem8-stat">
+          <div class="priem8-stat-num">26</div>
+          <div class="priem8-stat-label">Места</div>
+        </div>
+        <div class="priem8-stat">
+          <div class="priem8-stat-num">VIII</div>
+          <div class="priem8-stat-label">Клас</div>
+        </div>
+        <div class="priem8-stat">
+          <div class="priem8-stat-num">4</div>
+          <div class="priem8-stat-label">Профилни предмета</div>
+        </div>
+        <div class="priem8-stat">
+          <div class="priem8-stat-num">НВО</div>
+          <div class="priem8-stat-label">Изпит за прием</div>
+        </div>
+      </div>
+      <div class="priem8-cta">
+        <a href="priem-8-klas.html" class="btn-gold">Условия за прием <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="https://programisti.com" target="_blank" class="btn-outline-white">programisti.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section news-section" id="news">
+  <div class="section-label reveal">Актуално</div>
+  <h2 class="section-title reveal">Новини от<br>училищния живот</h2>
+  <div class="news-grid">
+    <div class="news-card reveal">
+      <div class="news-img"><div class="news-img-inner" style="background-image:url('images/concurs.jpg')"></div><span class="news-cat">Постижение</span></div>
+      <div class="news-body">
+        <div class="news-date">27 февруари 2026</div>
+        <h3>НАЦИОНАЛНО ОТЛИЧИЕ ЗА УЧЕНИЦИ ОТ СУ „ЙОРДАН ЙОВКОВ"</h3>
+        <p>Даниел Константинов и Венцислав Колев завоюваха второ място в националния конкурс „Аз и изкуственият интелект след 10 години".</p>
+        <a href="statiq.html" class="news-link">Прочети повече <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="news-card reveal" style="transition-delay:.12s">
+      <div class="news-img"><div class="news-img-inner" style="background-image:url('images/3-mart.jpg');background-position:top"></div><span class="news-cat">Събитие</span></div>
+      <div class="news-body">
+        <div class="news-date">28 Март 2025</div>
+        <h3>ТРЕТИ МАРТ – ПАМЕТ И ГОРДОСТ ЗА БЪЛГАРИЯ</h3>
+        <p>Участниците в клуб „Млади възрожденци" достойно се включиха в проявите за националния празник.</p>
+        <a href="#" class="news-link">Прочети повече <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="news-card reveal" style="transition-delay:.24s">
+      <div class="news-img"><div class="news-img-inner" style="background-image:url('images/levski.jpg');background-position:bottom"></div><span class="news-cat">Събитие</span></div>
+      <div class="news-body">
+        <div class="news-date">15 Март 2025</div>
+        <h3>„ВРЕМЕТО Е В НАС И НИЕ СМЕ ВЪВ ВРЕМЕТО"</h3>
+        <p>Тържествено отбелязахме 153-тата годишнина от гибелта на Васил Левски.</p>
+        <a href="#" class="news-link">Прочети повече <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="news-more reveal"><a href="novini.html" class="btn-outline">Виж повече новини <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+</section>
+ 
+<section class="community-section" id="community">
+  <div class="section-label reveal">Заедно</div>
+  <h2 class="section-title reveal">Училищна общност</h2>
+  <div class="community-grid">
+    <div class="community-img-wrap reveal-left">
+      <div class="community-img"></div>
+      <div class="community-img-deco"></div>
+    </div>
+    <div class="reveal-right">
+      <div class="community-badges">
+        <span class="badge">Ученически съвет</span><span class="badge">Родителски клуб</span>
+        <span class="badge">Педагогически екип</span><span class="badge">Спортни клубове</span>
+        <span class="badge">Творчески ателиета</span>
+      </div>
+      <div class="community-text">
+        <p>Нашата общност е повече от просто училище — тя е семейство. Ученически съвет, родителски клубове, спортни и творчески групи работят заедно.</p>
+        <p>Вярваме, че образованието се случва и извън класната стая — в спортни зали, на сцената, в природата.</p>
+      </div>
+      <div class="community-btns">
+        <a href="uchenicheski-suvet.html" class="btn-red">Ученически съвет</a>
+        <a href="izvunklasni-deinosti.html" class="btn-outline">Извънкласни дейности</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="programs-section" id="programs">
+  <div class="section-label reveal">Национални инициативи</div>
+  <h2 class="section-title reveal">Участие в национални програми</h2>
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <div class="program-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4>НП „Информационни и комуникационни технологии"</h4>
+      <p>Модернизация на материалната база и ИКТ обучение на учители.</p>
+      <span class="program-tag">МОН</span>
+    </div>
+    <div class="program-card reveal" style="transition-delay:.1s">
+      <div class="program-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <h4>Програма „Еразъм+" — Мобилност</h4>
+      <p>Международен обмен и партньорства с европейски училища.</p>
+      <span class="program-tag">ЕС</span>
+    </div>
+    <div class="program-card reveal" style="transition-delay:.2s">
+      <div class="program-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h4>НП „Без свободен час"</h4>
+      <p>Квалификация и продължаващо развитие на педагогическите специалисти.</p>
+      <span class="program-tag">МОН</span>
+    </div>
+    <div class="program-card reveal" style="transition-delay:.3s">
+      <div class="program-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h4>НП „Заедно в изкуството и спорта"</h4>
+      <p>Насърчаване на творческите и спортни дейности за всички ученици.</p>
+      <span class="program-tag">МОН</span>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+
+const slides=document.querySelectorAll('.hero-slide');
+const dots=document.querySelectorAll('.hero-dot');
+let cur=0,sliderTimer;
+function goTo(idx){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=idx;slides[cur].classList.add('active');dots[cur].classList.add('active')}
+function startSlider(){sliderTimer=setInterval(()=>goTo((cur+1)%slides.length),5500)}
+dots.forEach(d=>d.addEventListener('click',()=>{clearInterval(sliderTimer);goTo(+d.dataset.idx);startSlider()}));
+startSlider();
+
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+function openMenu(){menuOpen=true;hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');mobileMenu.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){menuOpen=false;hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>{menuOpen?closeMenu():openMenu()});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('click',(e)=>{if(menuOpen&&!mobileMenu.contains(e.target)&&!hamburger.contains(e.target))closeMenu()});
+
+function toggleMobSub(btn){
+  const item=btn.closest('.mobile-menu-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.1});
+revealEls.forEach(el=>io.observe(el));
+
+function countUp(el){const target=+el.dataset.target;let v=0;const step=target/80;const id=setInterval(()=>{v=Math.min(v+step,target);el.textContent=Math.round(v);if(v>=target)clearInterval(id)},18)}
+const counters=document.querySelectorAll('.count-up');
+const cio=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:0.5});
+counters.forEach(c=>cio.observe(c));
+</script>
+</body>
+</html>

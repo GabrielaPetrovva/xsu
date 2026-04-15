@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Правилници – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:5rem 8vw 4rem;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+.breadcrumb a{color:rgba(255,255,255,.5);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.25)}
+.page-hero h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}
+.page-hero p{font-size:1rem;color:rgba(255,255,255,.65);max-width:540px;line-height:1.75}
+
+/* MAIN CONTENT */
+.page-main{padding:4rem 8vw 6rem;max-width:1100px;margin:0 auto}
+
+/* YEAR BADGE */
+.year-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1.5px solid rgba(201,168,76,.35);color:var(--gold);font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:50px;margin-bottom:2rem}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid rgba(29,122,80,.1)}
+.section-header-icon{width:48px;height:48px;background:var(--green);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 16px rgba(29,122,80,.25)}
+.section-header-icon svg{width:22px;height:22px;color:#fff}
+.section-header h2{font-size:1.5rem;font-weight:700;color:var(--dark);line-height:1.2}
+.section-header p{font-size:.82rem;color:var(--gray);margin-top:.2rem}
+
+/* DOC LIST */
+.doc-list{display:flex;flex-direction:column;gap:3px;background:rgba(29,122,80,.06);border-radius:16px;overflow:hidden;border:1px solid rgba(29,122,80,.1);margin-bottom:4rem}
+
+.doc-row{background:#fff;display:flex;align-items:center;gap:1.2rem;padding:1.1rem 1.6rem;transition:background .2s,transform .15s;position:relative}
+.doc-row:hover{background:var(--green-light)}
+.doc-row:hover .doc-row-arrow{opacity:1;transform:translateX(0)}
+
+/* File icon */
+.doc-file-icon{position:relative;flex-shrink:0}
+.doc-file-body{width:38px;height:46px;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.doc-file-body.pdf{background:#fff0f0;border:1.5px solid #ffd5d5}
+.doc-file-body.doc{background:#e8f3ff;border:1.5px solid #c5deff}
+.doc-file-svg{width:20px;height:20px}
+.doc-file-svg.pdf{color:#e63946}
+.doc-file-svg.doc{color:#2b7bbf}
+.doc-ext{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);font-size:.5rem;font-weight:800;letter-spacing:.06em;padding:2px 5px;border-radius:3px;color:#fff}
+.doc-ext.pdf{background:#e63946}
+.doc-ext.doc{background:#2b7bbf}
+
+.doc-row-info{flex:1;min-width:0}
+.doc-row-title{font-size:.9rem;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:.15rem}
+.doc-row-sub{font-size:.72rem;color:var(--gray)}
+
+.doc-row-download{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;font-size:.72rem;font-weight:600;padding:.45rem 1rem;border-radius:50px;transition:background .2s;white-space:nowrap;flex-shrink:0;letter-spacing:.04em}
+.doc-row-download:hover{background:var(--green-dark)}
+.doc-row-download svg{width:13px;height:13px}
+
+.doc-row-arrow{width:26px;height:26px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:0;transform:translateX(-5px);transition:all .2s}
+.doc-row-arrow svg{width:11px;height:11px;color:var(--green)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.06s}
+.reveal-delay-2{transition-delay:.12s}
+.reveal-delay-3{transition-delay:.18s}
+.reveal-delay-4{transition-delay:.24s}
+.reveal-delay-5{transition-delay:.30s}
+.reveal-delay-6{transition-delay:.36s}
+.reveal-delay-7{transition-delay:.42s}
+.reveal-delay-8{transition-delay:.48s}
+.reveal-delay-9{transition-delay:.54s}
+
+/* BUTTONS */
+.btn-green{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s}
+.btn-green:hover{background:transparent;color:var(--green)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--green);padding:.85rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s}
+.btn-outline:hover{background:var(--green);color:#fff}
+
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .page-hero{padding:3.5rem 5vw 3rem}
+  .page-hero::before{font-size:10rem}
+  .page-main{padding:2.5rem 5vw 4rem}
+  .doc-row{padding:.9rem 1rem;gap:.8rem}
+  .doc-row-download span{display:none}
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:1100px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="history.html">История</a><a href="mision-vision.html">Мисия и визия</a><a href="ekip.html">Педагогически екип</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="priem-1-klas.html">Прием в I клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti.html">Необходими документи</a></div></div>
+  <div class="mobile-menu-item"><button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button><div class="mobile-submenu"><a href="pravilnitsi.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="dokumenti.html">Необходими документи</a><a href="faq.html">ЧЗВ</a></div></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions"><a href="priem-1-klas.html" class="btn-green">Прием I клас</a><a href="stipendii.html" class="btn-outline">Стипендии</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a>
+    <span>›</span>
+    <a href="dokumenti.html">Документи</a>
+    <span>›</span>
+    <span style="color:var(--gold)">Правилници</span>
+  </div>
+  <h1>Правилници</h1>
+  <p>Вътрешни нормативни документи, регулиращи учебния процес, правата и задълженията на всички участници в образователната общност.</p>
+</section>
+
+<!-- MAIN -->
+<main class="page-main">
+
+  <div class="year-badge reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Документи 2025/2026 година
+  </div>
+
+  <div class="section-header reveal">
+    <div class="section-header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div>
+      <h2>Нормативни документи</h2>
+      <p>СУ „Йордан Йовков" – Сливен · Учебна година 2025/2026</p>
+    </div>
+  </div>
+
+  <div class="doc-list">
+
+    <!-- 1 -->
+    <div class="doc-row reveal reveal-delay-1">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Правилник за дейността на училището за учебната 2025/2026 г.</div>
+        <div class="doc-row-sub">Основен нормативен документ · Учебна година 2025/2026</div>
+      </div>
+      <a href="pravilnik-deynostta-2025-2026.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 2 -->
+    <div class="doc-row reveal reveal-delay-2">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Годишен план</div>
+        <div class="doc-row-sub">Годишен план на дейностите · Учебна година 2025/2026</div>
+      </div>
+      <a href="godishen-plan-2025-2026.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 3 -->
+    <div class="doc-row reveal reveal-delay-3">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Форми на обучение</div>
+        <div class="doc-row-sub">Документ за форми на обучение · Учебна година 2025/2026</div>
+      </div>
+      <a href="formi-obuchenie-2025-2026.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 4 -->
+    <div class="doc-row reveal reveal-delay-4">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Училищни учебни планове</div>
+        <div class="doc-row-sub">Учебни планове по паралелки · Учебна година 2025/2026</div>
+      </div>
+      <a href="uchebni-planove-2025-2026.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 5 -->
+    <div class="doc-row reveal reveal-delay-5">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Етичен кодекс</div>
+        <div class="doc-row-sub">Етичен кодекс на общността на СУ „Йордан Йовков"</div>
+      </div>
+      <a href="etichen-kodeks.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 6 -->
+    <div class="doc-row reveal reveal-delay-6">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Стратегия 2023–2028</div>
+        <div class="doc-row-sub">Стратегия за развитие на СУ „Йордан Йовков" за периода 2023–2028 г.</div>
+      </div>
+      <a href="strategia-2023-2028-1.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 7 -->
+    <div class="doc-row reveal reveal-delay-7">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">Отчет 24–25 за изпълнение на стратегията</div>
+        <div class="doc-row-sub">Годишен отчет за изпълнение на стратегията · 2024/2025 г.</div>
+      </div>
+      <a href="otchet-24-25-strategia.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+    <!-- 8 -->
+    <div class="doc-row reveal reveal-delay-8">
+      <div class="doc-file-icon">
+        <div class="doc-file-body pdf">
+          <svg class="doc-file-svg pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <span class="doc-ext pdf">PDF</span>
+      </div>
+      <div class="doc-row-info">
+        <div class="doc-row-title">План към стратегията за учебната 2025–2026</div>
+        <div class="doc-row-sub">Годишен план за изпълнение на стратегията · Учебна година 2025/2026</div>
+      </div>
+      <a href="plan-strategia-2025-2026.pdf" download class="doc-row-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span>Изтегли</span>
+      </a>
+    </div>
+
+  </div><!-- /.doc-list -->
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+function openMenu(){menuOpen=true;hamburger.classList.add('open');hamburger.setAttribute('aria-expanded','true');mobileMenu.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){menuOpen=false;hamburger.classList.remove('open');hamburger.setAttribute('aria-expanded','false');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',()=>{menuOpen?closeMenu():openMenu()});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('click',(e)=>{if(menuOpen&&!mobileMenu.contains(e.target)&&!hamburger.contains(e.target))closeMenu()});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.06});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

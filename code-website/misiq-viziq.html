@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мисия и визия – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50;
+  --green-dark: #0F5438;
+  --green-light: #e1f5ee;
+  --teal: #1D9E75;
+  --gold: #C9A84C;
+  --gold-light: #f0e2b8;
+  --dark: #1a2e24;
+  --gray: #555;
+  --light: #f0f7f3;
+  --white: #ffffff;
+  --footer-bg: #0b3224;
+  --nav-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { scrollbar-width: thin; scrollbar-color: #8fcfb8 #eaf4ef; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  margin-top: var(--nav-h);
+  background: var(--green-dark);
+  padding: 5.5rem 8vw 5rem;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent 60%);
+}
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: .76rem; color: rgba(255,255,255,.45); margin-bottom: 1.8rem; }
+.breadcrumb a { color: rgba(255,255,255,.45); transition: color .2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { color: var(--gold); }
+.breadcrumb svg { width: 12px; height: 12px; }
+.page-hero-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+.page-hero h1 { font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 1.2rem; }
+.page-hero h1 em { color: var(--gold); font-style: italic; }
+.page-hero-lead { font-size: 1.05rem; color: rgba(255,255,255,.72); max-width: 580px; line-height: 1.75; }
+
+/* ─── SECTION BASE ─── */
+.section { padding: 6rem 8vw; }
+.section-label { font-size: .7rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 10px; margin-bottom: .8rem; }
+.section-label::before { content: ''; width: 26px; height: 2px; background: var(--green); flex-shrink: 0; }
+.section-title { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+.section-subtitle { font-size: .95rem; color: var(--gray); max-width: 580px; line-height: 1.78; }
+
+/* ─── MISSION SECTION ─── */
+.mission-section { background: var(--white); }
+.mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+.mission-text p { font-size: .95rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.2rem; }
+.mission-text p:last-child { margin-bottom: 0; }
+.big-quote {
+  padding: 2rem 2.2rem;
+  border-left: 4px solid var(--green);
+  background: var(--green-light);
+  border-radius: 0 16px 16px 0;
+  margin: 2rem 0;
+}
+.big-quote p { font-size: 1.15rem; font-style: italic; color: var(--dark); line-height: 1.6; font-weight: 500; }
+.big-quote cite { display: block; font-size: .75rem; color: var(--green); font-style: normal; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-top: .7rem; }
+
+.mission-pillars { display: flex; flex-direction: column; gap: 1.2rem; }
+.pillar-card {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.4rem 1.6rem;
+  background: var(--white);
+  border: 1px solid rgba(29,122,80,.15);
+  border-radius: 14px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.05);
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.pillar-card:hover { transform: translateX(6px); box-shadow: 0 6px 28px rgba(29,122,80,.12); border-color: rgba(29,122,80,.35); }
+.pillar-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border-radius: 12px; background: var(--green-light);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .3s;
+}
+.pillar-card:hover .pillar-icon { background: var(--green); }
+.pillar-icon svg { width: 22px; height: 22px; color: var(--green); transition: color .3s; }
+.pillar-card:hover .pillar-icon svg { color: var(--white); }
+.pillar-body h4 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: .3rem; }
+.pillar-body p { font-size: .84rem; color: var(--gray); line-height: 1.65; }
+
+/* ─── VALUES SECTION ─── */
+.values-section { background: var(--light); }
+.values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; margin-top: 3.5rem; }
+.value-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.2rem 1.8rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  transition: transform .35s, box-shadow .35s;
+}
+.value-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.1); }
+.value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+.value-card:hover::before { transform: scaleX(1); }
+.value-num { font-size: 4.5rem; font-weight: 800; color: var(--green-light); line-height: 1; margin-bottom: .6rem; letter-spacing: -0.02em; transition: color .3s; }
+.value-card:hover .value-num { color: rgba(29,122,80,.15); }
+.value-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .6rem; }
+.value-card p { font-size: .86rem; color: var(--gray); line-height: 1.7; }
+.value-badge { display: inline-block; margin-top: 1rem; font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); background: var(--green-light); border: 1px solid rgba(29,122,80,.2); padding: 3px 10px; border-radius: 50px; }
+
+/* ─── VISION SECTION ─── */
+.vision-section { background: var(--white); }
+.vision-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; margin-top: 3.5rem; }
+.vision-content p { font-size: .95rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.2rem; }
+.vision-targets { display: flex; flex-direction: column; gap: .9rem; margin-top: 2rem; }
+.target-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: var(--light);
+  border-left: 3px solid var(--green);
+  transition: background .25s, transform .25s;
+}
+.target-item:hover { background: var(--green-light); transform: translateX(4px); }
+.target-num { font-size: 1.3rem; font-weight: 800; color: var(--green); line-height: 1; flex-shrink: 0; min-width: 28px; }
+.target-text h5 { font-size: .9rem; font-weight: 700; color: var(--dark); margin-bottom: .2rem; }
+.target-text p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+
+/* Vision image side */
+.vision-visual { position: relative; }
+.vision-img-frame {
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  padding: 2.5rem 2rem;
+  color: var(--white);
+}
+.vision-img-frame .vf-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: .8rem; }
+.vision-img-frame .vf-big { font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 1.4rem; }
+.vision-img-frame .vf-big em { color: var(--gold); font-style: italic; }
+.vf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.vf-stat { background: rgba(255,255,255,.08); border-radius: 12px; padding: 1rem; border: 1px solid rgba(255,255,255,.1); }
+.vf-stat .n { font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.vf-stat .l { font-size: .74rem; color: rgba(255,255,255,.55); margin-top: .3rem; line-height: 1.4; }
+.vision-deco {
+  position: absolute; bottom: -16px; right: -16px;
+  width: 120px; height: 120px;
+  border: 2px solid var(--gold);
+  border-radius: 20px; z-index: -1;
+}
+
+/* ─── GOALS SECTION ─── */
+.goals-section {
+  background: linear-gradient(150deg, var(--green-dark) 0%, #156642 100%);
+  padding: 6rem 8vw;
+  position: relative; overflow: hidden;
+}
+.goals-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 80%, rgba(201,168,76,.1) 0%, transparent 55%);
+  pointer-events: none;
+}
+.goals-section .section-label { color: var(--gold); }
+.goals-section .section-label::before { background: var(--gold); }
+.goals-section .section-title { color: var(--white); }
+.goals-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.4rem; margin-top: 3.5rem; }
+.goal-card {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px; padding: 1.8rem;
+  transition: background .3s, transform .3s;
+  display: flex; gap: 1.2rem; align-items: flex-start;
+}
+.goal-card:hover { background: rgba(255,255,255,.14); transform: translateY(-3px); }
+.goal-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; background: rgba(201,168,76,.18); border: 1px solid rgba(201,168,76,.3); display: flex; align-items: center; justify-content: center; }
+.goal-icon svg { width: 20px; height: 20px; color: var(--gold); }
+.goal-body h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: .4rem; }
+.goal-body p { font-size: .83rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+
+/* ─── COMMITMENT SECTION ─── */
+.commitment-section { background: var(--light); padding: 6rem 8vw; }
+.commitment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3.5rem; }
+.commitment-card {
+  background: var(--white); border-radius: 16px; padding: 2rem;
+  border-bottom: 3px solid var(--green);
+  box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  transition: transform .3s, box-shadow .3s;
+}
+.commitment-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,.1); }
+.commitment-card.gold-border { border-bottom-color: var(--gold); }
+.commitment-card .cc-label { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; }
+.commitment-card.gold-border .cc-label { color: #8a6820; }
+.commitment-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: .8rem; }
+.commitment-card p { font-size: .88rem; color: var(--gray); line-height: 1.75; }
+.commitment-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: .45rem; }
+.commitment-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .84rem; color: var(--gray); line-height: 1.55; }
+.commitment-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; font-size: .8rem; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s, transform .65s; }
+.reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity .7s, transform .7s; }
+.reveal-right { opacity: 0; transform: translateX(30px); transition: opacity .7s, transform .7s; }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translate(0); }
+
+@media (max-width: 1100px) {
+  .mission-grid, .vision-grid, .commitment-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .goals-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .values-grid, .footer-grid { grid-template-columns: 1fr; }
+  .intro-strip { flex-direction: column; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    <a href="#">ЗА НАС</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+    <span>МИСИЯ И ВИЗИЯ</span>
+  </div>
+  <div class="page-hero-eyebrow">Ценности · Цели · Ангажименти</div>
+  <h1>Нашата <em>мисия</em><br>и визия</h1>
+  <p class="page-hero-lead">Обучение с гаранция за успех — качествено образование, ориентирано към дигиталните технологии и интерактивните методи на преподаване.</p>
+</section>
+
+
+<!-- MISSION -->
+<section class="section mission-section" id="mission">
+  <div class="section-label reveal">Мисия</div>
+  <h2 class="section-title reveal">Обучение с гаранция за успех</h2>
+  <p class="section-subtitle reveal">Предоставяме качествено образование, ориентирано към дигиталните технологии и интерактивните методи на преподаване.</p>
+
+  <div class="mission-grid">
+    <div class="reveal-left">
+      <div class="mission-text">
+        <p>Средно училище „Йордан Йовков" – Сливен предоставя качествено и отговарящо на съвременните тенденции образование и възпитание, което е ориентирано към дигиталните технологии и интерактивните методи на преподаване.</p>
+        <p>Изградена е конкурентна образователна и възпитателна среда, която насърчава и подкрепя всяка отделна личност в нейния стремеж към професионално и личностно развитие.</p>
+        <div class="big-quote">
+          <p>Училището гарантира качествено образование, като осигурява приемственост на изучаваните иновативни предмети в начален, прогимназиален и гимназиален етап.</p>
+          <cite>Педагогическият екип на СУ „Йордан Йовков"</cite>
+        </div>
+        <p>От начален етап с иновативните предмети „Въведение във визуалното програмиране" и „Визуално програмиране", през КМИТ в прогимназиален етап, до професия „Приложен програмист" в гимназиален етап — осигуряваме пълна приемственост и логична прогресия на знанията.</p>
+      </div>
+    </div>
+
+    <div class="mission-pillars reveal-right">
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="pillar-body">
+          <h4>Дигитални технологии</h4>
+          <p>Образование, ориентирано към съвременните дигитални инструменти и интерактивни методи на преподаване.</p>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <div class="pillar-body">
+          <h4>Визуално програмиране</h4>
+          <p>Иновативни предмети „Въведение във визуалното програмиране" и „Визуално програмиране" в начален етап.</p>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="pillar-body">
+          <h4>КМИТ в прогимназиален етап</h4>
+          <p>Разширена подготовка по кодиране и дигитални умения в рамките на разширената подготовка.</p>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="pillar-body">
+          <h4>Приложен програмист</h4>
+          <p>Пълна приемственост до гимназиален етап с придобиване на професия „Приложен програмист".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section values-section" id="values">
+  <div class="section-label reveal">Ценности</div>
+  <h2 class="section-title reveal">Нашите етични принципи</h2>
+  <p class="section-subtitle reveal">Ценностите са етичните принципи и норми на СУ „Йордан Йовков" — основата на всичко, което правим.</p>
+
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <div class="value-num">01</div>
+      <h3>Честност</h3>
+      <p>Изграждаме култура на прозрачност и почтеност — в отношенията между ученици, учители и родители.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.1s">
+      <div class="value-num">02</div>
+      <h3>Отговорност</h3>
+      <p>Учим учениците да поемат отговорност за своите действия, решения и бъдеще. Отговорният гражданин е нашата цел.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.2s">
+      <div class="value-num">03</div>
+      <h3>Уважение</h3>
+      <p>Всеки ученик, учител и родител заслужава да бъде чут, видян и оценен. Уважението е в основата на всичко.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.05s">
+      <div class="value-num">04</div>
+      <h3>Толерантност</h3>
+      <p>Изграждаме среда на приемане и разбиране, в която различията се уважават и ценят.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.15s">
+      <div class="value-num">05</div>
+      <h3>Компетентност</h3>
+      <p>Стремим се към високи стандарти в обучението и непрекъснато развитие на педагогическия и ученическия потенциал.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+    <div class="value-card reveal" style="transition-delay:.25s">
+      <div class="value-num">06</div>
+      <h3>Доверие</h3>
+      <p>Изграждаме трайни отношения на доверие между всички участници в образователния процес.</p>
+      <span class="value-badge">Основна ценност</span>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="section vision-section" id="vision">
+  <div class="section-label reveal">Визия</div>
+  <h2 class="section-title reveal">Към какво се стремим</h2>
+  <p class="section-subtitle reveal">СУ „Йордан Йовков" ще продължи да се утвърждава като училище, предоставящо качествено образование, базирано на добрата общообразователна подготовка.</p>
+
+  <div class="vision-grid">
+    <div class="vision-content reveal-left">
+      <p>СУ „Йордан Йовков" ще продължи да се утвърждава и развива като училище, предоставящо качествено образование, базирано на добрата общообразователна подготовка.</p>
+      <p>Ще продължим да ангажираме вниманието на нашите ученици с актуални теми, свързани със съвременните дигитални технологии, провокирайки тяхното въображение и бързина — превръщайки учениците от само консуматори на технологии до нейни създатели.</p>
+
+      <div class="vision-targets">
+        <div class="target-item">
+          <div class="target-num">→</div>
+          <div class="target-text">
+            <h5>От консуматори до създатели</h5>
+            <p>Превръщаме учениците от пасивни потребители на технологии в активни създатели на дигитални решения.</p>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-num">→</div>
+          <div class="target-text">
+            <h5>Дигитална трансформация</h5>
+            <p>Провокиране на въображението и бързината на учениците чрез актуални теми от дигиталния свят.</p>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-num">→</div>
+          <div class="target-text">
+            <h5>Качествена общообразователна база</h5>
+            <p>Запазване и надграждане на силната обща подготовка като основа за специализираното обучение.</p>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-num">→</div>
+          <div class="target-text">
+            <h5>Утвърждаване в общността</h5>
+            <p>Продължаване на развитието ни като предпочитано образователно пространство в Сливен.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vision-visual reveal-right">
+      <div class="vision-img-frame">
+        <div class="vf-label">Нашата перспектива</div>
+        <div class="vf-big">Училище,<br>в което учениците стават<br><em>създатели</em> на технологии</div>
+        <div class="vf-stats">
+          <div class="vf-stat">
+            <div class="n">45+</div>
+            <div class="l">Години опит в образованието</div>
+          </div>
+          <div class="vf-stat">
+            <div class="n">800+</div>
+            <div class="l">Ученици всяка година</div>
+          </div>
+          <div class="vf-stat">
+            <div class="n">60+</div>
+            <div class="l">Опитни педагози</div>
+          </div>
+          <div class="vf-stat">
+            <div class="n">4+</div>
+            <div class="l">Нац. и европ. програми</div>
+          </div>
+        </div>
+      </div>
+      <div class="vision-deco"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section class="goals-section" id="goals">
+  <div class="section-label reveal">Стратегически цели</div>
+  <h2 class="section-title reveal">Нашите приоритети</h2>
+
+  <div class="goals-grid">
+    <div class="goal-card reveal">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="goal-body">
+        <h4>Висок академичен стандарт</h4>
+        <p>Поддържане на качествена учебна среда с актуални методи и постоянна квалификация на педагогическия екип.</p>
+      </div>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.1s">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="goal-body">
+        <h4>Дигитална грамотност</h4>
+        <p>Развитие на умения за работа с технологии, критично мислене и отговорно използване на дигиталните ресурси.</p>
+      </div>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.05s">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="goal-body">
+        <h4>Приемственост в обучението</h4>
+        <p>Гарантиране на логична прогресия от визуалното програмиране в начален етап до професия „Приложен програмист".</p>
+      </div>
+    </div>
+    <div class="goal-card reveal" style="transition-delay:.15s">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="goal-body">
+        <h4>Приобщаване и равен шанс</h4>
+        <p>Гарантиране, че всяко дете — независимо от произход или способности — получава необходимата подкрепа.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENTS -->
+<section class="commitment-section" id="commitments">
+  <div class="section-label reveal">Ангажименти</div>
+  <h2 class="section-title reveal">Нашите обещания</h2>
+  <p class="section-subtitle reveal">Конкретни ангажименти към учениците, родителите и общността, които ни движат всеки ден.</p>
+
+  <div class="commitment-grid">
+    <div class="commitment-card reveal">
+      <div class="cc-label">Към учениците</div>
+      <h3>Безопасна и вдъхновяваща среда</h3>
+      <p>Гарантираме сигурна, позитивна атмосфера, в която всяко дете е уважавано и насърчавано да развива своя потенциал.</p>
+      <ul class="commitment-list">
+        <li>Индивидуален подход и допълнителна подкрепа</li>
+        <li>Разнообразни извънкласни дейности</li>
+        <li>Справедлива и прозрачна оценка</li>
+        <li>Защита срещу тормоз и дискриминация</li>
+      </ul>
+    </div>
+    <div class="commitment-card gold-border reveal" style="transition-delay:.1s">
+      <div class="cc-label">Към родителите</div>
+      <h3>Партньорство и откритост</h3>
+      <p>Вярваме, че родителите са наши партньори. Поддържаме редовна и прозрачна комуникация за напредъка на детето.</p>
+      <ul class="commitment-list">
+        <li>Редовни родителски срещи и консултации</li>
+        <li>Достъп до електронен дневник</li>
+        <li>Навременна информация за напредъка на детето</li>
+        <li>Активно включване в живота на училището</li>
+      </ul>
+    </div>
+    <div class="commitment-card reveal" style="transition-delay:.05s">
+      <div class="cc-label">Към педагозите</div>
+      <h3>Подкрепа и развитие</h3>
+      <p>Инвестираме в нашите учители, защото знаем, че качеството на образованието зависи преди всичко от тях.</p>
+      <ul class="commitment-list">
+        <li>Непрекъснато обучение и квалификация</li>
+        <li>Участие в национални и международни програми</li>
+        <li>Модерна материална база и ресурси</li>
+        <li>Колегиална подкрепа и споделяне на добри практики</li>
+      </ul>
+    </div>
+    <div class="commitment-card gold-border reveal" style="transition-delay:.15s">
+      <div class="cc-label">Към общността</div>
+      <h3>Активна роля в Сливен</h3>
+      <p>Ние не сме затворена институция — ние сме активна част от живота на Сливен и цялото общество.</p>
+      <ul class="commitment-list">
+        <li>Открити дни и публични прояви</li>
+        <li>Партньорства с местни организации</li>
+        <li>Участие в граждански и екологични инициативи</li>
+        <li>Запазване на българската традиция и идентичност</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

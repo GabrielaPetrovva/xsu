@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Седмично разписание – СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+ 
+/* === PAGE HERO === */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3.5rem;position:relative;overflow:hidden}
+.page-hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:10px}
+.page-hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}
+.page-hero h1 em{color:var(--gold);font-style:italic}
+.page-hero p{font-size:.95rem;color:rgba(255,255,255,.65);max-width:500px;line-height:1.7}
+ 
+/* === CLASS TABS === */
+.tabs-wrapper{background:#fff;border-bottom:2px solid var(--green-light);position:sticky;top:var(--nav-h);z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.06)}
+.tabs-inner{display:flex;overflow-x:auto;padding:0 8vw;gap:0;scrollbar-width:none}
+.tabs-inner::-webkit-scrollbar{display:none}
+.tab-group{display:flex;align-items:center;gap:0;border-right:1px solid var(--green-light)}
+.tab-group:last-child{border-right:none}
+.tab-group-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:.4rem .8rem .2rem;white-space:nowrap;align-self:flex-end;padding-bottom:.8rem}
+.tab-btn{padding:.9rem .75rem;font-size:.82rem;font-weight:600;color:var(--gray);background:none;border:none;cursor:pointer;white-space:nowrap;font-family:'Manrope',sans-serif;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;margin-bottom:-2px}
+.tab-btn:hover{color:var(--green)}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+ 
+/* === SCHEDULE CONTENT === */
+.schedule-content{padding:3rem 8vw 5rem;background:var(--light)}
+.class-panel{display:none}
+.class-panel.active{display:block}
+ 
+.class-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid var(--green-light)}
+.class-badge{width:60px;height:60px;background:var(--green);color:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;flex-shrink:0}
+.class-header-info h2{font-size:1.6rem;font-weight:700;color:var(--dark)}
+.class-header-info p{font-size:.85rem;color:var(--gray);margin-top:.2rem}
+.class-tag{display:inline-block;background:var(--green-light);color:var(--green);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .75rem;border-radius:50px;border:1px solid rgba(29,122,80,.2);margin-top:.4rem}
+.class-tag.prof{background:rgba(201,168,76,.12);color:#8a6c1e;border-color:rgba(201,168,76,.3)}
+ 
+/* === SCHEDULE TABLE === */
+.schedule-table-wrap{overflow-x:auto;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);margin-bottom:1.5rem}
+.schedule-table{width:100%;border-collapse:collapse;background:#fff;min-width:700px}
+.schedule-table thead tr{background:var(--green);color:#fff}
+.schedule-table thead th{padding:.9rem 1rem;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:center;border:none}
+.schedule-table thead th:first-child{text-align:left;border-radius:16px 0 0 0}
+.schedule-table thead th:last-child{border-radius:0 16px 0 0}
+.schedule-table tbody tr{border-bottom:1px solid var(--green-light)}
+.schedule-table tbody tr:last-child{border-bottom:none}
+.schedule-table tbody tr:hover{background:rgba(29,122,80,.03)}
+.schedule-table td{padding:.75rem 1rem;font-size:.83rem;text-align:center;vertical-align:middle;line-height:1.4;color:var(--dark)}
+.schedule-table td:first-child{text-align:left;font-weight:600;color:var(--green);white-space:nowrap;background:rgba(29,122,80,.04);border-right:1px solid var(--green-light)}
+.schedule-table td:nth-child(2){text-align:left;color:var(--gray);font-size:.76rem;white-space:nowrap;border-right:1px solid var(--green-light)}
+.subject-cell{display:flex;flex-direction:column;align-items:center;gap:2px}
+.subject-name{font-weight:500}
+.subject-note{font-size:.68rem;color:var(--gold);font-weight:600}
+.empty-cell{color:#ccc;font-size:.75rem}
+ 
+/* Extended rows (lunch, etc.) */
+.schedule-table tr.extended-row td{background:rgba(240,247,243,.8);font-size:.76rem;color:var(--gray);font-style:italic}
+.schedule-table tr.extended-row td:first-child{background:rgba(240,247,243,.8);color:var(--gray);font-weight:400}
+ 
+/* Notes */
+.schedule-notes{background:#fff;border-left:3px solid var(--gold);padding:1rem 1.2rem;border-radius:0 12px 12px 0;font-size:.82rem;color:var(--gray);line-height:1.8}
+.schedule-notes strong{color:var(--dark);font-weight:600}
+.schedule-notes ol{padding-left:1.2rem;margin-top:.3rem}
+.schedule-notes li{margin-bottom:.2rem}
+ 
+/* Responsive */
+@media(max-width:1100px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-item>a{padding:0 .6rem;font-size:.85rem}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links,.nav-search{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text strong{font-size:.95rem}
+  .nav-logo-text span{display:none}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .tabs-inner{padding:0 5vw}
+  .schedule-content{padding:2rem 5vw 3rem}
+  footer{padding:3.5rem 5vw 1.5rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.5rem}
+  .class-badge{width:48px;height:48px;font-size:1.1rem;border-radius:12px}
+  .class-header-info h2{font-size:1.2rem}
+}
+ 
+/* BREADCRUMB inside hero */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="history.html">История</a>
+      <a href="mision-vision.html">Мисия и визия</a>
+      <a href="ekip.html">Педагогически екип</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="priem-1-klas.html">Прием в I клас</a>
+      <a href="priem-5-klas.html">Прием в V клас</a>
+      <a href="priem-8-klas.html">Прием в VIII клас</a>
+      <a href="dokumenti.html">Необходими документи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Учебни планове</a>
+      <a href="sedmichno-razpisanie.html">Разписание</a>
+      <a href="#">Електронен дневник</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Родители <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="#">Наредби</a><a href="#">Родителска среща</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Ученици <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="school-council.html">Ученически съвет</a>
+      <a href="extracurricular-activities.html">Извънкласни дейности</a>
+      <a href="#">Спорт</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="dokumenti.html">Необходими документи</a>
+      <a href="faq.html">ЧЗВ</a>
+      <a href="#">Формуляри</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions">
+    <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
+    <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
+ 
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a>
+    <span>/</span>
+    <a href="#">Обучение</a>
+    <span>/</span>
+    <span style="color:var(--gold)">Седмично разписание</span>
+  </div>
+  <div class="page-hero-eyebrow">Обучение · 2025/2026</div>
+  <h1>Седмично <em>разписание</em></h1>
+  <p>Втори учебен срок · Учебна 2025/2026 година · Съгласувано с РЗИ</p>
+</div>
+ 
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs-inner">
+    <div class="tab-group">
+      <button class="tab-btn active" data-panel="1a">1.А</button>
+      <button class="tab-btn" data-panel="2a">2.А</button>
+      <button class="tab-btn" data-panel="3a">3.А</button>
+      <button class="tab-btn" data-panel="3b">3.Б</button>
+      <button class="tab-btn" data-panel="4a">4.А</button>
+      <button class="tab-btn" data-panel="4b">4.Б</button>
+    </div>
+    <div class="tab-group">
+      <button class="tab-btn" data-panel="5a">5.А</button>
+      <button class="tab-btn" data-panel="6a">6.А</button>
+      <button class="tab-btn" data-panel="7a">7.А</button>
+    </div>
+    <div class="tab-group">
+      <button class="tab-btn" data-panel="8a">8.А</button>
+      <button class="tab-btn" data-panel="9a">9.А</button>
+      <button class="tab-btn" data-panel="10a">10.А</button>
+      <button class="tab-btn" data-panel="11a">11.А</button>
+      <button class="tab-btn" data-panel="12a">12.А</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- SCHEDULE PANELS -->
+<div class="schedule-content">
+ 
+  <!-- I-А клас -->
+  <div class="class-panel active" id="panel-1a">
+    <div class="class-header">
+      <div class="class-badge">1</div>
+      <div class="class-header-info">
+        <h2>1.А клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:35</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>09:00–09:35</td><td>Математика</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:45–10:20</td><td>Въведение във визуалното програмиране <span class="subject-note">РП/УП</span></td><td>Математика</td><td>Математика</td><td>Математика</td><td>Родинознание</td></tr>
+          <tr><td>4</td><td>10:30–11:05</td><td>Музика</td><td>Физическо възпитание и спорт</td><td>Технологии и предприемачество</td><td>Музика</td><td>Изобразително изкуство</td></tr>
+          <tr><td>5</td><td>11:15–11:50</td><td><strong>УЧСД</strong></td><td>Час на класа</td><td>Обедно хранене</td><td>Физическо възпитание и спорт</td><td>Изобразително изкуство</td></tr>
+          <tr class="extended-row"><td>—</td><td>11:50–12:20</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Организиран отдих и спорт</td><td>Обедно хранене</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>12:20–12:55</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>12:55–13:30</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:30–14:05</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:05–14:40</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:40–15:15</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:15–15:50</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>—</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 11:15 до 11:50 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- II-А клас -->
+  <div class="class-panel" id="panel-2a">
+    <div class="class-header">
+      <div class="class-badge">2</div>
+      <div class="class-header-info">
+        <h2>2.A клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:35</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>09:00–09:35</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Въведение във визуалното програмиране <span class="subject-note">РП/УП</span></td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:45–10:20</td><td>Английски език</td><td>Изобразително изкуство</td><td>Математика</td><td>Математика</td><td>Английски език</td></tr>
+          <tr><td>4</td><td>10:30–11:05</td><td>Математика</td><td>Изобразително изкуство</td><td>Музика</td><td>Технологии и предприемачество</td><td>Родинознание</td></tr>
+          <tr><td>5</td><td>11:15–11:50</td><td>Музика</td><td>Час на класа</td><td>Физическо възпитание и спорт</td><td><strong>УЧСД</strong></td><td>Физическо възпитание и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>11:50–12:20</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>12:20–12:55</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>12:55–13:30</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:30–14:05</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:05–14:40</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:40–15:15</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:15–15:50</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки четвъртък от 11:15 до 11:50 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- III-А клас -->
+  <div class="class-panel" id="panel-3a">
+    <div class="class-header">
+      <div class="class-badge">3</div>
+      <div class="class-header-info">
+        <h2>3.A клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Български език и литература</td><td>Човекът и природата</td><td>Математика</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>08:50–09:30</td><td>Български език и литература</td><td>Визуално програмиране <span class="subject-note">РП/УП</span></td><td>Математика</td><td>Български език и литература</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:55–10:35</td><td>Човекът и обществото</td><td>Математика</td><td>Български език и литература</td><td>Човекът и обществото</td><td>Технологии и предприемачество</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Компютърно моделиране</td><td>Български език и литература</td><td>Английски език</td><td>Английски език</td><td>Английски език</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Музика</td><td>Физическо възпитание и спорт</td><td>Български език и литература</td><td>Изобразително изкуство</td><td>Музика</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td><strong>УЧСД</strong></td><td>Час на класа</td><td>Физическо възпитание и спорт</td><td>Изобразително изкуство</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:05–13:35</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:35–14:15</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:15–14:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:55–15:35</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:35–16:15</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:15–16:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:55–17:35</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 12:25 до 13:05 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- III-Б клас -->
+  <div class="class-panel" id="panel-3b">
+    <div class="class-header">
+      <div class="class-badge">3</div>
+      <div class="class-header-info">
+        <h2>3.Б клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Визуално програмиране <span class="subject-note">РП/УП</span></td><td>Български език и литература</td><td>Математика</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>08:50–09:30</td><td>Български език и литература</td><td>Български език и литература</td><td>Човекът и природата</td><td>Български език и литература</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:55–10:35</td><td>Човекът и обществото</td><td>Математика</td><td>Математика</td><td>Човекът и обществото</td><td>Технологии и предприемачество</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Музика</td><td>Български език и литература</td><td>Български език и литература</td><td>Изобразително изкуство</td><td>Музика</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Компютърно моделиране</td><td>Физическо възпитание и спорт</td><td>Физическо възпитание и спорт</td><td>Изобразително изкуство</td><td>Английски език</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td><strong>УЧСД</strong></td><td>Час на класа</td><td>Английски език</td><td>Английски език</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:05–13:35</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:35–14:15</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:15–14:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:55–15:35</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:35–16:15</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:15–16:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:55–17:35</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 12:25 до 13:05 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- IV-А клас -->
+  <div class="class-panel" id="panel-4a">
+    <div class="class-header">
+      <div class="class-badge">4</div>
+      <div class="class-header-info">
+        <h2>4.А клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Човекът и природата</td><td>Български език и литература</td><td>Човекът и природата</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>08:50–09:30</td><td>Български език и литература</td><td>Български език и литература</td><td>Математика</td><td>Български език и литература</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:55–10:35</td><td>Математика</td><td>Български език и литература</td><td>Английски език</td><td>Български език и литература</td><td>Визуално програмиране <span class="subject-note">РП/УП</span></td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Английски език</td><td>Математика</td><td>Изобразително изкуство</td><td>Английски език</td><td>Компютърно моделиране</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Технологии и предприемачество</td><td>Музика</td><td>Физическо възпитание и спорт</td><td>Математика</td><td>Човекът и обществото</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td><strong>УЧСД</strong></td><td>Час на класа</td><td>Обедно хранене</td><td>Физическо възпитание и спорт</td><td>Физическо възпитание и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:05–13:35</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Организиран отдих и спорт</td><td>Обедно хранене</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:35–14:15</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:15–14:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:55–15:35</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:35–16:15</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:15–16:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:55–17:35</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>—</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 12:25 до 13:05 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- IV-Б клас -->
+  <div class="class-panel" id="panel-4b">
+    <div class="class-header">
+      <div class="class-badge">4</div>
+      <div class="class-header-info">
+        <h2>4.Б клас</h2>
+        <p>Начален етап на основното образование</p>
+        <span class="class-tag">Начален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>08:50–09:30</td><td>Български език и литература</td><td>Човекът и природата</td><td>Математика</td><td>Човекът и природата</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>3</td><td>09:55–10:35</td><td>Математика</td><td>Български език и литература</td><td>Изобразително изкуство</td><td>Български език и литература</td><td>Компютърно моделиране</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Технологии и предприемачество</td><td>Математика</td><td>Английски език</td><td>Математика</td><td>Визуално програмиране <span class="subject-note">РП/УП</span></td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Английски език</td><td>Музика</td><td>Физическо възпитание и спорт</td><td>Английски език</td><td>Човекът и обществото</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td><strong>УЧСД</strong></td><td>Час на класа</td><td>Обедно хранене</td><td>Физическо възпитание и спорт</td><td>Физическо възпитание и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:05–13:35</td><td>Обедно хранене</td><td>Обедно хранене</td><td>Организиран отдих и спорт</td><td>Обедно хранене</td><td>Обедно хранене</td></tr>
+          <tr class="extended-row"><td>—</td><td>13:35–14:15</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:15–14:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:55–15:35</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:35–16:15</td><td>Самоподготовка</td><td>Самоподготовка</td><td>Занимания по интереси</td><td>Самоподготовка</td><td>Самоподготовка</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:15–16:55</td><td>Занимания по интереси</td><td>Занимания по интереси</td><td>Организиран отдих и спорт</td><td>Занимания по интереси</td><td>Занимания по интереси</td></tr>
+          <tr class="extended-row"><td>—</td><td>16:55–17:35</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td><td>—</td><td>Организиран отдих и спорт</td><td>Организиран отдих и спорт</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всяка Вторник от 11:15 – 11:50</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 12:25 до 13:05 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- V-А клас -->
+  <div class="class-panel" id="panel-5a">
+    <div class="class-header">
+      <div class="class-badge">5</div>
+      <div class="class-header-info">
+        <h2>5.А клас</h2>
+        <p>Прогимназиален етап на основното образование</p>
+        <span class="class-tag">Прогимназиален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Математика</td><td>Музика</td><td>Български език и литература</td><td>Български език и литература</td><td>Английски език</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>История и цивилизации</td><td>Математика</td><td>Човекът и природата</td><td>Математика</td><td>Математика</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Български език и литература</td><td>Български език и литература</td><td>География и икономика</td><td>Английски език</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Човекът и природата</td><td>Български език и литература</td><td>Компютърно моделиране и информационни технологии</td><td>Музика</td><td>Български език и литература</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Физическо възпитание и спорт</td><td>Физическо възпитание и спорт</td><td>Математика</td><td>Човекът и природата <span class="subject-note">РП/УП-А</span></td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>География и икономика</td><td>История и цивилизации</td><td>Технологии и предприемачество</td><td>Изобразително изкуство</td><td>Технологии и предприемачество</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Английски език</td><td><strong>Час на класа</strong></td><td>—</td><td>Изобразително изкуство</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:05–15:45</td><td>—</td><td>—</td><td><strong>УЧСД</strong></td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всяка сряда от 15:05 до 15:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- VI-А клас -->
+  <div class="class-panel" id="panel-6a">
+    <div class="class-header">
+      <div class="class-badge">6</div>
+      <div class="class-header-info">
+        <h2>6.А клас</h2>
+        <p>Прогимназиален етап на основното образование</p>
+        <span class="class-tag">Прогимназиален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Технологии и предприемачество 1 гр.</td><td>Български език и литература</td><td>Математика</td><td>Математика</td><td>Технологии и предприемачество 1 гр.</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Английски език</td><td>Математика</td><td>Български език и литература</td><td>Български език и литература</td><td>Български език и литература</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Математика</td><td>Музика</td><td>Български език и литература</td><td>Музика</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Български език и литература</td><td>География и икономика</td><td>История и цивилизации</td><td>История и цивилизации</td><td>Математика</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Изобразително изкуство</td><td>Човекът и природата</td><td>Компютърно моделиране и информационни технологии</td><td>География и икономика</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Изобразително изкуство</td><td>Физическо възпитание и спорт</td><td>Човекът и природата</td><td>Английски език</td><td>Английски език</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Технологии и предприемачество 2 гр.</td><td><strong>Час на класа</strong></td><td>Физическо възпитание и спорт</td><td>Човекът и природата <span class="subject-note">РП/УП-А</span></td><td>Технологии и предприемачество 2 гр.</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:05–14:45</td><td>—</td><td>—</td><td>—</td><td><strong>УЧСД</strong></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки четвъртък от 14:05 до 14:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- VII-А клас -->
+  <div class="class-panel" id="panel-7a">
+    <div class="class-header">
+      <div class="class-badge">7</div>
+      <div class="class-header-info">
+        <h2>7.А клас</h2>
+        <p>Прогимназиален етап на основното образование</p>
+        <span class="class-tag">Прогимназиален етап</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Математика</td><td>История и цивилизации</td><td>География и икономика</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Български език и литература</td><td>Български език и литература</td><td>Математика</td><td>Музика</td><td>Математика</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>География и икономика</td><td>Биология и здравно образование</td><td>Биология и здравно образование</td><td>Математика</td><td>Математика <span class="subject-note">РП/УП-А</span></td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Математика</td><td>Музика</td><td>Химия и опазване на околната следа</td><td>Български език и литература</td><td>Технологии и предприемачество</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Английски език</td><td>Компютърно моделиране и информационни технологии</td><td>Български език и литература</td><td>Физическо възпитание и спорт</td><td>История и цивилизации</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Физика и астрономия</td><td>Компютърно моделиране и ИТ <span class="subject-note">РП/УП-А</span></td><td>Физическо възпитание и спорт</td><td>Химия и опазване на околната следа</td><td>Английски език</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Изобразително изкуство</td><td><strong>Час на класа</strong></td><td>Английски език</td><td>—</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:05–15:45</td><td><strong>УЧСД</strong></td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 15:05 до 15:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- VIII-А клас -->
+  <div class="class-panel" id="panel-8a">
+    <div class="class-header">
+      <div class="class-badge">8</div>
+      <div class="class-header-info">
+        <h2>8.А клас</h2>
+        <p>Гимназиален етап · Професионална паралелка</p>
+        <span class="class-tag prof">Професионална паралелка</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Английски език</td><td>Английски език</td><td>Английски език</td><td>Английски език</td><td>Химия и опазване на околната следа</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Английски език</td><td>Английски език</td><td>Английски език</td><td>Английски език</td><td>Английски език</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Английски език</td><td>Физика и астрономия</td><td>Български език и литература</td><td>Информационни технологии</td><td>Английски език</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Компютърен дизайн</td><td>Математика</td><td>Български език и литература</td><td>Информационни технологии</td><td>Български език и литература</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Биология и здравно образование</td><td>Английски език</td><td>Математика</td><td>Български език и литература</td><td>Философия</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>История и цивилизации</td><td>История и цивилизации</td><td>Физика и астрономия</td><td>Математика</td><td>География и икономика</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Физическо възпитание и спорт</td><td><strong>Час на класа</strong></td><td><strong>УЧСД</strong></td><td>Физическо възпитание и спорт</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всяка сряда от 13:15 до 13:55 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- IX-А клас -->
+  <div class="class-panel" id="panel-9a">
+    <div class="class-header">
+      <div class="class-badge">9</div>
+      <div class="class-header-info">
+        <h2>9.А клас</h2>
+        <p>Гимназиален етап · Професионална паралелка</p>
+        <span class="class-tag prof">Професионална паралелка</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Български език и литература</td><td>Български език и литература</td><td>Увод в обектно-ориентираното програмиране /ОтПП/</td><td>Математика</td><td>Учебна практика – Програмиране ОтПП</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Български език и литература</td><td>Английски език</td><td>Английски език</td><td>Физическо възпитание и спорт</td><td>Учебна практика – Програмиране ОтПП</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Физика и астрономия</td><td>Програмиране ОтПП</td><td>Математика</td><td>Немски език</td><td>Програмиране РПП</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Математика</td><td>Програмиране ОтПП</td><td>Здравословни и безопасни условия на труд</td><td>Немски език</td><td>Програмиране РПП</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>География и икономика</td><td>История и цивилизации</td><td>Физическо възпитание и спорт</td><td>Философия</td><td>Английски език</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Английски език</td><td>Химия и опазване на околната следа</td><td>Учебна практика – Увод в ООП</td><td>История и цивилизации</td><td>Биология и здравно образование</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Английски език</td><td><strong>Час на класа</strong></td><td>—</td><td>Английски език</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:55–15:35</td><td>—</td><td><strong>УЧСД</strong></td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки вторник от 14:55 до 15:35 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- X-А клас -->
+  <div class="class-panel" id="panel-10a">
+    <div class="class-header">
+      <div class="class-badge">10</div>
+      <div class="class-header-info">
+        <h2>10.А клас</h2>
+        <p>Гимназиален етап · Професионална паралелка</p>
+        <span class="class-tag prof">Професионална паралелка</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Физическо възпитание и спорт</td><td>Увод в алгоритмите и структурите от данни – ОтПП</td><td>Биология и здравно образование</td><td>Физическо възпитание и спорт</td><td>Български език и литература</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Химия и опазване на околната следа</td><td>Увод в алгоритмите и структурите от данни – ОтПП</td><td>Програмиране на микроконтролери</td><td>Математика</td><td>Български език и литература</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Български език и литература</td><td>География и икономика</td><td>Програмиране на микроконтролери</td><td>История и цивилизации</td><td>История и цивилизации</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>История и цивилизации</td><td>Английски език</td><td>Физика и астрономия</td><td>География и икономика</td><td>Химия и опазване на околната следа</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Философия</td><td>Учебна практика – Увод в алгоритмите и структурите от данни – ОтПП</td><td>История и цивилизации</td><td>Немски език</td><td>Биология и здравно образование</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Английски език</td><td>Учебна практика – Увод в алгоритмите и структурите от данни – ОтПП</td><td>Математика</td><td>Немски език</td><td>Физика и астрономия</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Информационни технологии</td><td><strong>Час на класа</strong></td><td>Философия</td><td>—</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>15:05–15:45</td><td>—</td><td>—</td><td>—</td><td><strong>УЧСД</strong></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки четвъртък от 15:05 до 15:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- XI-А клас -->
+  <div class="class-panel" id="panel-11a">
+    <div class="class-header">
+      <div class="class-badge">11</div>
+      <div class="class-header-info">
+        <h2>11.А клас</h2>
+        <p>Гимназиален етап · Професионална паралелка</p>
+        <span class="class-tag prof">Професионална паралелка</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Обектно ориентирано програмиране</td><td>Чужд език по професията – Английски</td><td>Чужд език по професията – Английски</td><td>Бази данни</td><td>Изкуствен интелект в софтуерното инженерство</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Обектно ориентирано програмиране</td><td>Български език и литература</td><td>Физическо възпитание и спорт</td><td>Бази данни</td><td>Изкуствен интелект в софтуерното инженерство</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Разработка на софтуер</td><td>Български език и литература</td><td>Гражданско образование</td><td>Български език и литература</td><td>Физическо възпитание и спорт</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Разработка на софтуер</td><td>Математика</td><td>Учебна практика – Програмиране на вградени системи</td><td>Учебна практика – Математически основи на програмирането</td><td>Математика</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Програмиране на вградени системи</td><td>Немски език</td><td>Учебна практика – Програмиране на вградени системи</td><td>Учебна практика – Бази данни</td><td>Учебна практика – Обектно ориентирано програмиране</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Програмиране на вградени системи</td><td>Немски език</td><td>Учебна практика – Разработка на софтуер</td><td>Учебна практика – Бази данни</td><td>Учебна практика – Обектно ориентирано програмиране</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Математически основи на програмирането</td><td><strong>Час на класа</strong></td><td>Учебна практика – Разработка на софтуер</td><td>—</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:00–14:40</td><td><strong>УЧСД</strong></td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки понеделник от 14:05 до 14:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+  <!-- XII-А клас -->
+  <div class="class-panel" id="panel-12a">
+    <div class="class-header">
+      <div class="class-badge">12</div>
+      <div class="class-header-info">
+        <h2>12.А клас</h2>
+        <p>Гимназиален етап · Профилирана паралелка</p>
+        <span class="class-tag prof">Профилирана паралелка</span>
+      </div>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Час</th><th>Времетраене</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>08:00–08:40</td><td>Модул – Софтуерни науки</td><td>Немски език</td><td>Български език и литература</td><td>Гражданско образование</td><td>Математика</td></tr>
+          <tr><td>2</td><td>08:55–09:35</td><td>Модул – Софтуерни науки</td><td>Немски език</td><td>Български език и литература</td><td>Български език и литература</td><td>Физическо възпитание и спорт</td></tr>
+          <tr><td>3</td><td>09:45–10:25</td><td>Физическо възпитание и спорт</td><td>Модул 4 – Програмиране на информационни системи</td><td>Английски език</td><td>Модул 3 – Уеб дизайн</td><td>Модул – География на България и света</td></tr>
+          <tr><td>4</td><td>10:45–11:25</td><td>Английски език</td><td>Модул 4 – Програмиране на информационни системи</td><td>Модул 5 – България и регионална политика</td><td>Модул 3 – Уеб дизайн</td><td>Модул – География на България и света</td></tr>
+          <tr><td>5</td><td>11:35–12:15</td><td>Математика</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td><td>Модул 5 – България и регионална политика</td><td>Модул 4 – Програмиране на информационни системи</td><td>Модул – Приложно програмиране</td></tr>
+          <tr><td>6</td><td>12:25–13:05</td><td>Модул 3 – Уеб дизайн</td><td>Български ез. и лит. <span class="subject-note">РП/УП-А</span></td><td>Модул 6 – Географска и икономическа информация</td><td>Модул 4 – Програмиране на информационни системи</td><td>Модул – Приложно програмиране</td></tr>
+          <tr><td>7</td><td>13:15–13:55</td><td>Модул 3 – Уеб дизайн</td><td><strong>Час на класа</strong></td><td>Модул 6 – Географска и икономическа информация</td><td>—</td><td>—</td></tr>
+          <tr class="extended-row"><td>—</td><td>14:05–14:45</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>УЧСД</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="schedule-notes">
+      <strong>Забележки:</strong>
+      <ol>
+        <li>График на учебното време по учебни предмети от раздел „А"</li>
+        <li>Провеждане на час на класа всеки вторник от 13:15 – 13:55</li>
+        <li>Учебния час за спортни дейности се провежда всеки петък от 14:05 до 14:45 <strong>/УЧСД/</strong></li>
+      </ol>
+    </div>
+  </div>
+ 
+</div><!-- end schedule-content -->
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40) });
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+function openMenu() { menuOpen = true; hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden' }
+function closeMenu() { menuOpen = false; hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); mobileMenu.classList.remove('open'); document.body.style.overflow = '' }
+hamburger.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu() });
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('click', (e) => { if (menuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMenu() });
+function toggleMobSub(btn) {
+  const item = btn.closest('.mobile-menu-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.mobile-menu-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Tabs
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.class-panel');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    // scroll to schedule
+    document.querySelector('.schedule-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

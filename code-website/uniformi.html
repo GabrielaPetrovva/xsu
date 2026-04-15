@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Униформи | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero em{color:var(--gold);font-style:italic}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:600px;line-height:1.7;font-weight:300}
+
+/* CONTENT */
+.content-wrap{max-width:1100px;margin:0 auto;padding:4rem 8vw}
+
+/* SECTION LABEL */
+.section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+
+/* INFO BANNER */
+.info-banner{background:var(--light);border-left:3px solid var(--gold);padding:1.4rem 1.8rem;border-radius:0 12px 12px 0;margin-bottom:3rem}
+.info-banner p{font-size:.9rem;color:var(--gray);line-height:1.7}
+.info-banner strong{color:var(--dark)}
+
+
+/* ITEMS GRID */
+.items-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-bottom:3.5rem}
+.item-card{background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:16px;overflow:hidden;transition:box-shadow .3s,transform .3s}
+.item-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-4px)}
+.item-img{background:var(--light);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.item-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.item-card:hover .item-img img{transform:scale(1.04)}
+.item-img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;color:var(--green);opacity:.5;width:100%;height:100%;min-height:240px}
+.item-img-placeholder svg{width:48px;height:48px}
+.item-img-placeholder span{font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.item-img-badge{position:absolute;top:1rem;left:1rem;background:var(--green);color:#fff;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:50px}
+.item-body{padding:1.4rem 1.5rem}
+.item-body h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--dark);margin-bottom:.5rem}
+.item-body p{font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:1rem}
+.item-details{display:flex;flex-direction:column;gap:.4rem}
+.item-detail{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--gray)}
+.item-detail svg{width:14px;height:14px;color:var(--green);flex-shrink:0}
+.item-detail strong{color:var(--dark);font-weight:600}
+
+/* PHOTO GALLERY */
+.gallery-section{background:var(--light);padding:4rem 8vw;margin:0}
+.gallery-section .section-label{margin-bottom:2rem}
+.gallery-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:.8rem}
+.gallery-section p.intro{font-size:.92rem;color:var(--gray);max-width:560px;line-height:1.75;margin-bottom:2.5rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.gallery-item{aspect-ratio:1;background:rgba(29,122,80,.08);border-radius:12px;overflow:hidden;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.gallery-item:first-child{grid-column:span 2;aspect-ratio:2/1}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:var(--green);opacity:.4;width:100%;height:100%;min-height:180px}
+.gallery-placeholder svg{width:32px;height:32px}
+.gallery-placeholder span{font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.gallery-overlay{position:absolute;inset:0;background:rgba(15,84,56,.0);transition:background .3s;display:flex;align-items:center;justify-content:center}
+.gallery-item:hover .gallery-overlay{background:rgba(15,84,56,.15)}
+
+/* ─── SHOP SECTION ─── */
+.shop-section {
+  padding: 4rem 8vw;
+  background: var(--white);
+}
+.shop-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.shop-section h2 {
+  
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: .5rem;
+}
+.shop-section .lead {
+  font-size: .93rem;
+  color: var(--gray);
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Info card */
+.shop-info-card {
+  background: var(--green-dark);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.8rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.shop-info-card .card-eyebrow {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.shop-info-card h3 {
+  
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-top: -.3rem;
+}
+.shop-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.shop-detail-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(201,168,76,.18);
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.shop-detail-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gold);
+}
+.shop-detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+.shop-detail-text .label {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+}
+.shop-detail-text .value {
+  font-size: .9rem;
+  color: #fff;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.shop-divider {
+  height: 1px;
+  background: rgba(255,255,255,.1);
+}
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--dark);
+  padding: .8rem 1.6rem;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  transition: opacity .25s;
+  width: fit-content;
+}
+.btn-gold:hover { opacity: .85; }
+.btn-gold svg { width: 14px; height: 14px; }
+
+/* Map */
+.shop-map-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 4px 24px rgba(0,0,0,.07);
+  position: relative;
+}
+.shop-map-wrap iframe {
+  width: 100%;
+  height: 380px;
+  display: block;
+  border: none;
+}
+.map-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(15,84,56,.85), transparent);
+  padding: 1.2rem 1.4rem .9rem;
+  font-size: .78rem;
+  color: rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.map-label svg { width: 13px; height: 13px; color: var(--gold); flex-shrink: 0; }
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .8s,transform .8s}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .8s,transform .8s}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .items-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-item:first-child{grid-column:span 2}
+  .shop-layout{grid-template-columns:1fr}
+  .shop-map-wrap iframe{height:280px}
+  .content-wrap,.gallery-section,.shop-section{padding-left:5vw;padding-right:5vw}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="history.html">История</a><a href="ekip.html">Екип</a><a href="uniformi.html">Униформи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Начало</a><span>/</span>
+    <a href="#">За нас</a><span>/</span>
+    <span style="color:var(--gold)">Униформи</span>
+  </div>
+  <div class="page-hero-label">За нас · Облекло</div>
+  <h1>Училищни<br><em>униформи<em></h1>
+  <p class="page-hero-sub">Частична униформа за учениците на СУ „Йордан Йовков" — суичър и блуза с дълъг или къс ръкав в официалните цветове на училището.</p>
+</section>
+
+<!-- ITEMS -->
+<div class="content-wrap">
+  <div class="section-label reveal">Артикули</div>
+  <p style="font-size:.95rem;color:var(--gray);max-width:620px;line-height:1.8;margin-bottom:2.5rem" class="reveal">Училищната ни частична униформа се предлага в два варианта — худи и блуза. И двата модела са в зелено, с емблемата на училището.</p>
+
+  <div class="info-banner reveal">
+    <p><strong>Частична униформа:</strong> Носенето на училищната униформа е задължително в определени дни и при официални събития. Моля, свържете се с канцеларията за повече информация относно правилата за носене.</p>
+  </div>
+
+  <div class="items-grid">
+    <div class="item-card reveal">
+      <div class="item-img">
+        <div class="item-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.38 3.46 16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="item-img-badge">Зимен модел</span>
+      </div>
+      <div class="item-body">
+        <h3>Суичър</h3>
+        <p>Топло и удобно горнище с качулка в зелено с логото и надписа на СУ „Йордан Йовков". Подходящо за по-хладните месеци.</p>
+        <div class="item-details">
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <span><strong>Цвят:</strong> Черен със зелено лого</span>
+          </div>
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span><strong>Размери:</strong> 128 – 3XL</span>
+          </div>
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <span><strong>Материя:</strong> 80% памук, 20% полиестер</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card reveal" style="transition-delay:.12s">
+      <div class="item-img">
+        <div class="item-img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.38 3.46 16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+          <span>Снимка предстои</span>
+        </div>
+        <span class="item-img-badge">Летен модел</span>
+      </div>
+      <div class="item-body">
+        <h3>Блуза с къс / дълъг ръкав</h3>
+        <p>Лека памучна блуза в зелено с логото на училището. Предлага се в два варианта — с къс и с дълъг ръкав.</p>
+        <div class="item-details">
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <span><strong>Цвят:</strong> Зелен със зелено лого</span>
+          </div>
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span><strong>Размери:</strong> 128 – 3XL</span>
+          </div>
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span><strong>Варианти:</strong> Къс ръкав / Дълъг ръкав</span>
+          </div>
+          <div class="item-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <span><strong>Материя:</strong> 100% памук</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label reveal">Галерия</div>
+    <h2 class="reveal">Снимки от учениците</h2>
+    <p class="intro reveal">Снимките по-долу показват учениците в официална училищна униформа по време на прояви и ежедневие.</p>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Главна снимка</span>
+        </div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Снимка 2</span>
+        </div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Снимка 3</span>
+        </div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Снимка 4</span>
+        </div>
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Снимка 5</span>
+        </div>
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOP SECTION ═══ -->
+<section class="shop-section">
+  <div class="shop-inner">
+    <div class="section-label reveal">Магазин</div>
+    <h2 class="reveal">Откъде да купя?</h2>
+    <p class="lead reveal">Униформите се продават в специализиран магазин в Сливен. По-долу ще намерите адреса и карта за лесна ориентация.</p>
+
+    <div class="shop-layout">
+
+      <!-- Info card -->
+      <div class="shop-info-card reveal-left">
+        <div>
+          <div class="card-eyebrow">Официален магазин</div>
+          <h3>Магазин за<br>училищни униформи</h3>
+        </div>
+
+        <div class="shop-divider"></div>
+
+        <div class="shop-detail-row">
+          <div class="shop-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="shop-detail-text">
+            <span class="label">Адрес</span>
+            <!-- ⚠️ ЗАМЕНИ с реалния адрес на магазина -->
+            <span class="value">ул. „…………………" №…<br>гр. Сливен</span>
+          </div>
+        </div>
+
+        <div class="shop-detail-row">
+          <div class="shop-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <div class="shop-detail-text">
+            <span class="label">Работно време</span>
+            <!-- ⚠️ ЗАМЕНИ с реалното работно време -->
+            <span class="value">Пон – Пет: … – …<br>Събота: … – …</span>
+          </div>
+        </div>
+
+        <div class="shop-detail-row">
+          <div class="shop-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+          </div>
+          <div class="shop-detail-text">
+            <span class="label">Телефон</span>
+            <!-- ⚠️ ЗАМЕНИ с реалния телефон -->
+            <span class="value">0… / … … …</span>
+          </div>
+        </div>
+
+        <div class="shop-divider"></div>
+
+        <!-- ⚠️ ЗАМЕНИ href с реална Google Maps връзка -->
+        <a href="https://maps.google.com/?q=Сливен" target="_blank" class="btn-gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Отвори в Google Maps
+        </a>
+      </div>
+
+      <!-- Map -->
+      <div class="shop-map-wrap reveal-right">
+        <!--
+          ⚠️ ИНСТРУКЦИИ ЗА КАРТАТА:
+          1. Отидете на https://maps.google.com
+          2. Намерете магазина
+          3. Кликнете Споделяне → Вграждане на карта
+          4. Копирайте <iframe src="..."> и го поставете тук
+          
+          Засега е показана обща карта на Сливен:
+        -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46751.82219217695!2d26.274999999999999!3d42.6818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a6a7274a6abe63%3A0xa1c96d9e65fe2a62!2z0KHQu9C40LLQtdC9!5e0!3m2!1sbg!2sbg!4v1700000000000!5m2!1sbg!2sbg"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          гр. Сливен — заменете iframe-а с точния адрес на магазина
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

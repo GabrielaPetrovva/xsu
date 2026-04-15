@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Паралелки | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:520px;line-height:1.7;font-weight:300}
+
+/* MAIN */
+.content-wrap{max-width:1100px;margin:0 auto;padding:4rem 8vw}
+
+/* SECTION LABEL */
+.section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+.stat-card{background:var(--light);border-radius:14px;padding:1.3rem 1.2rem;text-align:center;border-top:3px solid var(--green)}
+.stat-number{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--green);line-height:1;margin-bottom:.3rem}
+.stat-label{font-size:.72rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase}
+
+/* LEVEL GROUPS */
+.level-group{margin-bottom:3rem}
+.level-heading{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.level-badge{background:var(--green-dark);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.4rem 1.1rem;border-radius:50px}
+.level-line{flex:1;height:1px;background:rgba(0,0,0,.08)}
+.level-line-gold{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent)}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.class-card{background:var(--white);border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:1.3rem 1.2rem;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.class-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green)}
+.class-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.class-card-name{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--green);font-weight:700;line-height:1;margin-bottom:.6rem}
+.class-card-role{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);margin-bottom:.3rem}
+.class-card-teacher{font-size:.92rem;font-weight:600;color:var(--dark);line-height:1.3}
+
+/* GOLD accent for graduating classes */
+.class-card.gold::before{background:var(--gold)}
+.class-card.gold .class-card-name{color:#8a6610}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text span{display:none}
+  .content-wrap{padding:3rem 5vw}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="history.html">История</a><a href="ekip.html">Екип</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="paralelki.html">Паралелки</a><a href="books.html">Учебници</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="priem-1-klas.html">Прием</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a><span>/</span>
+    <a href="#">ОБУЧЕНИЕ</a><span>/</span>
+    <span style="color:var(--gold)">ПАРАЛЕЛКИ</span>
+  </div>
+  <div class="page-hero-label">Обучение · Учебна 2025/2026</div>
+  <h1>Паралелки</h1>
+  <p class="page-hero-sub">Класни ръководители на паралелките в СУ „Йордан Йовков" за учебната 2025/2026 година.</p>
+</section>
+
+<div class="content-wrap">
+
+  <!-- STATS -->
+  <div class="stats-row reveal">
+    <div class="stat-card">
+      <div class="stat-number">14</div>
+      <div class="stat-label">Паралелки</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">I–XII</div>
+      <div class="stat-label">Класове</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">14</div>
+      <div class="stat-label">Класни ръководители</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2025</div>
+      <div class="stat-label">Учебна година</div>
+    </div>
+  </div>
+
+  <!-- НАЧАЛЕН ЕТАП -->
+  <div class="level-group reveal">
+    <div class="level-heading">
+      <div class="level-badge">Начален етап · I – IV клас</div>
+      <div class="level-line"></div>
+    </div>
+    <div class="cards-grid">
+      <div class="class-card">
+        <div class="class-card-name">I а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Събина Кутрова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">II а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Таня Чотова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">III а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Мария Панова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">III б</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Дора Георгиева</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">IV а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Мария Грунова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">IV б</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Бояна Данева</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОГИМНАЗИАЛЕН ЕТАП -->
+  <div class="level-group reveal">
+    <div class="level-heading">
+      <div class="level-badge">Прогимназиален етап · V – VII клас</div>
+      <div class="level-line"></div>
+    </div>
+    <div class="cards-grid">
+      <div class="class-card">
+        <div class="class-card-name">V а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Даниела Атанасова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">VI а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Памела Георгиева</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">VII а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Анна Енчева</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ГИМНАЗИАЛЕН ЕТАП -->
+  <div class="level-group reveal">
+    <div class="level-heading">
+      <div class="level-badge" style="background:var(--green)">Гимназиален етап · VIII – XII клас</div>
+      <div class="level-line-gold"></div>
+    </div>
+    <div class="cards-grid">
+      <div class="class-card">
+        <div class="class-card-name">VIII а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Анелия Шидерова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">IX а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Велияна Добрева</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">Х а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Ивелина Ангелова</div>
+      </div>
+      <div class="class-card">
+        <div class="class-card-name">XI а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Маргарита Байгуска</div>
+      </div>
+      <div class="class-card gold">
+        <div class="class-card-name">XII а</div>
+        <div class="class-card-role">Класен ръководител</div>
+        <div class="class-card-teacher">Стоян Димитров</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

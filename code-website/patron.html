@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Патрон – Йордан Йовков | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'"';position:absolute;right:4vw;top:-2rem;font-family:'Playfair Display',serif;font-size:28rem;color:rgba(255,255,255,.04);line-height:1;pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero h1 em{font-style:italic;color:var(--gold)}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:520px;line-height:1.7;font-weight:300}
+
+/* MAIN LAYOUT */
+.content-wrap{max-width:1100px;margin:0 auto;padding:4rem 8vw}
+.content-grid{display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:start}
+
+/* SIDEBAR */
+.sidebar{}
+
+/* PORTRAIT CARD */
+.portrait-card{background:var(--green-dark);border-radius:20px;overflow:hidden;margin-bottom:1.5rem}
+.portrait-img{width:100%;overflow:hidden}
+.portrait-img img{width:100%;height:auto;display:block;object-fit:cover}
+.portrait-meta{padding:1.5rem 1.8rem}
+.portrait-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:.3rem}
+.portrait-dates{font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.9rem}
+.portrait-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.portrait-tag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);font-size:.67rem;padding:.28rem .7rem;border-radius:50px;letter-spacing:.05em}
+
+/* QUICK FACTS */
+.quick-facts{background:var(--light);border-radius:16px;padding:1.4rem;margin-bottom:1.5rem}
+.quick-facts h4{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid rgba(29,122,80,.15)}
+.fact-row{display:flex;justify-content:space-between;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.81rem;gap:1rem}
+.fact-row:last-child{border-bottom:none}
+.fact-label{color:var(--gray);flex-shrink:0}
+.fact-value{color:var(--dark);font-weight:500;text-align:right}
+
+/* QUOTE CARD */
+.quote-card{background:var(--green-dark);border-radius:16px;padding:1.6rem;margin-bottom:1.5rem}
+.quote-card-label{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.quote-card p{font-family:'Playfair Display',serif;font-style:italic;color:#fff;font-size:1rem;line-height:1.7}
+.quote-card cite{display:block;font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.7rem;letter-spacing:.05em;font-style:normal}
+
+/* HYMN LINK */
+.hymn-link{display:flex;align-items:center;gap:.9rem;background:var(--gold);border-radius:13px;padding:1.1rem 1.3rem}
+.hymn-link svg{width:26px;height:26px;color:var(--dark);flex-shrink:0}
+.hymn-link-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(26,46,36,.6);margin-bottom:2px}
+.hymn-link-title{font-size:.92rem;font-weight:700;color:var(--dark)}
+
+/* ARTICLE */
+.article-section{margin-bottom:3rem}
+.article-section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.article-section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+.article-section h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--dark);margin-bottom:1.2rem;line-height:1.2}
+.article-section p{font-size:.97rem;color:var(--gray);line-height:1.9;margin-bottom:1rem}
+.pull-quote{margin:2rem 0;padding:1.5rem 2rem;border-left:3px solid var(--gold);background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(201,168,76,.03));border-radius:0 12px 12px 0}
+.pull-quote p{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:var(--dark);line-height:1.6;margin:0}
+.pull-quote cite{display:block;margin-top:.7rem;font-size:.73rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;font-style:normal}
+
+/* WORKS GRID */
+.works-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.work-card{background:var(--light);border-radius:12px;padding:1.1rem 1rem;border-top:2px solid var(--green);transition:transform .3s,box-shadow .3s}
+.work-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.work-year{font-size:.67rem;color:var(--gold);font-weight:600;letter-spacing:.1em;margin-bottom:.3rem}
+.work-title{font-family:'Playfair Display',serif;font-size:.97rem;color:var(--dark);line-height:1.3}
+
+/* FULL WIDTH SECTIONS */
+.full-width-section{margin-top:3rem}
+.full-width-section .article-section-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:.7rem}
+.full-width-section .article-section-label::before{content:'';width:20px;height:2px;background:var(--gold);flex-shrink:0}
+.full-width-section h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--dark);margin-bottom:1.2rem;line-height:1.2}
+.full-width-section p{font-size:.97rem;color:var(--gray);line-height:1.9;margin-bottom:1rem}
+
+/* LEGACY BANNER */
+.legacy-banner{background:var(--green);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden}
+.legacy-banner::before{content:'"';position:absolute;right:-1rem;bottom:-3rem;font-family:'Playfair Display',serif;font-size:14rem;color:rgba(255,255,255,.06);line-height:1}
+.legacy-banner h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:.7rem;font-style:italic}
+.legacy-banner p{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.75;max-width:800px}
+.legacy-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--dark);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.38rem .9rem;border-radius:50px;margin-bottom:1rem}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .8s,transform .8s}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+@media(max-width:1024px){
+  .content-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text span{display:none}
+  .content-wrap{padding:3rem 5vw}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .page-hero h1{font-size:clamp(2.2rem,8vw,3rem)}
+  .works-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="patron.html">Патрон</a>
+      <a href="hymn.html">Химн</a>
+      <a href="history.html">История</a>
+      <a href="ekip.html">Екип</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="priem-1-klas.html">Прием</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <span>/</span>
+    <a href="#">ЗА НАС</a>
+    <span>/</span>
+    <span style="color:var(--gold)">ПАТРОН</span>
+  </div>
+  <div class="page-hero-label">За нас · Патрон</div>
+  <h1>Йордан Йовков</h1>
+  <p class="page-hero-sub">Майстор на късия разказ, певец на красотата и хуманизма, класик на българската литература — нашият вдъхновяващ патрон.</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+  <div class="content-grid">
+
+    <!-- LEFT: MAIN -->
+    <main>
+
+      <div class="article-section reveal">
+        <div class="article-section-label">Животът му</div>
+        <h2>Биография</h2>
+        <p>Йордан Стефанов Йовков е роден на <strong>9 ноември 1880 г.</strong> в старопланинското село Жеравна, Сливенско — земя, изпълнена с романтични предания и народни легенди, които завинаги ще оцветят неговото творчество. Петото дете в семейството на Стефан Йовков и Пена Бойчова, той прекарва детството и юношеството си в родното место, впивайки красотата на планинската природа и звука на народните песни.</p>
+        <p>Основното си образование получава в Жеравна и Котел. През <strong>1900 г.</strong> завършва гимназия в София. Учителят му по литература — поетът Иван Грозев — прочита домашна работа на младия Йордан и пред целия клас предсказва: <em>„Вие имате в класа си бъдещ писател, надарен с тънка и дълбока наблюдателност."</em></p>
+
+        <div class="pull-quote">
+          <p>„Във всяка моя работа мисълта ми е там — там е моят пейзаж, там са героите ми — битът, работата и съдбата им."</p>
+          <cite>— Йордан Йовков, за Добруджа</cite>
+        </div>
+
+        <p>След дипломирането си семейството му се премества в Добруджа, където Йовков учителства в различни села. Тази земя и нейните хора стават неизчерпаем извор на творческо вдъхновение. Записва се в Юридическия факултет на Софийския университет, но смъртта на баща му прекъсва следването.</p>
+        <p>През <strong>1912 г.</strong> е мобилизиран и участва като командир на рота в Балканската война. Сражава се при Одрин и Чаталджа. На следващата година е ранен при Дойран — собствените му войници го носят четири километра на ръце, за да го спасят от плен. Награден е с орден за храброст. Участва и в Първата световна война. Военното преживяване ражда <em>йовковския хуманизъм</em> — болката по човека, унищожаван безмилостно, и копнежът по красотата дори сред ужаса.</p>
+      </div>
+
+    </main>
+
+    <!-- RIGHT: SIDEBAR — static -->
+    <aside class="sidebar">
+
+      <div class="portrait-card">
+        <div class="portrait-img">
+          <img src="images/yordan-yovkov-portret.jpg" alt="Йордан Йовков — портрет">
+        </div>
+        <div class="portrait-meta">
+          <div class="portrait-name">Йордан Йовков</div>
+          <div class="portrait-dates">9 ноември 1880 — 15 октомври 1937</div>
+          <div class="portrait-tags">
+            <span class="portrait-tag">Писател</span>
+            <span class="portrait-tag">Хуманист</span>
+            <span class="portrait-tag">Класик</span>
+            <span class="portrait-tag">Воин</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-facts">
+        <h4>Бързи факти</h4>
+        <div class="fact-row">
+          <span class="fact-label">Роден</span>
+          <span class="fact-value">9 ноем. 1880, Жеравна</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Починал</span>
+          <span class="fact-value">15 окт. 1937, Пловдив</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Жанр</span>
+          <span class="fact-value">Разкази, повести, драми</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Езици</span>
+          <span class="fact-value">~40 езика</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Книги</span>
+          <span class="fact-value">70+ превода</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Известен с</span>
+          <span class="fact-value">Антимовски хан, Стар. легенди</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Военно звание</span>
+          <span class="fact-value">Поручик, орден за храброст</span>
+        </div>
+      </div>
+
+      <div class="quote-card">
+        <div class="quote-card-label">Цитат</div>
+        <p>„Винаги съм наклонен да вярвам на хората, да виждам и да търся у тях преди всичко доброто."</p>
+        <cite>— Йордан Йовков</cite>
+      </div>
+
+      <a href="himn.html" class="hymn-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <div>
+          <div class="hymn-link-label">Вижте също</div>
+          <div class="hymn-link-title">Химн на училището</div>
+        </div>
+      </a>
+
+    </aside>
+  </div>
+
+  <!-- ЛИТЕРАТУРНО НАСЛЕДСТВО — пълна ширина -->
+  <div class="full-width-section reveal" style="margin-top:3rem">
+    <div class="article-section-label">Творчеството му</div>
+    <h2>Литературно наследство</h2>
+    <p>Йордан Йовков е класик на <strong>краткия разказ</strong> — автор на осем цикъла разкази, повести, романи и три драми. В разказите си той тръгва от сивата действителност и постепенно я превръща в легендарна реалност, пренасяйки читателя в един по-красив и хармоничен свят. Устоите на доброто, красотата и човешката достойнство са централни за неговото изкуство.</p>
+    <p>Войните преобразяват неговия мироглед: от елегичния лирик израства мащабният хуманист, чиято болка за унищожавания човек прониква всичко написано от него след 1912 г. Неговият разказ <em>„Грехът на Иван Белин"</em> е включен в Световната антология на краткия разказ, съставена от Томас Ман.</p>
+    <p>Творбите му са преведени на <strong>близо 40 езика</strong>, сред които арабски, виетнамски, китайски, персийски, японски, хинди и шведски — свидетелство за универсалността на неговите послания.</p>
+
+    <div class="works-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="work-card">
+        <div class="work-year">1917 – 1918</div>
+        <div class="work-title">Разкази (I и II том)</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1920</div>
+        <div class="work-title">Жетварят</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1926</div>
+        <div class="work-title">Последна радост</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1927</div>
+        <div class="work-title">Старопланински легенди</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1928</div>
+        <div class="work-title">Вечери в Антимовския хан</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1935</div>
+        <div class="work-title">Женско сърце</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">1936</div>
+        <div class="work-title">Ако можеха да говорят</div>
+      </div>
+      <div class="work-card">
+        <div class="work-year">Драми</div>
+        <div class="work-title">Албена · Боряна · Обикновен човек</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGACY BANNER — пълна ширина под грида -->
+  <div class="legacy-banner reveal full-width-section">
+    <div class="legacy-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Защо той е наш патрон
+    </div>
+    <h3>„Йовков ни учи да търсим красотата навсякъде"</h3>
+    <p>Йордан Йовков е роден в Жеравна — на крачка от Сливен. Неговите ценности — хуманизъм, красота, отговорност и любов към родното — са в основата на мисията на нашето училище. Изграждаме ученици, вдъхновени от същата вяра: че добротата и знанието могат да преобразят света.</p>
+  </div>
+
+  <!-- ПАМЕТ — пълна ширина -->
+  <div class="full-width-section reveal" style="margin-top:3rem">
+    <div class="article-section-label">Паметта</div>
+    <h2>Памет и признание</h2>
+    <p>Дом-паметникът на Йордан Йовков в Добрич е открит през <strong>1980 г.</strong> по повод стогодишнината от рождението му и е включен в <em>Стоте национални туристически обекта</em> под номер 23. Той е единственият по рода си музей в България, посветен изцяло на живота и творчеството му.</p>
+    <p>Образът на бялата лястовица — символ на надеждата, прелитащ в разказите му — се е превърнал в емблема на цялото му творческо наследство.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+const revealEls=document.querySelectorAll('.reveal,.reveal-right');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.1});
+revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

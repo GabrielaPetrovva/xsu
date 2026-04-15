@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Национално отличие за ученици от СУ „Йордан Йовков" | СУ „Йордан Йовков"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+    <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { scrollbar-width: thin; scrollbar-color: #8fcfb8 #eaf4ef; }
+    *::-webkit-scrollbar { width: 10px; }
+    *::-webkit-scrollbar-track { background: #eaf4ef; border-radius: 10px; }
+    *::-webkit-scrollbar-thumb { background: #8fcfb8; border-radius: 10px; border: 2px solid #eaf4ef; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', sans-serif; color: var(--dark); background: #fff; padding-top: var(--nav-h); }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+ 
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar { background: var(--light); border-bottom: 1px solid #dceee5; padding: .65rem 8vw; }
+    .breadcrumb { display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--gray); }
+    .breadcrumb a:hover { color: var(--green); }
+    .breadcrumb .sep { opacity: .4; }
+    .breadcrumb .cur { color: var(--green); font-weight: 600; }
+ 
+    /* ── LAYOUT ── */
+    .layout { display: grid; grid-template-columns: 1fr minmax(260px, 300px); gap: 2.5rem; padding: 2.5rem 8vw 5rem; max-width: 1300px; margin: 0 auto; }
+ 
+    /* ── ARTICLE ── */
+    .article-hero { position: relative; border-radius: 18px; overflow: hidden; margin-bottom: 2rem; }
+    .article-hero img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .article-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,50,36,.75) 0%, transparent 55%); }
+    .article-hero-meta { position: absolute; bottom: 1.5rem; left: 1.8rem; right: 1.8rem; display: flex; align-items: center; gap: .7rem; }
+    .tag { display: inline-flex; align-items: center; background: var(--green); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .06em; padding: .3rem .75rem; border-radius: 20px; text-transform: uppercase; }
+    .tag.gold { background: var(--gold); }
+    .tag.outline { background: transparent; border: 1.5px solid rgba(255,255,255,.6); color: #fff; }
+    .hero-date { font-size: .8rem; color: rgba(255,255,255,.8); }
+ 
+    .article-header { margin-bottom: 1.5rem; }
+    .article-title { font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 800; line-height: 1.25; color: var(--dark); margin-bottom: 1rem; }
+    .article-byline { display: flex; align-items: center; gap: 1.2rem; padding-bottom: 1.2rem; border-bottom: 2px solid var(--green-light); flex-wrap: wrap; }
+    .byline-author { display: flex; align-items: center; gap: .5rem; }
+    .author-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; color: var(--green); flex-shrink: 0; }
+    .author-name { font-size: .88rem; font-weight: 600; color: var(--dark); }
+    .author-role { font-size: .75rem; color: var(--gray); }
+    .byline-sep { width: 1px; height: 30px; background: #ddd; }
+    .byline-stat { text-align: center; }
+    .byline-stat strong { display: block; font-size: .95rem; font-weight: 700; color: var(--dark); }
+    .byline-stat span { font-size: .72rem; color: var(--gray); }
+ 
+    /* ── ARTICLE BODY ── */
+    .article-body { font-size: .97rem; line-height: 1.85; color: #334; }
+    .article-body p { margin-bottom: 1.2rem; }
+    .article-body h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin: 2rem 0 .8rem; padding-left: 1rem; border-left: 4px solid var(--green); }
+    .article-body h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin: 1.5rem 0 .6rem; }
+    .article-body ul { margin: .8rem 0 1.2rem 1.5rem; }
+    .article-body ul li { margin-bottom: .4rem; }
+    .article-body strong { color: var(--dark); font-weight: 700; }
+ 
+    .lead-paragraph { font-size: 1.08rem; font-weight: 500; color: var(--dark); line-height: 1.8; padding: 1.2rem 1.4rem; background: var(--green-light); border-radius: 12px; border-left: 4px solid var(--green); margin-bottom: 1.5rem; }
+ 
+    /* ── INFO BOX ── */
+    .info-box { background: #fffbec; border: 1.5px solid #f2e7a1; border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.5rem 0; }
+    .info-box-title { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .95rem; color: #7a6000; margin-bottom: .7rem; }
+    .info-box-title svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+    .info-box p { font-size: .88rem; color: #5a4800; margin: 0; line-height: 1.7; }
+ 
+    /* ── DEADLINES TABLE ── */
+    .deadlines-table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: .88rem; border-radius: 12px; overflow: hidden; border: 1px solid #dceee5; }
+    .deadlines-table thead tr { background: var(--green); color: #fff; }
+    .deadlines-table th { padding: .7rem 1rem; text-align: left; font-weight: 600; font-size: .82rem; letter-spacing: .04em; }
+    .deadlines-table td { padding: .65rem 1rem; border-bottom: 1px solid #eaf4ef; vertical-align: top; }
+    .deadlines-table tr:last-child td { border-bottom: none; }
+    .deadlines-table tr:nth-child(even) { background: var(--green-light); }
+    .deadlines-table .highlight { font-weight: 700; color: var(--green); }
+ 
+    /* ── GALLERY ── */
+    .article-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.8rem 0; }
+    .gallery-item { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; background: var(--green-light); cursor: zoom-in; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item::after { content: '⤢'; position: absolute; bottom: 6px; right: 8px; font-size: 14px; color: #fff; opacity: 0; transition: opacity .2s; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+    .gallery-item:hover::after { opacity: 1; }
+    .gallery-caption { grid-column: 1/-1; font-size: .78rem; color: var(--gray); text-align: center; font-style: italic; margin-top: -.25rem; }
+ 
+    /* ── LIGHTBOX ── */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.92); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; }
+    .lightbox-inner img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 48px rgba(0,0,0,.6); display: block; }
+    .lightbox-close { position: fixed; top: 1.2rem; right: 1.4rem; background: rgba(255,255,255,.15); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .lightbox-close:hover { background: rgba(255,255,255,.3); }
+    .lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.15); border: none; color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,.3); }
+    .lightbox-prev { left: 1.2rem; }
+    .lightbox-next { right: 1.2rem; }
+    .lightbox-counter { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .82rem; font-family: 'Manrope', sans-serif; }
+ 
+    /* ── SHARE ── */
+    .share-bar { display: flex; align-items: center; gap: .7rem; padding: 1.1rem 1.3rem; background: var(--light); border-radius: 12px; margin: 2rem 0 1.5rem; flex-wrap: wrap; }
+    .share-label { font-size: .82rem; font-weight: 600; color: var(--gray); margin-right: .3rem; }
+    .share-btn { display: inline-flex; align-items: center; gap: 5px; padding: .4rem .9rem; border-radius: 20px; font-size: .78rem; font-weight: 600; transition: opacity .2s; }
+    .share-btn:hover { opacity: .85; }
+    .share-fb { background: #1877f2; color: #fff; }
+    .share-tw { background: #000; color: #fff; }
+    .share-copy { background: var(--green); color: #fff; margin-left: auto; }
+    .share-copy svg, .share-btn svg { width: 13px; height: 13px; }
+ 
+    /* ── TAGS ── */
+    .article-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+    .article-tags .tag-pill { padding: .3rem .85rem; border-radius: 20px; border: 1.5px solid var(--green-light); font-size: .78rem; color: var(--gray); transition: background .2s, color .2s, border-color .2s; }
+    .article-tags .tag-pill:hover { background: var(--green-light); color: var(--green); border-color: var(--green); }
+ 
+    /* ── PREV / NEXT ── */
+    .article-pagination { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #dceee5; }
+    .art-nav-item { display: block; padding: .9rem 1.1rem; border: 1.5px solid #dceee5; border-radius: 12px; transition: border-color .2s, background .2s; }
+    .art-nav-item:hover { border-color: var(--green); background: var(--green-light); }
+    .art-nav-item.next { text-align: right; }
+    .art-nav-hint { font-size: .72rem; color: var(--gray); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem; display: block; }
+    .art-nav-title { font-size: .9rem; font-weight: 700; color: var(--dark); display: block; }
+ 
+    /* ── RELATED (bottom) ── */
+    .related-section { margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--green-light); }
+    .section-heading { font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .6rem; }
+    .section-heading::after { content: ''; flex: 1; height: 1px; background: var(--green-light); }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .related-card { border: 1px solid #e8efeb; border-radius: 12px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .related-card-img { height: 120px; background: var(--green-light); }
+    .related-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .related-card-body { padding: .8rem; }
+    .related-card-body .tag { font-size: .65rem; margin-bottom: .4rem; }
+    .related-card-title { font-size: .88rem; font-weight: 700; color: var(--dark); line-height: 1.4; }
+ 
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 1.2rem; }
+    .sidebar-card { background: #fff; border: 1px solid #e8efeb; border-radius: 14px; padding: 1.1rem; box-shadow: 0 3px 16px rgba(0,0,0,.05); }
+    .sidebar-card-title { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: .9rem; padding-bottom: .6rem; border-bottom: 1px solid var(--green-light); }
+    .meta-list { display: flex; flex-direction: column; gap: .6rem; }
+    .meta-row { display: flex; justify-content: space-between; align-items: center; font-size: .83rem; }
+    .meta-label { color: var(--gray); }
+    .meta-value { font-weight: 600; color: var(--dark); }
+    .meta-value.green { color: var(--green); }
+    .back-btn { display: flex; align-items: center; justify-content: center; gap: .5rem; background: var(--green-light); color: var(--green); font-weight: 700; font-size: .82rem; padding: .7rem; border-radius: 8px; margin-top: .9rem; transition: background .2s; }
+    .back-btn:hover { background: #c8eddf; }
+    .back-btn svg { width: 14px; height: 14px; }
+ 
+    .latest-list { display: flex; flex-direction: column; gap: .7rem; }
+    .latest-item { display: flex; gap: .7rem; align-items: flex-start; padding: .55rem; border-radius: 8px; transition: background .2s; }
+    .latest-item:hover { background: var(--light); }
+    .latest-thumb { width: 50px; height: 50px; border-radius: 7px; background: var(--green-light); flex-shrink: 0; overflow: hidden; }
+    .latest-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .latest-info .t { display: block; font-size: .83rem; font-weight: 700; color: var(--dark); line-height: 1.35; margin-bottom: .2rem; }
+    .latest-info .d { font-size: .72rem; color: var(--gray); }
+ 
+    .cat-list { display: flex; flex-direction: column; gap: .4rem; }
+    .cat-item { display: flex; justify-content: space-between; align-items: center; padding: .5rem .65rem; border-radius: 7px; font-size: .83rem; color: var(--gray); background: var(--light); transition: background .2s, color .2s; }
+    .cat-item:hover { background: var(--green-light); color: var(--green); }
+    .cat-count { background: #fff; color: var(--green); font-size: .7rem; font-weight: 700; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--green-light); }
+ 
+    /* ── PRINT BUTTON ── */
+    .print-btn { display: flex; align-items: center; gap: .4rem; background: none; border: 1.5px solid #ddd; color: var(--gray); padding: .4rem .8rem; border-radius: 20px; font-size: .78rem; font-weight: 600; cursor: pointer; transition: border-color .2s, color .2s; width: 100%; justify-content: center; margin-top: .5rem; }
+    .print-btn:hover { border-color: var(--green); color: var(--green); }
+    .print-btn svg { width: 14px; height: 14px; }
+ 
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .article-gallery { grid-template-columns: repeat(2, 1fr); }
+      .related-grid { grid-template-columns: 1fr; }
+      .article-nav { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+</style>
+</head>
+<body>
+ 
+  <!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb" aria-label="Навигация">
+      <a href="index.html">НАЧАЛО</a>
+      <span class="sep">›</span>
+      <a href="news.html">НОВИНИ</a>
+      <span class="sep">›</span>
+      <span class="cur">Национално отличие за ученици от СУ „Йордан Йовков"</span>
+    </div>
+  </div>
+ 
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
+    <main>
+ 
+      <!-- HERO IMAGE -->
+      <div class="article-hero">
+        <img src="images/concurs.jpg" alt="Кампания за прием в I клас">
+        <div class="article-hero-overlay"></div>
+        <div class="article-hero-meta">
+          <span class="tag">Постижения</span>
+          <span class="tag gold">Национален конкурс</span>
+          <span class="hero-date">27 Февруари 2026</span>
+        </div>
+      </div>
+ 
+      <!-- HEADER -->
+      <div class="article-header">
+        <h1 class="article-title">Национално отличие за ученици от СУ „Йордан Йовков" – Сливен</h1>
+        <div class="article-byline">
+          <div class="byline-author">
+            <div class="author-avatar">АИ</div>
+            <div>
+              <div class="author-name">Администрация</div>
+              <div class="author-role">СУ „Йордан Йовков"</div>
+            </div>
+          </div>
+          <div class="byline-sep"></div>
+          <div class="byline-stat">
+            <strong>27 Фев 2026</strong>
+            <span>Публикувано</span>
+          </div>
+          <div class="byline-sep"></div>
+          <div class="byline-stat">
+            <strong>16:47</strong>
+            <span>Час</span>
+          </div>
+          <div class="byline-sep"></div>
+          <div class="byline-stat">
+            <strong>~2 мин</strong>
+            <span>Четене</span>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- BODY -->
+      <div class="article-body">
+ 
+        <p class="lead-paragraph">
+          <strong>Даниел Константинов</strong> и <strong>Венцислав Колев</strong> от СУ „Йордан Йовков" – Сливен завоюваха <strong>второ място</strong> в националния конкурс „Аз и изкуственият интелект след 10 години", организиран по повод 20-годишнината на образователна институция „ДАРБИ" – „DARBI COLLEGE INTERNATIONAL SCHOOL".
+        </p>
+ 
+        <p>
+          Сред над <strong>150 участници от страната</strong> те се откроиха със задълбочено мислене, аргументирана позиция и зряло осмисляне на ролята на изкуствения интелект в съвременното общество.
+        </p>
+ 
+        <p>
+          Постижението е резултат от устойчива образователна среда, която развива критическо мислене, технологична култура и отговорност към бъдещето.
+        </p>
+ 
+        <div class="info-box">
+          <div class="info-box-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            Нова специалност
+          </div>
+          <p>В тази посока училището разширява професионалната си подготовка със специалност <strong>„Интелигентни системи"</strong> – естествено продължение на обучението по програмиране и стратегическа стъпка към професиите на дигиталната ера.</p>
+        </div>
+ 
+        <p>
+          Успехът на нашите ученици е доказателство, че когато знанието се съчетае с визия и целеустременост, бъдещето започва още днес.
+        </p>
+ 
+        <div class="article-gallery">
+          <div class="gallery-item" onclick="openLightbox(0)"><img src="images/article-img-1.jpg" alt="Национален конкурс"></div>
+          <div class="gallery-item" onclick="openLightbox(1)"><img src="images/article-img-2.jpg" alt="Ученици"></div>
+          <div class="gallery-item" onclick="openLightbox(2)"><img src="images/article-img-3.jpg" alt="Отличие"></div>
+          <div class="gallery-caption">Национален конкурс „Аз и изкуственият интелект след 10 години" – DARBI College</div>
+        </div>
+ 
+        <!-- LIGHTBOX -->
+        <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+          <div class="lightbox-inner">
+            <img id="lightbox-img" src="" alt="">
+          </div>
+          <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+          <button class="lightbox-prev" onclick="shiftLightbox(-1)">&#8592;</button>
+          <button class="lightbox-next" onclick="shiftLightbox(1)">&#8594;</button>
+          <div class="lightbox-counter" id="lightbox-counter"></div>
+        </div>
+ 
+      </div>
+ 
+      <!-- SHARE -->
+      <div class="share-bar">
+        <span class="share-label">Сподели:</span>
+        <a href="#" class="share-btn share-fb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="#" class="share-btn share-tw">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4l16 16M4 20 20 4"/></svg>
+          X / Twitter
+        </a>
+        <button class="share-btn share-copy" onclick="copyLink()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Копирай връзка
+        </button>
+      </div>
+ 
+      <!-- TAGS -->
+      <div class="article-tags">
+        <a href="#" class="tag-pill">постижения</a>
+        <a href="#" class="tag-pill">изкуствен интелект</a>
+        <a href="#" class="tag-pill">конкурс</a>
+        <a href="#" class="tag-pill">DARBI College</a>
+        <a href="#" class="tag-pill">интелигентни системи</a>
+        <a href="#" class="tag-pill">национален</a>
+      </div>
+ 
+      <!-- PREV / NEXT NAV -->
+      <div class="article-pagination" aria-label="Следваща/предишна статия">
+        <a href="#" class="art-nav-item prev">
+          <span class="art-nav-hint">← Предишна статия</span>
+          <span class="art-nav-title">Ден на отворените врати</span>
+        </a>
+        <a href="#" class="art-nav-item next">
+          <span class="art-nav-hint">Следваща статия →</span>
+          <span class="art-nav-title">Отлично представяне на областен кръг</span>
+        </a>
+      </div>
+ 
+      <!-- RELATED -->
+      <section class="related-section">
+        <h2 class="section-heading">Свързани статии</h2>
+        <div class="related-grid">
+          <a href="#" class="related-card">
+            <div class="related-card-img"><img src="images/3-mart.jpg" alt="Олимпиади"></div>
+            <div class="related-card-body">
+              <span class="tag" style="background:var(--green-light);color:var(--green);font-size:.65rem;">Олимпиади</span>
+              <div class="related-card-title">Отлично представяне на областен кръг по математика</div>
+            </div>
+          </a>
+          <a href="#" class="related-card">
+            <div class="related-card-img"><img src="images/levski.jpg" alt="Постижения"></div>
+            <div class="related-card-body">
+              <span class="tag" style="background:var(--green-light);color:var(--green);font-size:.65rem;">Постижения</span>
+              <div class="related-card-title">Награда за иновативен проект по информатика</div>
+            </div>
+          </a>
+          <a href="#" class="related-card">
+            <div class="related-card-img"><img src="images/concurs.jpg" alt="Събития"></div>
+            <div class="related-card-body">
+              <span class="tag" style="background:var(--green-light);color:var(--green);font-size:.65rem;">Събития</span>
+              <div class="related-card-title">Ден на отворените врати – посрещаме бъдещи ученици</div>
+            </div>
+          </a>
+        </div>
+      </section>
+ 
+    </main>
+ 
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+ 
+      <!-- META CARD -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Информация за статията</div>
+        <div class="meta-list">
+          <div class="meta-row"><span class="meta-label">Дата</span><span class="meta-value">27 Февруари 2026</span></div>
+          <div class="meta-row"><span class="meta-label">Час</span><span class="meta-value">16:47</span></div>
+          <div class="meta-row"><span class="meta-label">Категория</span><span class="meta-value green">Постижения</span></div>
+          <div class="meta-row"><span class="meta-label">Автор</span><span class="meta-value">Администрация</span></div>
+        </div>
+        <a href="novini.html" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Към всички новини
+        </a>
+      </div>
+ 
+      <!-- LATEST NEWS -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Последни новини</div>
+        <div class="latest-list">
+          <a href="#" class="latest-item">
+            <div class="latest-thumb"><img src="images/concurs.jpg" alt=""></div>
+            <div class="latest-info">
+              <span class="t">Начало на кампанията за прием</span>
+              <span class="d">Днес</span>
+            </div>
+          </a>
+          <a href="#" class="latest-item">
+            <div class="latest-thumb"><img src="images/3-mart.jpg" alt=""></div>
+            <div class="latest-info">
+              <span class="t">Отлично представяне на областен кръг</span>
+              <span class="d">Вчера</span>
+            </div>
+          </a>
+          <a href="#" class="latest-item">
+            <div class="latest-thumb"><img src="images/levski.jpg" alt=""></div>
+            <div class="latest-info">
+              <span class="t">Награда за иновативен проект</span>
+              <span class="d">Преди 3 дни</span>
+            </div>
+          </a>
+        </div>
+      </div>
+ 
+      <!-- CATEGORIES -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Категории</div>
+        <div class="cat-list">
+          <a href="#" class="cat-item">Новини <span class="cat-count">18</span></a>
+          <a href="#" class="cat-item">Олимпиади <span class="cat-count">12</span></a>
+          <a href="#" class="cat-item">Постижения <span class="cat-count">9</span></a>
+          <a href="#" class="cat-item">Съобщения <span class="cat-count">24</span></a>
+          <a href="#" class="cat-item">Твоят час <span class="cat-count">6</span></a>
+          <a href="#" class="cat-item">Събития <span class="cat-count">15</span></a>
+        </div>
+      </div>
+ 
+    </aside>
+  </div>
+ 
+  <!-- FOOTER -->
+  <footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+ 
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+ 
+    // ── LIGHTBOX ──
+    const galleryImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => ({ src: i.src, alt: i.alt }));
+    let currentIdx = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCounter = document.getElementById('lightbox-counter');
+ 
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = galleryImgs[idx].src;
+      lbImg.alt = galleryImgs[idx].alt;
+      lbCounter.textContent = (idx + 1) + ' / ' + galleryImgs.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxOutside(e) { if (e.target === lb) closeLightbox(); }
+    function shiftLightbox(dir) {
+      currentIdx = (currentIdx + dir + galleryImgs.length) % galleryImgs.length;
+      lbImg.src = galleryImgs[currentIdx].src;
+      lbImg.alt = galleryImgs[currentIdx].alt;
+      lbCounter.textContent = (currentIdx + 1) + ' / ' + galleryImgs.length;
+    }
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') shiftLightbox(1);
+      if (e.key === 'ArrowLeft') shiftLightbox(-1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.querySelector('.share-copy');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg> Копирано!';
+        setTimeout(() => btn.innerHTML = original, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

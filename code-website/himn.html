@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Химн | СУ „Йордан Йовков" – Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50; --green-dark: #0F5438; --green-light: #e1f5ee;
+  --gold: #C9A84C; --dark: #1a2e24; --gray: #555; --light: #f0f7f3;
+  --white: #ffffff; --footer-bg: #0b3224; --nav-h: 72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+
+/* PAGE HERO */
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:4rem 8vw 3rem;position:relative;overflow:hidden;text-align:center}
+.page-hero::before{content:'♪';position:absolute;left:4vw;top:50%;transform:translateY(-50%);font-size:18rem;color:rgba(255,255,255,.04);line-height:1;pointer-events:none}
+.page-hero::after{content:'♫';position:absolute;right:4vw;top:50%;transform:translateY(-50%);font-size:18rem;color:rgba(255,255,255,.04);line-height:1;pointer-events:none}
+.page-hero-deco{position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;justify-content:center}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
+.page-hero-label{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.1;margin-bottom:.8rem}
+.page-hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:480px;line-height:1.7;font-weight:300;margin:0 auto}
+
+/* MAIN LAYOUT */
+.hymn-wrap{max-width:1100px;margin:0 auto;padding:4rem 8vw}
+.hymn-grid{display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:start}
+
+/* SIDEBAR */
+.hymn-sidebar{}
+
+/* CREATORS CARD */
+.creators-card{background:var(--green-dark);border-radius:20px;overflow:hidden;margin-bottom:1.5rem}
+.creators-card-header{padding:1.5rem 1.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.creators-card-header-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.creators-card-header h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff}
+.creator-entry{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.8rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.creator-entry:last-child{border-bottom:none}
+.creator-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.creator-icon.text-icon{background:rgba(201,168,76,.2);border:1.5px solid rgba(201,168,76,.4)}
+.creator-icon.music-icon{background:rgba(29,122,80,.4);border:1.5px solid rgba(29,122,80,.7)}
+.creator-icon svg{width:18px;height:18px}
+.creator-role{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.2rem}
+.creator-name{font-size:1rem;font-weight:600;color:#fff}
+.creator-note{font-size:.73rem;color:rgba(255,255,255,.45);margin-top:.1rem;line-height:1.4}
+
+/* AUDIO PLAYER */
+.audio-player{background:linear-gradient(135deg,#0d3322,#1a5438);border-radius:18px;padding:1.8rem;border:1px solid rgba(201,168,76,.2);margin-bottom:1.5rem}
+.audio-label{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem}
+.audio-title{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.audio-subtitle{font-size:.73rem;color:rgba(255,255,255,.45);margin-bottom:1.3rem}
+.audio-controls{display:flex;flex-direction:column;gap:.9rem}
+.audio-main-btn{width:50px;height:50px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s;flex-shrink:0;box-shadow:0 4px 16px rgba(201,168,76,.35)}
+.audio-main-btn:hover{transform:scale(1.08)}
+.audio-main-btn svg{width:20px;height:20px;fill:var(--dark)}
+.audio-main-btn.playing .play-icon{display:none}
+.audio-main-btn.playing .pause-icon{display:block}
+.audio-main-btn .pause-icon{display:none}
+.audio-top-row{display:flex;align-items:center;gap:.9rem}
+.audio-time-info{color:rgba(255,255,255,.5);font-size:.75rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.audio-progress-wrap{cursor:pointer;padding:4px 0;flex:1}
+.audio-progress-track{height:4px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.audio-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#e8c55a);border-radius:4px;width:0%;transition:width .1s linear}
+.audio-volume-row{display:flex;align-items:center;gap:.6rem}
+.audio-volume-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);padding:2px;display:flex;align-items:center;transition:color .2s}
+.audio-volume-btn:hover{color:var(--gold)}
+.audio-volume-btn svg{width:15px;height:15px}
+.audio-volume-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;border-radius:3px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
+.audio-volume-slider::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--gold);cursor:pointer}
+.audio-no-file{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.15);border-radius:10px;padding:1rem;text-align:center;margin-top:.8rem}
+.audio-no-file p{font-size:.75rem;color:rgba(255,255,255,.35);line-height:1.6}
+.audio-no-file strong{color:rgba(255,255,255,.55)}
+.audio-upload-btn{display:inline-flex;align-items:center;gap:5px;margin-top:.7rem;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:.4rem .9rem;font-size:.7rem;font-weight:600;cursor:pointer;transition:background .2s}
+.audio-upload-btn:hover{background:rgba(201,168,76,.25)}
+.audio-upload-btn svg{width:12px;height:12px}
+
+/* Sidebar info box */
+.sidebar-info{background:var(--light);border-radius:14px;padding:1.3rem;margin-bottom:1.5rem}
+.sidebar-info-label{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid rgba(29,122,80,.12)}
+.sidebar-info p{font-size:.83rem;color:var(--gray);line-height:1.75}
+.sidebar-info p+p{margin-top:.5rem}
+
+/* Patron link */
+.patron-link{display:flex;align-items:center;gap:.9rem;background:var(--light);border-radius:13px;padding:1.1rem 1.3rem;transition:box-shadow .3s}
+.patron-link:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.patron-link-icon{width:40px;height:40px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.patron-link-icon svg{width:16px;height:16px;color:#fff}
+.patron-link-role{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:2px}
+.patron-link-name{font-size:.92rem;font-weight:700;color:var(--dark)}
+
+/* LYRICS SECTION */
+.lyrics-header{margin-bottom:2.5rem}
+.lyrics-header-label{font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:.7rem}
+.lyrics-header-label::before{content:'';width:22px;height:2px;background:var(--gold);flex-shrink:0}
+.lyrics-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--dark);line-height:1.1;margin-bottom:.4rem}
+.lyrics-header p{font-size:.88rem;color:var(--gray);line-height:1.65}
+
+/* STANZA */
+.stanza{margin-bottom:1.8rem}
+.stanza-type{display:inline-flex;align-items:center;gap:6px;font-size:.63rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.28rem .85rem;border-radius:50px;margin-bottom:.7rem}
+.stanza-type.refren{background:rgba(201,168,76,.15);color:#a07820;border:1px solid rgba(201,168,76,.3)}
+.stanza-type.kuplet{background:var(--green-light);color:var(--green);border:1px solid rgba(29,122,80,.2)}
+.stanza-type svg{width:11px;height:11px}
+.stanza-lines{background:#fff;border-radius:14px;padding:1.5rem 1.8rem;border-left:3px solid transparent;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.stanza.refren-stanza .stanza-lines{border-left-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,.04),#fff)}
+.stanza.kuplet-stanza .stanza-lines{border-left-color:var(--green)}
+.line{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);line-height:1.85;font-style:italic}
+.repeat-badge{display:inline-flex;align-items:center;gap:5px;margin-top:.6rem;font-size:.63rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);background:rgba(0,0,0,.04);padding:.22rem .65rem;border-radius:50px}
+.repeat-badge svg{width:10px;height:10px}
+
+/* ORDER DIVIDER — показва реда на изпълнение */
+.order-divider{display:flex;align-items:center;gap:.9rem;margin:1.4rem 0}
+.order-divider-line{flex:1;height:1px;background:rgba(0,0,0,.08)}
+.order-divider-badge{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.32rem 1rem;border-radius:50px}
+.order-divider-badge.goto-refren{background:rgba(201,168,76,.13);color:#8a6610;border:1px solid rgba(201,168,76,.35)}
+.order-divider-badge.goto-kuplet{background:var(--green-light);color:var(--green-dark);border:1px solid rgba(29,122,80,.25)}
+.order-divider-badge svg{width:11px;height:11px;flex-shrink:0}
+
+/* BUTTONS */
+.download-row{display:flex;align-items:center;gap:1rem;margin-top:2.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.btn-green{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.8rem 1.8rem;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:50px;border:none;cursor:pointer;transition:background .3s}
+.btn-green:hover{background:var(--green-dark)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--green);padding:.8rem 1.8rem;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;transition:background .3s,color .3s;cursor:pointer}
+.btn-outline:hover{background:var(--green);color:#fff}
+
+/* PRINT */
+@media print {
+  nav, .mobile-menu, .page-hero, .hymn-sidebar,
+  .creators-card, .sidebar-info, .patron-link, .download-row, footer { display: none !important; }
+  body { background: #fff; color: #000; font-family: Georgia, serif; }
+  .hymn-wrap { padding: 1rem 2rem; max-width: 100%; }
+  .hymn-grid { display: block; }
+  .reveal, .reveal-right { opacity: 1 !important; transform: none !important; }
+  .lyrics-header { margin-bottom: 1.5rem; }
+  .lyrics-header h2 { font-size: 1.8rem; color: #000; }
+  .lyrics-header p { color: #444; }
+  .lyrics-header-label { color: #555; }
+  .stanza { margin-bottom: 1.2rem; page-break-inside: avoid; }
+  .stanza-type { border: 1px solid #ccc; color: #333 !important; background: #f5f5f5 !important; }
+  .stanza-lines { box-shadow: none; border: 1px solid #ddd; background: #fff !important; }
+  .line { color: #000; font-size: 1rem; }
+  .repeat-badge { background: #eee; color: #555; border: none; }
+  .order-divider { display: flex !important; }
+  .order-divider-line { background: #ccc; }
+  .order-divider-badge { background: #f0f0f0 !important; color: #333 !important; border: 1px solid #ccc !important; }
+  .order-divider-badge svg { display: none; }
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .8s,transform .8s}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+@media(max-width:1024px){
+  .hymn-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-logo img{height:44px}
+  .nav-logo-text span{display:none}
+  .hymn-wrap{padding:3rem 5vw}
+  .page-hero{padding:3rem 5vw 2.5rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .download-row{flex-direction:column}
+  .download-row a,.download-row button{width:100%;justify-content:center}
+}
+
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="razrabotva-se.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="patron.html">Патрон</a>
+      <a href="hymn.html">Химн</a>
+      <a href="history.html">История</a>
+      <a href="ekip.html">Екип</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="priem-1-klas.html">Прием</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-deco"></div>
+  <div class="breadcrumb">
+    <a href="index.html">НАЧАЛО</a><span>/</span>
+    <a href="#">ЗА НАС</a><span>/</span>
+    <span style="color:var(--gold)">ХИМН</span>
+  </div>
+  <div class="page-hero-label">За нас · Официален химн</div>
+  <h1>Химнът на нашето училище</h1>
+  <p class="page-hero-sub">Думи и мелодия, родени от обичта към тези стени — посветени на всеки ученик, минал оттук.</p>
+</section>
+
+<!-- CONTENT -->
+<div class="hymn-wrap">
+  <div class="hymn-grid">
+
+    <!-- LEFT: LYRICS -->
+    <div>
+      <div class="lyrics-header reveal">
+        <div class="lyrics-header-label">Текст и ред на изпълнение</div>
+        <h2>Химн</h2>
+        <p>Официалният химн на СУ „Йордан Йовков" — Сливен, изпълняван на тържествени събития.</p>
+      </div>
+
+      <!-- ПРИПЕВ -->
+      <div class="stanza refren-stanza reveal" style="transition-delay:.05s">
+        <div class="stanza-type refren">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Припев
+        </div>
+        <div class="stanza-lines">
+          <div class="line">Над нас сияят камъните сини</div>
+          <div class="line">и Българка е нашият квартал.</div>
+          <div class="line">Тук раснем в най-щастливите години</div>
+          <div class="line">и се стремим към своя идеал.</div>
+          <div class="repeat-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+            × 2
+          </div>
+        </div>
+      </div>
+
+      <!-- → Куплет 1 -->
+      <div class="order-divider reveal" style="transition-delay:.08s">
+        <div class="order-divider-line"></div>
+        <div class="order-divider-badge goto-kuplet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Куплет 1
+        </div>
+        <div class="order-divider-line"></div>
+      </div>
+
+      <!-- КУПЛЕТ 1 -->
+      <div class="stanza kuplet-stanza reveal" style="transition-delay:.1s">
+        <div class="stanza-type kuplet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          Куплет 1
+        </div>
+        <div class="stanza-lines">
+          <div class="line">И древна кръв пулсира в нашите вени,</div>
+          <div class="line">над нас е тя опора и пътека.</div>
+          <div class="line">От красотата йовкова пленени,</div>
+          <div class="line">политаме в небето на успеха.</div>
+          <div class="repeat-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+            × 2
+          </div>
+        </div>
+      </div>
+
+      <!-- → Припев -->
+      <div class="order-divider reveal" style="transition-delay:.13s">
+        <div class="order-divider-line"></div>
+        <div class="order-divider-badge goto-refren">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          Припев × 2
+        </div>
+        <div class="order-divider-line"></div>
+      </div>
+
+      <!-- КУПЛЕТ 2 -->
+      <div class="stanza kuplet-stanza reveal" style="transition-delay:.15s">
+        <div class="stanza-type kuplet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          Куплет 2
+        </div>
+        <div class="stanza-lines">
+          <div class="line">И тихи в час, и шумни в коридори,</div>
+          <div class="line">училище, ти бащино огнище.</div>
+          <div class="line">Тук днес на ти с науката говорим</div>
+          <div class="line">и следваме желаното равнище.</div>
+          <div class="repeat-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+            × 2
+          </div>
+        </div>
+      </div>
+
+      <!-- → Финален припев -->
+      <div class="order-divider reveal" style="transition-delay:.18s">
+        <div class="order-divider-line"></div>
+        <div class="order-divider-badge goto-refren">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          Припев × 2 — Финал
+        </div>
+        <div class="order-divider-line"></div>
+      </div>
+
+      <div class="download-row reveal" style="transition-delay:.2s">
+        <button class="btn-green" onclick="window.print()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+          Отпечатай текста
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: SIDEBAR -->
+    <aside class="hymn-sidebar">
+
+      <div class="creators-card reveal-right">
+        <div class="creators-card-header">
+          <div class="creators-card-header-label">Авторски права</div>
+          <h3>Създатели на химна</h3>
+        </div>
+        <div class="creator-entry">
+          <div class="creator-icon text-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,.9)" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div>
+            <div class="creator-role">Текст</div>
+            <div class="creator-name">— въведете автора —</div>
+            <div class="creator-note">Автор на думите на химна</div>
+          </div>
+        </div>
+        <div class="creator-entry">
+          <div class="creator-icon music-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(100,220,160,.9)" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div>
+            <div class="creator-role">Музика</div>
+            <div class="creator-name">— въведете автора —</div>
+            <div class="creator-note">Композитор на мелодията</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="audio-player reveal-right" style="transition-delay:.1s">
+        <div class="audio-label">Слушайте</div>
+        <div class="audio-title">Химн на СУ „Йордан Йовков"</div>
+        <div class="audio-subtitle">Официална версия · Сливен</div>
+        <div class="audio-controls">
+          <div class="audio-top-row">
+            <button class="audio-main-btn" id="playBtn" aria-label="Пусни/Паузирай" onclick="togglePlay()">
+              <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <div class="audio-progress-wrap" id="progressWrap" onclick="seekAudio(event)">
+              <div class="audio-progress-track">
+                <div class="audio-progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+            <div class="audio-time-info" id="timeDisplay">0:00 / 0:00</div>
+          </div>
+          <div class="audio-volume-row">
+            <button class="audio-volume-btn" onclick="toggleMute()" id="volBtn" aria-label="Звук">
+              <svg id="volIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+            </button>
+            <input type="range" class="audio-volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="setVolume(this.value)">
+          </div>
+        </div>
+        <div class="audio-no-file" id="noFileMsg">
+          <p><strong>Аудио файлът не е качен.</strong><br>Добавете MP3 файл с химна и задайте пътя.</p>
+          <label class="audio-upload-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            Качи аудио файл
+            <input type="file" accept="audio/*" style="display:none" onchange="loadAudioFile(event)">
+          </label>
+        </div>
+      </div>
+
+      <div class="sidebar-info reveal-right" style="transition-delay:.2s">
+        <div class="sidebar-info-label">За химна</div>
+        <p>Химнът се изпълнява на тържествени събрания, в началото на учебната година и при официални прояви.</p>
+        <p>Думите му отразяват гордостта от кварталните корени, уважението към йовковото наследство и устрема към знанието.</p>
+      </div>
+
+      <a href="patron.html" class="patron-link reveal-right" style="transition-delay:.3s">
+        <div class="patron-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div>
+          <div class="patron-link-role">Вижте също</div>
+          <div class="patron-link-name">За патрона Йордан Йовков</div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;color:var(--gray);margin-left:auto;flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефон:</strong><br>044 / …</p>
+      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+  </div>
+</footer>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+const revealEls=document.querySelectorAll('.reveal,.reveal-right');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.08});
+revealEls.forEach(el=>io.observe(el));
+
+let audio=null,isMuted=false,lastVol=0.8;
+function initAudio(src){
+  audio=new Audio(src);audio.volume=parseFloat(document.getElementById('volumeSlider').value);
+  document.getElementById('noFileMsg').style.display='none';
+  audio.addEventListener('timeupdate',updateProgress);
+  audio.addEventListener('ended',()=>{document.getElementById('playBtn').classList.remove('playing');document.getElementById('progressFill').style.width='0%';updateTimeDisplay(0,audio.duration)});
+  audio.addEventListener('loadedmetadata',()=>{updateTimeDisplay(0,audio.duration)});
+}
+function togglePlay(){
+  if(!audio){alert('Моля, качете аудио файл с химна.');return;}
+  const btn=document.getElementById('playBtn');
+  if(audio.paused){audio.play();btn.classList.add('playing');}else{audio.pause();btn.classList.remove('playing');}
+}
+function updateProgress(){
+  if(!audio||!audio.duration)return;
+  document.getElementById('progressFill').style.width=(audio.currentTime/audio.duration*100)+'%';
+  updateTimeDisplay(audio.currentTime,audio.duration);
+}
+function updateTimeDisplay(cur,dur){
+  const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+  document.getElementById('timeDisplay').textContent=`${fmt(cur)} / ${isNaN(dur)?'0:00':fmt(dur)}`;
+}
+function seekAudio(e){
+  if(!audio||!audio.duration)return;
+  const r=document.getElementById('progressWrap').getBoundingClientRect();
+  audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
+}
+function setVolume(v){lastVol=parseFloat(v);if(audio)audio.volume=lastVol;updateVolIcon(lastVol);if(lastVol>0)isMuted=false;}
+function toggleMute(){
+  if(!audio)return;
+  if(isMuted){audio.volume=lastVol;document.getElementById('volumeSlider').value=lastVol;isMuted=false;}
+  else{audio.volume=0;document.getElementById('volumeSlider').value=0;isMuted=true;}
+  updateVolIcon(audio.volume);
+}
+function updateVolIcon(v){
+  const icon=document.getElementById('volIcon');
+  if(v==0){icon.innerHTML='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';}
+  else{icon.innerHTML='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>';}
+}
+function loadAudioFile(event){
+  const file=event.target.files[0];if(!file)return;
+  const url=URL.createObjectURL(file);
+  if(audio){audio.pause();audio.src='';}
+  initAudio(url);
+}
+</script>
+</body>
+</html>
