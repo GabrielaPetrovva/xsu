@@ -255,7 +255,7 @@ img { display: block; }
     <div class="nav-item">
       <a href="obuchenie.html">Обучение <span class="caret"></span></a>
       <div class="dropdown">
-        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="razrabotva-se.html">Електронен дневник</a>
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="https://app.shkolo.bg/">Електронен дневник</a>
       </div>
     </div>
     <div class="nav-item">
@@ -287,6 +287,77 @@ img { display: block; }
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="istoriq.html">История</a>
+      <a href="patron.html">Патрон</a>
+      <a href="himn.html">Химн</a>
+      <a href="misiq-viziq.html">Мисия и визия</a>
+      <a href="ekip.html">Училищен екип</a>
+      <a href="paralelki.html">Паралелки</a>
+      <a href="materialna-baza.html">Материална база</a>
+      <a href="uniformi.html">Униформи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="priem-1-klas.html">Прием в I клас</a>
+      <a href="priem-5-klas.html">Прием в V клас</a>
+      <a href="priem-8-klas.html">Прием в VIII клас</a>
+      <a href="dokumenti.html">Необходими документи</a>
+      <a href="faq.html">Често задавани въпроси</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="uchebnici.html">Учебници</a>
+      <a href="uchebni-planove.html">Учебни планове</a>
+      <a href="https://app.shkolo.bg">Електронен дневник</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Родители <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="razrabotva-se.html">Наредби</a>
+      <a href="razrabotva-se.html">Родителски среща</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Ученици <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="dnevno-razpisanie.html">Дневно разписание</a>
+      <a href="sedmichno-razpisanie.html">Седмично разписание</a>
+      <a href="pochivni-dni.html">Почивни дни и ваканции</a>
+      <a href="klasni-kontrolni.html">Графици класни и контролни</a>
+      <a href="razrabotva-se.html">Консултации</a>
+      <a href="uchenicheski-suvet.html">Ученически съвет</a>
+      <a href="izvunklasni-deinosti.html">Извънкласни дейности</a>
+      <a href="nvo.html">НВО</a>
+      <a href="dzi.html">ДЗИ</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="news.html">Новини</a></div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="pravilnici.html">Правилници</a>
+      <a href="stipendii.html">Стипендии</a>
+      <a href="razrabotva-se.html">Училищни документи</a>
+      <a href="razrabotva-se.html">Формуляри</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="contacts.html">Контакти</a></div>
+  <div class="mobile-menu-actions">
+    <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
+    <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
 
 <!-- PAGE HERO -->
 <section class="page-hero">
@@ -593,19 +664,22 @@ img { display: block; }
     </div>
     <div class="footer-col">
       <h5>Полезни връзки</h5>
-      <ul><li><a href="#">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="#">РУО Сливен</a></li></ul>
+      <ul><li><a href="https://app.shkolo.bg/">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="https://www.ruo-sliven.bg/">РУО Сливен</a></li></ul>
     </div>
     <div class="footer-col footer-contact">
       <h5>Контакти</h5>
       <p><strong>Адрес:</strong><br>гр. Сливен</p>
-      <p><strong>Телефон:</strong><br>044 / …</p>
-      <p><strong>Имейл:</strong><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc95929a93bc8f898a938ad18f90958a9992d29e9b">[email&#160;protected]</a></p>
+      <p><strong>Телефони:</strong><br>
+        Директор: 044/ 66 72 44<br>
+        Зам. директор: 044/ 66 76 84
+      </p>
+      <p><strong>Имейл:</strong><br><a href="mailto:info-2000114@edu.mon.bg">info-2000114@edu.mon.bg</a></p>
       <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
-    <span><a href="#">Поверителност</a> · <a href="#">Достъпност</a></span>
+    <span>© 2026 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="razrabotva-se.html">Поверителност</a> · <a href="razrabotva-se.html">Достъпност</a></span>
   </div>
 </footer>
 

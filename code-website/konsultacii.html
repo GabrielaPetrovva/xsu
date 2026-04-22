@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Консултации – СУ „Йордан Йовков" Сливен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --green: #1D7A50;
+  --green-dark: #0F5438;
+  --green-light: #e1f5ee;
+  --teal: #1D9E75;
+  --teal-light: #9FE1CB;
+  --gold: #C9A84C;
+  --gold-light: #f0e2b8;
+  --dark: #1a2e24;
+  --gray: #555;
+  --light: #f0f7f3;
+  --white: #ffffff;
+  --footer-bg: #0b3224;
+  --nav-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════
+   АНИМАЦИИ
+═══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-breadcrumb  { animation: slideDown 0.55s cubic-bezier(.22,.68,0,1.2) 0.15s both; }
+.hero-eyebrow     { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.30s both; }
+.hero-title       { animation: fadeUp   0.65s cubic-bezier(.22,.68,0,1.2) 0.45s both; }
+.hero-desc        { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.62s both; }
+
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(rgba(0,0,0,0.473), rgba(0,0,0,0.733));
+  animation: fadeIn 0.9s ease 0s both;
+}
+
+/* ═══════════════════════════════════════
+   PAGE HERO
+═══════════════════════════════════════ */
+.page-hero {
+  margin-top: var(--nav-h);
+  padding: 3rem 8vw 6rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--green-dark);
+  color: white;
+  text-align: left;
+}
+
+.page-hero > * {
+  position: relative;
+  z-index: 2; 
+}
+
+.page-hero-eyebrow {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.page-hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  text-align: left;
+}
+
+.page-hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.page-hero p {
+  font-size: 1rem;
+  color: rgba(255,255,255,.85);
+  max-width: 520px;
+  line-height: 1.75;
+  text-align: left;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.breadcrumb a {
+  font-size: .78rem;
+  color: rgba(255,255,255,.45);
+  transition: color .2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb span {
+  font-size: .78rem;
+  color: rgba(255,255,255,.25);
+}
+
+/* ═══════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════ */
+.consultation-section {
+  padding: 4rem 8vw 6rem;
+  background: var(--light);
+  min-height: 60vh;
+}
+
+.consultation-intro {
+  max-width: 640px;
+  margin-bottom: 3rem;
+}
+
+.consultation-intro p {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* ═══════════════════════════════════════
+   ТАБУЛАТОРИ
+═══════════════════════════════════════ */
+.term-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(29,122,80,.1);
+}
+
+.term-tab-btn {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: 'Manrope', sans-serif;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray);
+  position: relative;
+  transition: color .25s;
+}
+
+.term-tab-btn:hover {
+  color: var(--green);
+}
+
+.term-tab-btn.active {
+  color: var(--green);
+}
+
+.term-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--green);
+}
+
+/* ═══════════════════════════════════════
+   ТАБЛИЦА
+═══════════════════════════════════════ */
+.consultations-table-wrapper {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid rgba(29,122,80,.1);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,.04);
+  display: none;
+}
+
+.consultations-table-wrapper.active {
+  display: block;
+}
+
+.consultations-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .95rem;
+}
+
+.consultations-table thead {
+  background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+  color: var(--white);
+}
+
+.consultations-table th {
+  padding: 1.2rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border-bottom: 2px solid rgba(255,255,255,.2);
+}
+
+.consultations-table tbody tr {
+  border-bottom: 1px solid rgba(29,122,80,.08);
+  transition: background-color .25s;
+}
+
+.consultations-table tbody tr:hover {
+  background-color: rgba(29,122,80,.05);
+}
+
+.consultations-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.consultations-table td {
+  padding: 1.1rem 1.5rem;
+  color: var(--dark);
+}
+
+.consultations-table td:nth-child(1) {
+  font-weight: 600;
+  color: var(--green);
+}
+
+.consultations-table td:nth-child(2) {
+  color: var(--gray);
+}
+
+.consultations-table td:nth-child(3) {
+  color: var(--dark);
+  background: rgba(29,122,80,.04);
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--gray);
+}
+
+.empty-state svg {
+  width: 48px;
+  height: 48px;
+  opacity: .25;
+  margin: 0 auto 1rem;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .page-hero { padding: 3rem 1.5rem 2.5rem; }
+  .consultation-section { padding: 2rem 1.5rem 4rem; }
+  
+  .consultations-table {
+    font-size: .85rem;
+  }
+  
+  .consultations-table th,
+  .consultations-table td {
+    padding: 0.8rem 1rem;
+  }
+  
+  .consultations-table th {
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .consultations-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .consultations-table {
+    min-width: 320px;
+    font-size: .8rem;
+  }
+  
+  .consultations-table th,
+  .consultations-table td {
+    padding: 0.7rem 0.8rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="Лого СУ Йордан Йовков">
+    <div class="nav-logo-text">
+      <strong>СУ „Йордан Йовков"</strong>
+      <span>Сливен</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-item">
+      <a href="za-nas.html">За нас <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="patron.html">Патрон</a><a href="himn.html">Химн</a><a href="istoriq.html">История</a><a href="misiq-viziq.html">Мисия и визия</a><a href="virtualna-razhodka.html">Виртуална разходка</a><a href="ekip.html">Училищен екип</a><a href="paralelki.html">Паралелки</a><a href="materialna-baza.html">Материална база</a><a href="uniformi.html">Униформи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="priem.html">Прием <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="priem-1-klas.html">Прием в I клас</a><a href="priem-5-klas.html">Прием в V клас</a><a href="priem-8-klas.html">Прием в VIII клас</a><a href="dokumenti-priem.html">Необходими документи</a><a href="faq.html">Често задавани въпроси</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="obuchenie.html">Обучение <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="https://app.shkolo.bg/">Електронен дневник</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="roditeli.html">Родители <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="razrabotva-se.html">Наредби</a><a href="razrabotva-se.html">Родителски срещи</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="uchenici.html">Ученици <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="dnevno-razpisanie.html">Дневно разписание</a><a href="sedmichno-razpisanie.html">Седмично разписание</a><a href="pochivni-dni.html">Почивни дни и ваканции</a><a href="klasni-kontrolni.html">Графици класни и контролни</a><a href="konsultacii.html">Консултации</a><a href="uchenicheski-suvet.html">Ученически съвет</a><a href="izvunklasni-deinosti.html">Извънкласни дейности</a><a href="nvo.html">НВО</a><a href="dzi.html">ДЗИ</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="razrabotva-se.html">Проекти</a></div>
+    <div class="nav-item"><a href="novini.html">Новини</a></div>
+    <div class="nav-item">
+      <a href="dokumenti.html">Документи <span class="caret"></span></a>
+      <div class="dropdown">
+        <a href="pravilnici.html">Правилници</a><a href="stipendii.html">Стипендии</a><a href="razrabotva-se.html">Училищни документи</a><a href="razrabotva-se.html">Формуляри</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="kontakti.html">Контакти</a></div>
+  </div>
+  <button class="nav-search" aria-label="Търсене">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Навигационно меню">
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">За нас <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="istoriq.html">История</a>
+      <a href="patron.html">Патрон</a>
+      <a href="himn.html">Химн</a>
+      <a href="misiq-viziq.html">Мисия и визия</a>
+      <a href="ekip.html">Училищен екип</a>
+      <a href="paralelki.html">Паралелки</a>
+      <a href="materialna-baza.html">Материална база</a>
+      <a href="uniformi.html">Униформи</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Прием <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="priem-1-klas.html">Прием в I клас</a>
+      <a href="priem-5-klas.html">Прием в V клас</a>
+      <a href="priem-8-klas.html">Прием в VIII клас</a>
+      <a href="dokumenti.html">Необходими документи</a>
+      <a href="faq.html">Често задавани въпроси</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Обучение <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="uchebnici.html">Учебници</a>
+      <a href="uchebni-planove.html">Учебни планове</a>
+      <a href="https://app.shkolo.bg">Електронен дневник</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Родители <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="razrabotva-se.html">Наредби</a>
+      <a href="razrabotva-se.html">Родителски среща</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Ученици <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="dnevno-razpisanie.html">Дневно разписание</a>
+      <a href="sedmichno-razpisanie.html">Седмично разписание</a>
+      <a href="pochivni-dni.html">Почивни дни и ваканции</a>
+      <a href="klasni-kontrolni.html">Графици класни и контролни</a>
+      <a href="konsultacii.html">Консултации</a>
+      <a href="uchenicheski-suvet.html">Ученически съвет</a>
+      <a href="izvunklasni-deinosti.html">Извънкласни дейности</a>
+      <a href="nvo.html">НВО</a>
+      <a href="dzi.html">ДЗИ</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="#">Проекти</a></div>
+  <div class="mobile-menu-item"><a href="novini.html">Новини</a></div>
+  <div class="mobile-menu-item">
+    <button onclick="toggleMobSub(this)">Документи <span class="mob-caret"></span></button>
+    <div class="mobile-submenu">
+      <a href="pravilnici.html">Правилници</a>
+      <a href="stipendii.html">Стипендии</a>
+      <a href="razrabotva-se.html">Училищни документи</a>
+      <a href="razrabotva-se.html">Формуляри</a>
+    </div>
+  </div>
+  <div class="mobile-menu-item"><a href="kontakti.html">Контакти</a></div>
+  <div class="mobile-menu-actions">
+    <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
+    <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="breadcrumb hero-breadcrumb">
+    <a href="index.html">НАЧАЛО</a>
+    <span>/</span>
+    <a href="uchenici.html">УЧЕНИЦИ</a>
+    <span>/</span>
+    <a href="konsultacii.html" style="color:rgba(255,255,255,.7)">КОНСУЛТАЦИИ</a>
+  </div>
+  <div class="page-hero-eyebrow hero-eyebrow">СУ „Йордан Йовков" · Сливен</div>
+  <h1 class="hero-title">Консултации с <em>учители</em></h1>
+  <p class="hero-desc">Редовни консултации по всички предмети за подпомагане на учениците при усвояване на учебния материал.</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="consultation-section">
+  <div class="consultation-intro">
+    <p>Консултациите се провеждат по график по всички предмети. Учениците могат да посещават консултациите, за да получат допълнителна помощ при разбиране на учебния материал, подготовка за контролни работи или при затруднения в някой предмет.</p>
+  </div>
+
+  <!-- ТАБУЛАТОРИ -->
+  <div class="term-tabs">
+    <button class="term-tab-btn active" data-term="term1" onclick="switchTerm(event)">I срок</button>
+    <button class="term-tab-btn" data-term="term2" onclick="switchTerm(event)">II срок</button>
+  </div>
+
+  <!-- ТАБЛИЦА I СРОК -->
+  <div class="consultations-table-wrapper active" data-term-content="term1">
+    <table class="consultations-table">
+      <thead>
+        <tr>
+          <th>Име, фамилия на учителя</th>
+          <th>Предмет</th>
+          <th>Консултации</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Анелия Шидерова</td>
+          <td>Човекът и природата<br>Биология и ЗО<br>Химия и ООС</td>
+          <td>Понеделник, 14:05 - 14:50 ч.</td>
+        </tr>
+        <tr>
+          <td>Анна Енчева</td>
+          <td>География и икономика<br>История и цивилизации</td>
+          <td>Четвъртък, 14:05 - 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Велияна Добрева</td>
+          <td>География и икономика<br>История и цивилизации<br>Философия<br>Гражданско образование</td>
+          <td>Четвъртък, 14:50 - 15:30 ч.</td>
+        </tr>
+        <tr>
+          <td>Виктор Диндев</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 - 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Даниела Атанасова</td>
+          <td>Български език и литература</td>
+          <td>Сряда, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Димитър Желев</td>
+          <td>Информационни технологии</td>
+          <td>Четвъртък, 15:40 – 16:20 ч.</td>
+        </tr>
+        <tr>
+          <td>Ивелина Ангелова</td>
+          <td>Български език и литература</td>
+          <td>Сряда, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Маргарита Байгуска</td>
+          <td>Английски език</td>
+          <td>Понеделник, 14:50 – 15:35 ч.</td>
+        </tr>
+        <tr>
+          <td>Нина Стоянова</td>
+          <td>Математика<br>Физика и астрономия</td>
+          <td>Петък, 14:05 - 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Памела Георгиева</td>
+          <td>Математика</td>
+          <td>Вторник, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Станислав Донев</td>
+          <td>Информационни технологии</td>
+          <td>Вторник, 15:40 – 16:20 ч.</td>
+        </tr>
+        <tr>
+          <td>Стоян Димитров</td>
+          <td>Английски език</td>
+          <td>Сряда, 14:50 – 15:30 ч.</td>
+        </tr>
+        <tr>
+          <td>Аделина Дишлиева</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 – 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Георги Генов</td>
+          <td>Немски език</td>
+          <td>Четвъртък, 13:15 – 13:55 ч.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ТАБЛИЦА II СРОК -->
+  <div class="consultations-table-wrapper" data-term-content="term2">
+    <table class="consultations-table">
+      <thead>
+        <tr>
+          <th>Име, фамилия на учителя</th>
+          <th>Предмет</th>
+          <th>Консултации</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Анелия Шидерова</td>
+          <td>Човекът и природата<br>Биология и ЗО<br>Химия и ООС</td>
+          <td>Вторник, 16:00 ч. – 16:40 ч. </td>
+        </tr>
+        <tr>
+          <td>Анна Енчева</td>
+          <td>География и икономика<br>История и цивилизации</td>
+          <td>Сряда, 14:55 ч. – 15:25 ч.</td>
+        </tr>
+        <tr>
+          <td>Велияна Добрева</td>
+          <td>География и икономика<br>История и цивилизации<br>Философия<br>Гражданско образование</td>
+          <td>Четвъртък, 14:50 - 15:30 ч.</td>
+        </tr>
+        <tr>
+          <td>Виктор Диндев</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 - 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Даниела Атанасова</td>
+          <td>Български език и литература</td>
+          <td>Понеделник, 14:50 – 15:30 ч.</td>
+        </tr>
+        <tr>
+          <td>Димитър Желев</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 – 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Ивелина Ангелова</td>
+          <td>Български език и литература</td>
+          <td>Сряда, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Маргарита Байгуска</td>
+          <td>Английски език</td>
+          <td>Понеделник, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Нина Стоянова</td>
+          <td>Математика<br>Физика и астрономия</td>
+          <td>Петък, 14:05 - 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Памела Георгиева</td>
+          <td>Математика</td>
+          <td>Вторник, 14:50 – 15:30 ч.</td>
+        </tr>
+        <tr>
+          <td>Станислав Донев</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 – 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Стоян Димитров</td>
+          <td>Английски език</td>
+          <td>Понеделник, 14:05 – 14:45 ч.</td>
+        </tr>
+        <tr>
+          <td>Аделина Дишлиева</td>
+          <td>Информационни технологии</td>
+          <td>Петък, 13:15 – 13:55 ч.</td>
+        </tr>
+        <tr>
+          <td>Георги Генов</td>
+          <td>Немски език</td>
+          <td>Четвъртък, 13:15 – 13:55 ч.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+// Табулатори за сроковете
+function switchTerm(event) {
+  const termId = event.target.getAttribute('data-term');
+  
+  // Премахни active класа от всички табулатори
+  document.querySelectorAll('.term-tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // Премахни active класа от всички таблици
+  document.querySelectorAll('.consultations-table-wrapper').forEach(wrapper => {
+    wrapper.classList.remove('active');
+  });
+  
+  // Добави active клас на кликнатия таблулатор
+  event.target.classList.add('active');
+  
+  // Добави active клас на съответната таблица
+  document.querySelector(`[data-term-content="${termId}"]`).classList.add('active');
+}
+</script>
+
+</body>
+</html>
+
