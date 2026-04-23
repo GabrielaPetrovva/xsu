@@ -48,88 +48,18 @@ a { text-decoration: none; color: inherit; }
 .hero-title       { animation: fadeUp   0.65s cubic-bezier(.22,.68,0,1.2) 0.45s both; }
 .hero-desc        { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.62s both; }
 
-.page-hero::after {
-  content: '';
-  position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(rgba(0,0,0,0.473), rgba(0,0,0,0.733));
-  animation: fadeIn 0.9s ease 0s both;
-}
+.page-hero{margin-top:var(--nav-h);background:var(--green-dark);padding:5rem 8vw 4rem;position:relative;overflow:hidden}
+.page-hero::before{content:'📚';position:absolute;right:6vw;top:50%;transform:translateY(-50%);font-size:16rem;opacity:.06;line-height:1;pointer-events:none}
+.page-hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:10px}
+.page-hero-eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1rem}
+.page-hero h1 em{color:var(--gold);font-style:italic}
+.page-hero p{font-size:1rem;color:rgba(255,255,255,.75);max-width:560px;line-height:1.75}
 
-/* ═══════════════════════════════════════
-   PAGE HERO
-═══════════════════════════════════════ */
-.page-hero {
-  margin-top: var(--nav-h);
-  padding: 3rem 8vw 6rem;
-  position: relative;
-  overflow: hidden;
-  background: var(--green-dark);
-  color: white;
-  text-align: left;
-}
-
-.page-hero > * {
-  position: relative;
-  z-index: 2; 
-}
-
-.page-hero-eyebrow {
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-}
-
-.page-hero h1 {
-  font-size: clamp(2.2rem, 4vw, 3.6rem);
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1.1;
-  text-align: left;
-}
-
-.page-hero h1 em {
-  color: var(--gold);
-  font-style: italic;
-}
-
-.page-hero p {
-  font-size: 1rem;
-  color: rgba(255,255,255,.85);
-  max-width: 520px;
-  line-height: 1.75;
-  text-align: left;
-  margin: 0;
-  margin-top: 0.5rem;
-}
-
-.breadcrumb {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 2rem;
-  margin-top: 0;
-}
-
-.breadcrumb a {
-  font-size: .78rem;
-  color: rgba(255,255,255,.45);
-  transition: color .2s;
-}
-
-.breadcrumb a:hover {
-  color: var(--gold);
-}
-
-.breadcrumb span {
-  font-size: .78rem;
-  color: rgba(255,255,255,.25);
-}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
 
 /* ═══════════════════════════════════════
    MAIN CONTENT
@@ -342,7 +272,7 @@ a { text-decoration: none; color: inherit; }
     <div class="nav-item">
       <a href="obuchenie.html">Обучение <span class="caret"></span></a>
       <div class="dropdown">
-        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="https://app.shkolo.bg/">Електронен дневник</a>
+        <a href="uchebnici.html">Учебници</a><a href="uchebni-planove.html">Учебни планове</a><a href="https://app.shkolo.bg/" target="_blank">Електронен дневник</a>
       </div>
     </div>
     <div class="nav-item">
@@ -641,11 +571,50 @@ a { text-decoration: none; color: inherit; }
       </tbody>
     </table>
   </div>
-
 </main>
 
-<script src="script.js"></script>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Лого">
+      <p>СУ „Йордан Йовков" — Сливен е средно училище с богата история и традиции, изграждащо знаещи и уверени личности от 1980 година.</p>
+      <div class="footer-motto">„Ако успееш тук, ще успееш навсякъде!"</div>
+    </div>
+    <div class="footer-col">
+      <h5>Навигация</h5>
+      <ul><li><a href="za-nas.html">За нас</a></li><li><a href="priem.html">Прием</a></li><li><a href="obuchenie.html">Обучение</a></li><li><a href="novini.html">Новини</a></li><li><a href="razrabotva-se.html">Проекти</a></li><li><a href="dokumenti.html">Документи</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5>Полезни връзки</h5>
+      <ul><li><a href="https://app.shkolo.bg/" target="_blank">Електронен дневник</a></li><li><a href="uchebni-planove.html">Учебни планове</a></li><li><a href="uchenicheski-suvet.html">Ученически съвет</a></li><li><a href="https://programisti.com" target="_blank">programisti.com</a></li><li><a href="https://web.mon.bg/mon/" target="_blank">МОН</a></li><li><a href="https://www.ruo-sliven.bg/" target="_blank">РУО Сливен</a></li></ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h5>Контакти</h5>
+      <p><strong>Адрес:</strong><br>гр. Сливен</p>
+      <p><strong>Телефони:</strong><br>
+        Директор: 044/ 66 72 44<br>
+        Зам. директор: 044/ 66 76 84
+      </p>
+      <p><strong>Имейл:</strong><br><a href="mailto:info-2000114@edu.mon.bg">info-2000114@edu.mon.bg</a></p>
+      <p><strong>Работно време:</strong><br>Пон–Пет: 07:30 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 СУ „Йордан Йовков" – Сливен. Всички права запазени.</span>
+    <span><a href="razrabotva-se.html">Поверителност</a> · <a href="razrabotva-se.html">Достъпност</a></span>
+  </div>
+</footer>
+
 <script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{menuOpen=!menuOpen;hamburger.classList.toggle('open',menuOpen);mobileMenu.classList.toggle('open',menuOpen);document.body.style.overflow=menuOpen?'hidden':''});
+function toggleMobSub(btn){const item=btn.closest('.mobile-menu-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.mobile-menu-item.open').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open')}
+
+
 // Табулатори за сроковете
 function switchTerm(event) {
   const termId = event.target.getAttribute('data-term');
@@ -670,4 +639,3 @@ function switchTerm(event) {
 
 </body>
 </html>
-
