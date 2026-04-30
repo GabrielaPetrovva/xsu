@@ -12,8 +12,10 @@ img{display:block}
 /* PAGE HERO */
 .page-hero{margin-top:var(--nav-h);background:var(--green-dark);position:relative;overflow:hidden;padding:5rem 8vw 4rem}
 .page-hero-deco{position:absolute;right:8vw;top:50%;transform:translateY(-50%);font-size:18rem;font-weight:800;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;font-family:'Manrope',sans-serif;letter-spacing:-.05em}
-.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;opacity:.6}
-.breadcrumb a,.breadcrumb span{font-size:.75rem;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
 .breadcrumb svg{width:10px;height:10px;color:rgba(255,255,255,.4)}
 .page-hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
 .page-hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem}

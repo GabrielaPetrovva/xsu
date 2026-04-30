@@ -44,13 +44,13 @@ img { display: block; }
 }
 .breadcrumb {
   display: flex; align-items: center; gap: 8px;
-  font-size: .72rem; font-weight: 600; letter-spacing: .18em;
+  font-size: .75rem; font-weight: 600; letter-spacing: .1em;
   text-transform: uppercase; color: rgba(255,255,255,.5);
   margin-bottom: 2rem;
 }
 .breadcrumb a { color: rgba(255,255,255,.5); transition: color .2s; }
 .breadcrumb a:hover { color: var(--gold); }
-.breadcrumb span { color: var(--gold); }
+.breadcrumb span{ color:rgba(255,255,255,.2); }
 .breadcrumb-sep { opacity: .35; }
 .page-hero-label {
   font-size: .72rem; font-weight: 600; letter-spacing: .25em;

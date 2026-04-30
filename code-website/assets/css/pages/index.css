@@ -39,26 +39,41 @@ img{display:block}
 .hero-slide.active .hero-bg{transform:scale(1.05)}
 .hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(130deg,rgba(0,0,0,.68) 0%,rgba(0,0,0,.4) 55%,rgba(0,0,0,.18) 100%)}
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:0 8vw;max-width:760px}
-.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:0;transform:translateY(24px);transition:opacity .9s .3s,transform .9s .3s}
+
+@keyframes heroSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:0;transform:translateY(40px)}
+.hero-slide.first-load .hero-eyebrow{animation:heroSlideUp 1.2s .15s both}
+.hero-slide.active:not(.first-load) .hero-eyebrow{opacity:1;transform:translateY(0);transition:opacity 1.2s .15s,transform 1.2s .15s}
+
 .hero-title{font-size:clamp(2.4rem,5.5vw,4.8rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.2rem;white-space:nowrap;}
 .hero-title em{color:var(--gold);font-style:italic}
-.hero-title .w1{display:inline-block;opacity:0;transform:translateY(24px);transition:opacity .9s .5s,transform .9s .5s}
-.hero-title .w2{display:inline-block;opacity:0;transform:translateY(24px);transition:opacity .9s .72s,transform .9s .72s}
-.hero-slide.active .hero-title .w1,
-.hero-slide.active .hero-title .w2{opacity:1;transform:translateY(0)}
-.hero-subtitle{font-size:1rem;font-weight:300;color:rgba(255,255,255,.82);line-height:1.7;margin-bottom:2.2rem;max-width:460px;opacity:0;transform:translateY(24px);transition:opacity .9s .7s,transform .9s .7s}
-.hero-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.9rem 1.2rem;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;width:fit-content;transition:background .3s}
+.hero-title .w1{display:inline-block;opacity:0;transform:translateY(40px)}
+.hero-slide.first-load .hero-title .w1{animation:heroSlideUp 1.2s .35s both}
+.hero-slide.active:not(.first-load) .hero-title .w1{opacity:1;transform:translateY(0);transition:opacity 1.2s .35s,transform 1.2s .35s}
+
+.hero-title .w2{display:inline-block;opacity:0;transform:translateY(40px)}
+.hero-slide.first-load .hero-title .w2{animation:heroSlideUp 1.2s .35s both}
+.hero-slide.active:not(.first-load) .hero-title .w2{opacity:1;transform:translateY(0);transition:opacity 1.2s .35s,transform 1.2s .35s}
+
+.hero-subtitle{font-size:1rem;font-weight:300;color:rgba(255,255,255,.82);line-height:1.7;margin-bottom:2.2rem;max-width:460px;opacity:0;transform:translateY(40px)}
+.hero-slide.first-load .hero-subtitle{animation:heroSlideUp 1.2s .5s both}
+.hero-slide.active:not(.first-load) .hero-subtitle{opacity:1;transform:translateY(0);transition:opacity 1.2s .5s,transform 1.2s .5s}
+
+.hero-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:.9rem 1.2rem;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--green);border-radius:50px;width:fit-content;opacity:0;transform:translateY(40px);transition:background .3s}
+.hero-slide.first-load .hero-btn{animation:heroSlideUp 1.2s .7s both}
+.hero-slide.active:not(.first-load) .hero-btn{opacity:1;transform:translateY(0);transition:opacity 1.2s .7s,transform 1.2s .7s,background .3s}
 .hero-btn:hover{background:transparent}
 .hero-btn svg{width:15px;height:15px;transition:transform .3s}
 .hero-btn:hover svg{transform:translateX(4px)}
-.hero-slide.active .hero-eyebrow,.hero-slide.active .hero-subtitle,.hero-slide.active .hero-btn{opacity:1;transform:translateY(0)}
 .hero-indicators{position:absolute;bottom:2.5rem;left:8vw;z-index:3;display:flex;gap:10px}
 .hero-dot{width:36px;height:3px;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,width .3s;border:none;border-radius:2px}
 .hero-dot.active{background:var(--gold);width:60px}
-.hero-scroll{position:absolute;bottom:2.5rem;right:8vw;z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
-.scroll-line{width:1px;height:48px;background:rgba(255,255,255,.25);position:relative;overflow:hidden}
-.scroll-line::after{content:'';position:absolute;top:-100%;left:0;right:0;bottom:0;background:var(--gold);animation:scrollLine 2.2s infinite ease-in-out}
-@keyframes scrollLine{0%{top:-100%}100%{top:100%}}
+.back-to-top{position:fixed;bottom:2.5rem;right:2.5rem;width:50px;height:50px;border:2px solid var(--green);border-radius:50%;background:var(--green);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease;z-index:999;opacity:0;pointer-events:none;box-shadow:0 4px 12px rgba(29,122,80,.2)}
+.back-to-top.visible{opacity:1;pointer-events:auto}
+.back-to-top:hover{background:var(--green-dark);transform:translateY(-3px);box-shadow:0 6px 16px rgba(29,122,80,.3)}
+.back-to-top svg{width:22px;height:22px;transition:transform .3s}
+.back-to-top:hover svg{transform:translateY(-2px)}
  
 /* QUICK */
 .quick-section{display:grid;grid-template-columns:repeat(4,1fr);background:var(--green-dark)}
@@ -165,7 +180,7 @@ img{display:block}
 .community-section{background:#fff;padding:6rem 8vw}
 .community-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
 .community-img-wrap{position:relative}
-.community-img{width:100%;aspect-ratio:4/3;background-image:url('Училище__Йордан_Йовков__в_Сливен.png');background-size:cover;background-position:center;border-radius:16px}
+.community-img{width:100%;aspect-ratio:4/3;background-image:url('.');background-size:cover;background-position:center;border-radius:16px}
 .community-img-deco{position:absolute;top:-18px;left:-18px;right:18px;bottom:18px;border:2px solid var(--gold);z-index:-1;border-radius:20px}
 .community-badges{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.8rem}
 .badge{background:var(--green-light);border:1px solid rgba(29,122,80,.2);padding:.35rem .9rem;font-size:.78rem;font-weight:500;color:var(--green);border-radius:50px}

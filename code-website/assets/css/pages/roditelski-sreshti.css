@@ -7,13 +7,18 @@
   }
   
   .page-hero .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: rgba(255, 255, 255, .55);
     margin-bottom: 1.5rem;
     font-size: .75rem;
+    font-weight: 600;
   }
 
   .page-hero .breadcrumb a {
       color: rgba(255, 255, 255, .55);
+      letter-spacing: .08em;
   }
 
   .page-hero .breadcrumb a:hover {

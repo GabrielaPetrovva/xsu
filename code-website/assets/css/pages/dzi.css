@@ -18,7 +18,7 @@ a{text-decoration:none;color:inherit}
 .page-hero p{font-size:1rem;color:rgba(255,255,255,.75);max-width:560px;line-height:1.75}
 
 /* BREADCRUMB */
-.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem}
 .breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
 .breadcrumb a:hover{color:var(--gold)}
 .breadcrumb span{color:rgba(255,255,255,.2)}

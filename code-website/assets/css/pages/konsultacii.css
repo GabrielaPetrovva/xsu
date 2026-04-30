@@ -97,12 +97,15 @@ a { text-decoration: none; color: inherit; }
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+  font-weight: 600;
   margin-bottom: 2rem;
   margin-top: 0;
+  letter-spacing: .1em;
 }
 
 .breadcrumb a {
   font-size: .78rem;
+  font-weight: 600;
   color: rgba(255,255,255,.45);
   transition: color .2s;
 }

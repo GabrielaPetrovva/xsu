@@ -10,6 +10,25 @@ export function initTeamFilter() {
     // Show all groups by default on page load
     groups.forEach(g => g.classList.remove('hidden'));
   
+    // Helper функция за проверка на визуалност на група
+    const countVisibleCards = (filter) => {
+      let count = 0;
+      groups.forEach(g => {
+        if (filter === 'all' || g.dataset.group === filter) {
+          count += g.querySelectorAll('.member-card').length;
+        }
+      });
+      return count;
+    };
+  
+    // Инициализация на броевете
+    filterBtns.forEach(btn => {
+      const filter = btn.dataset.filter;
+      const count = countVisibleCards(filter);
+      const countSpan = btn.querySelector('.filter-count');
+      if (countSpan) countSpan.textContent = count;
+    });
+  
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));

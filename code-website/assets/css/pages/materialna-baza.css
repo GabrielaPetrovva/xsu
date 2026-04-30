@@ -28,11 +28,11 @@ img{display:block}
   position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(90deg, var(--gold), transparent 65%);
 }
-.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
 .breadcrumb a{color:rgba(255,255,255,.45);transition:color .2s}
 .breadcrumb a:hover{color:var(--gold)}
 .breadcrumb svg{width:11px;height:11px;opacity:.4}
-.breadcrumb span{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.2)}
 .page-hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
 .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.2rem);color:var(--white);line-height:1.1;margin-bottom:1.2rem}
 .page-hero h1 em{color:var(--gold);font-style:italic}

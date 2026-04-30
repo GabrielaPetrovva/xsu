@@ -49,7 +49,7 @@ img { display: block; }
 }
 .breadcrumb a { color: rgba(255,255,255,.45); transition: color .2s; }
 .breadcrumb a:hover { color: var(--gold); }
-.breadcrumb span { color: var(--gold); }
+.breadcrumb span { color:rgba(255,255,255,.2); }
 .breadcrumb-sep { opacity: .3; }
 .page-hero-label {
   font-size: .72rem; font-weight: 600; letter-spacing: .25em;
