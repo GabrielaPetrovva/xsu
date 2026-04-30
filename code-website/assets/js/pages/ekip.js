@@ -1,8 +1,13 @@
 import { initTeamFilter }  from '../modules/team-filter.js';
 import { initStatCounters } from '../modules/counters.js';
 
-initTeamFilter();
-initStatCounters();
+document.addEventListener("DOMContentLoaded", () => {
+  initTeamFilter();
+  initStatCounters();
+
+  // force initial state
+  document.querySelector('.filter-btn.active')?.click();
+});
 
 // Scroll reveal за .reveal елементи
 const revealEls = document.querySelectorAll('.reveal');
@@ -29,11 +34,3 @@ const cardObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.05 });
 document.querySelectorAll('.member-group').forEach(g => cardObs.observe(g));
-
-document.addEventListener("DOMContentLoaded", () => {
-  initTeamFilter();
-  initStatCounters();
-
-  // force initial state
-  document.querySelector('.filter-btn.active')?.click();
-});

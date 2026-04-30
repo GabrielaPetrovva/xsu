@@ -1,480 +1,480 @@
 /* ── PAGE HERO ── */
 .page-hero {
-    margin-top: var(--nav-h);
-    background: var(--green-dark);
-    padding: 4rem 8vw 3rem;
-    position: relative;
-    overflow: hidden;
+  margin-top: var(--nav-h);
+  background: var(--green-dark);
+  padding: 4rem 8vw 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb span {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.page-hero-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+
+.page-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+  font-weight: 800;
+}
+
+.page-hero-sub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 520px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── CONTENT WRAPPER ── */
+.content-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 8vw;
+}
+
+/* ── QUICK YEAR NAV ── */
+.years-nav {
+  margin-bottom: 3rem;
+  background: var(--light);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.6rem;
+  border: 1px solid rgba(29, 122, 80, 0.12);
+}
+
+.years-nav-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.9rem;
+}
+
+.years-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.year-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.38rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1.5px solid rgba(29, 122, 80, 0.25);
+  color: var(--gray);
+  background: var(--white);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.year-pill:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+
+.year-pill--active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+/* ── ACCORDION ── */
+.years-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.year-block {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid #e2ece7;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s;
+}
+
+.year-block:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Year header (accordion trigger) */
+.year-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  background: var(--white);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.year-header:hover {
+  background: var(--green-light);
+}
+
+.year-header--open {
+  background: var(--green-dark);
+}
+
+.year-header--open:hover {
+  background: var(--green-dark);
+}
+
+/* Year badge */
+.year-badge {
+  flex-shrink: 0;
+  width: 64px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.year-header--open .year-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.year-badge--current {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.year-header--open .year-badge--current {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* Year title */
+.year-title {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--dark);
+  transition: color 0.2s;
+}
+
+.year-header--open .year-title {
+  color: #fff;
+}
+
+/* Year count */
+.year-count {
+  font-size: 0.73rem;
+  color: var(--gray);
+  background: var(--light);
+  padding: 0.25rem 0.7rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.year-header--open .year-count {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Chevron */
+.year-chevron {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  transition: transform 0.3s, color 0.2s;
+}
+
+.year-chevron svg {
+  width: 18px;
+  height: 18px;
+}
+
+.year-chevron--open {
+  transform: rotate(180deg);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.year-header--open .year-chevron {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Docs container */
+.year-docs {
+  background: var(--white);
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.year-docs--closed {
+  max-height: 0;
+}
+
+/* ── DOC ROWS ── */
+.doc-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.4rem;
+  border-bottom: 1px solid #f0f5f2;
+  transition: background 0.15s;
+}
+
+.doc-row:last-child {
+  border-bottom: none;
+}
+
+.doc-row:hover {
+  background: var(--green-light);
+}
+
+/* Budget row accent */
+.doc-row--budget {
+  background: rgba(201, 168, 76, 0.05);
+  border-left: 3px solid var(--gold);
+}
+
+.doc-row--budget:hover {
+  background: rgba(201, 168, 76, 0.1);
+}
+
+/* Doc icons */
+.doc-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.doc-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.doc-icon--budget {
+  background: rgba(201, 168, 76, 0.15);
+  color: #a07a28;
+}
+
+.doc-icon--report {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.doc-icon--special {
+  background: rgba(29, 122, 80, 0.08);
+  color: var(--green-dark);
+}
+
+/* Doc info */
+.doc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-type {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* Download button */
+.doc-download {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.45rem 1rem;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 50px;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.doc-download svg {
+  width: 13px;
+  height: 13px;
+}
+
+.doc-download:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+/* ── LEGACY / TRANSPARENCY BANNER ── */
+.legacy-banner {
+  background: var(--green);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.legacy-banner::before {
+  content: '§';
+  position: absolute;
+  right: -1rem;
+  bottom: -3rem;
+  font-size: 14rem;
+  color: rgba(255, 255, 255, 0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.legacy-banner h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.7rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.legacy-banner p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.75;
+  max-width: 800px;
+}
+
+.legacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.38rem 0.9rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 3rem 5vw 2.5rem;
   }
-  
-  .page-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
-  
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.45);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-  }
-  
-  .breadcrumb a {
-    color: rgba(255, 255, 255, 0.45);
-    transition: color 0.2s;
-  }
-  
-  .breadcrumb a:hover {
-    color: var(--gold);
-  }
-  
-  .breadcrumb span {
-    color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .page-hero-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.7rem;
-  }
-  
+
   .page-hero h1 {
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 0.8rem;
-    font-weight: 800;
+    font-size: clamp(2rem, 8vw, 3rem);
   }
-  
-  .page-hero-sub {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 520px;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-  
-  /* ── CONTENT WRAPPER ── */
+
   .content-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 8vw;
+    padding: 2.5rem 5vw;
   }
-  
-  /* ── QUICK YEAR NAV ── */
-  .years-nav {
-    margin-bottom: 3rem;
-    background: var(--light);
-    border-radius: var(--radius-lg);
-    padding: 1.4rem 1.6rem;
-    border: 1px solid rgba(29, 122, 80, 0.12);
+
+  .year-header {
+    gap: 0.6rem;
+    padding: 0.9rem 1rem;
   }
-  
-  .years-nav-label {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.9rem;
+
+  .year-badge {
+    width: 52px;
+    font-size: 0.78rem;
   }
-  
-  .years-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+
+  .year-title {
+    font-size: 0.85rem;
   }
-  
-  .year-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.38rem 0.9rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 1.5px solid rgba(29, 122, 80, 0.25);
-    color: var(--gray);
-    background: var(--white);
-    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+
+  .year-count {
+    display: none;
   }
-  
-  .year-pill:hover {
-    background: var(--green);
-    color: #fff;
-    border-color: var(--green);
-    transform: translateY(-2px);
-  }
-  
-  .year-pill--active {
-    background: var(--green);
-    color: #fff;
-    border-color: var(--green);
-  }
-  
-  /* ── ACCORDION ── */
-  .years-accordion {
-    display: flex;
-    flex-direction: column;
+
+  .doc-row {
+    padding: 0.75rem 1rem;
     gap: 0.75rem;
   }
-  
-  .year-block {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid #e2ece7;
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.3s;
-  }
-  
-  .year-block:hover {
-    box-shadow: var(--shadow-md);
-  }
-  
-  /* Year header (accordion trigger) */
-  .year-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.4rem;
-    background: var(--white);
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.2s;
-  }
-  
-  .year-header:hover {
-    background: var(--green-light);
-  }
-  
-  .year-header--open {
-    background: var(--green-dark);
-  }
-  
-  .year-header--open:hover {
-    background: var(--green-dark);
-  }
-  
-  /* Year badge */
-  .year-badge {
-    flex-shrink: 0;
-    width: 64px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: var(--radius-sm);
-    letter-spacing: 0.04em;
-    transition: background 0.2s, color 0.2s;
-  }
-  
-  .year-header--open .year-badge {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-  }
-  
-  .year-badge--current {
-    background: var(--gold);
-    color: var(--dark);
-  }
-  
-  .year-header--open .year-badge--current {
-    background: var(--gold);
-    color: var(--dark);
-  }
-  
-  /* Year title */
-  .year-title {
-    flex: 1;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--dark);
-    transition: color 0.2s;
-  }
-  
-  .year-header--open .year-title {
-    color: #fff;
-  }
-  
-  /* Year count */
-  .year-count {
-    font-size: 0.73rem;
-    color: var(--gray);
-    background: var(--light);
-    padding: 0.25rem 0.7rem;
-    border-radius: 50px;
-    white-space: nowrap;
-    transition: background 0.2s, color 0.2s;
-  }
-  
-  .year-header--open .year-count {
-    background: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.65);
-  }
-  
-  /* Chevron */
-  .year-chevron {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    transition: transform 0.3s, color 0.2s;
-  }
-  
-  .year-chevron svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .year-chevron--open {
-    transform: rotate(180deg);
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  .year-header--open .year-chevron {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  /* Docs container */
-  .year-docs {
-    background: var(--white);
-    overflow: hidden;
-    max-height: 2000px;
-    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .year-docs--closed {
-    max-height: 0;
-  }
-  
-  /* ── DOC ROWS ── */
-  .doc-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.85rem 1.4rem;
-    border-bottom: 1px solid #f0f5f2;
-    transition: background 0.15s;
-  }
-  
-  .doc-row:last-child {
-    border-bottom: none;
-  }
-  
-  .doc-row:hover {
-    background: var(--green-light);
-  }
-  
-  /* Budget row accent */
-  .doc-row--budget {
-    background: rgba(201, 168, 76, 0.05);
-    border-left: 3px solid var(--gold);
-  }
-  
-  .doc-row--budget:hover {
-    background: rgba(201, 168, 76, 0.1);
-  }
-  
-  /* Doc icons */
-  .doc-icon {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-sm);
-  }
-  
-  .doc-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .doc-icon--budget {
-    background: rgba(201, 168, 76, 0.15);
-    color: #a07a28;
-  }
-  
-  .doc-icon--report {
-    background: var(--green-light);
-    color: var(--green);
-  }
-  
-  .doc-icon--special {
-    background: rgba(29, 122, 80, 0.08);
-    color: var(--green-dark);
-  }
-  
-  /* Doc info */
-  .doc-info {
-    flex: 1;
-    min-width: 0;
-  }
-  
+
   .doc-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--dark);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 0.82rem;
   }
-  
-  .doc-type {
-    font-size: 0.75rem;
-    color: var(--gray);
-    margin-top: 2px;
-  }
-  
-  /* Download button */
+
   .doc-download {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.45rem 1rem;
-    background: var(--green);
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    border-radius: 50px;
-    transition: background 0.2s, transform 0.2s;
-    white-space: nowrap;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.67rem;
   }
-  
-  .doc-download svg {
-    width: 13px;
-    height: 13px;
+
+  .years-nav {
+    padding: 1rem 1.1rem;
   }
-  
-  .doc-download:hover {
-    background: var(--green-dark);
-    transform: translateY(-1px);
-  }
-  
-  /* ── LEGACY / TRANSPARENCY BANNER ── */
+
   .legacy-banner {
-    background: var(--green);
-    border-radius: 20px;
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
+    padding: 1.8rem;
   }
-  
-  .legacy-banner::before {
-    content: '§';
-    position: absolute;
-    right: -1rem;
-    bottom: -3rem;
-    font-size: 14rem;
-    color: rgba(255, 255, 255, 0.06);
-    line-height: 1;
-    pointer-events: none;
-  }
-  
-  .legacy-banner h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 0.7rem;
-    font-style: italic;
-    font-weight: 700;
-  }
-  
-  .legacy-banner p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.75;
-    max-width: 800px;
-  }
-  
-  .legacy-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--gold);
-    color: var(--dark);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.38rem 0.9rem;
-    border-radius: 50px;
-    margin-bottom: 1rem;
-  }
-  
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .page-hero {
-      padding: 3rem 5vw 2.5rem;
-    }
-  
-    .page-hero h1 {
-      font-size: clamp(2rem, 8vw, 3rem);
-    }
-  
-    .content-wrap {
-      padding: 2.5rem 5vw;
-    }
-  
-    .year-header {
-      gap: 0.6rem;
-      padding: 0.9rem 1rem;
-    }
-  
-    .year-badge {
-      width: 52px;
-      font-size: 0.78rem;
-    }
-  
-    .year-title {
-      font-size: 0.85rem;
-    }
-  
-    .year-count {
-      display: none;
-    }
-  
-    .doc-row {
-      padding: 0.75rem 1rem;
-      gap: 0.75rem;
-    }
-  
-    .doc-title {
-      font-size: 0.82rem;
-    }
-  
-    .doc-download {
-      padding: 0.4rem 0.75rem;
-      font-size: 0.67rem;
-    }
-  
-    .years-nav {
-      padding: 1rem 1.1rem;
-    }
-  
-    .legacy-banner {
-      padding: 1.8rem;
-    }
-  }
+}

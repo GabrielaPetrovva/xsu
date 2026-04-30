@@ -1,10 +1,10 @@
 :root {
-  --green: #1D7A50;
-  --green-dark: #0F5438;
+  --green: #1d7a50;
+  --green-dark: #0f5438;
   --green-light: #e1f5ee;
-  --teal: #1D9E75;
-  --teal-light: #9FE1CB;
-  --gold: #C9A84C;
+  --teal: #1d9e75;
+  --teal-light: #9fe1cb;
+  --gold: #c9a84c;
   --gold-light: #f0e2b8;
   --dark: #1a2e24;
   --gray: #555;
@@ -13,31 +13,71 @@
   --footer-bg: #0b3224;
   --nav-h: 72px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Manrope', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
-a { text-decoration: none; color: inherit; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 /* ═══════════════════════════════════════
    АНИМАЦИИ
 ═══════════════════════════════════════ */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes slideDown {
-  from { opacity: 0; transform: translateY(-18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero-breadcrumb  { animation: slideDown 0.55s cubic-bezier(.22,.68,0,1.2) 0.15s both; }
-.hero-eyebrow     { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.30s both; }
-.hero-title       { animation: fadeUp   0.65s cubic-bezier(.22,.68,0,1.2) 0.45s both; }
-.hero-desc        { animation: fadeUp   0.55s cubic-bezier(.22,.68,0,1.2) 0.62s both; }
+.hero-breadcrumb {
+  animation: slideDown 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.15s both;
+}
+.hero-eyebrow {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.3s both;
+}
+.hero-title {
+  animation: fadeUp 0.65s cubic-bezier(0.22, 0.68, 0, 1.2) 0.45s both;
+}
+.hero-desc {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.62s both;
+}
 
 /* ═══════════════════════════════════════
    PAGE HERO
@@ -54,13 +94,13 @@ a { text-decoration: none; color: inherit; }
 
 .page-hero > * {
   position: relative;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .page-hero-eyebrow {
-  font-size: .72rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: .25em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
   display: flex;
@@ -84,7 +124,7 @@ a { text-decoration: none; color: inherit; }
 
 .page-hero p {
   font-size: 1rem;
-  color: rgba(255,255,255,.85);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 520px;
   line-height: 1.75;
   text-align: left;
@@ -100,14 +140,14 @@ a { text-decoration: none; color: inherit; }
   font-weight: 600;
   margin-bottom: 2rem;
   margin-top: 0;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
 }
 
 .breadcrumb a {
-  font-size: .78rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(255,255,255,.45);
-  transition: color .2s;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
 }
 
 .breadcrumb a:hover {
@@ -115,8 +155,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 .breadcrumb span {
-  font-size: .78rem;
-  color: rgba(255,255,255,.25);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.25);
 }
 
 /* ═══════════════════════════════════════
@@ -147,21 +187,21 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   gap: 0;
   margin-bottom: 2rem;
-  border-bottom: 2px solid rgba(29,122,80,.1);
+  border-bottom: 2px solid rgba(29, 122, 80, 0.1);
 }
 
 .term-tab-btn {
   flex: 1;
   padding: 1rem 1.5rem;
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   background: transparent;
   border: none;
   cursor: pointer;
   color: var(--gray);
   position: relative;
-  transition: color .25s;
+  transition: color 0.25s;
 }
 
 .term-tab-btn:hover {
@@ -173,7 +213,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .term-tab-btn.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -188,9 +228,9 @@ a { text-decoration: none; color: inherit; }
 .consultations-table-wrapper {
   background: var(--white);
   border-radius: 12px;
-  border: 1px solid rgba(29,122,80,.1);
+  border: 1px solid rgba(29, 122, 80, 0.1);
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   display: none;
 }
 
@@ -201,7 +241,7 @@ a { text-decoration: none; color: inherit; }
 .consultations-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .consultations-table thead {
@@ -213,17 +253,17 @@ a { text-decoration: none; color: inherit; }
   padding: 1.2rem 1.5rem;
   text-align: left;
   font-weight: 700;
-  letter-spacing: .04em;
-  border-bottom: 2px solid rgba(255,255,255,.2);
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .consultations-table tbody tr {
-  border-bottom: 1px solid rgba(29,122,80,.08);
-  transition: background-color .25s;
+  border-bottom: 1px solid rgba(29, 122, 80, 0.08);
+  transition: background-color 0.25s;
 }
 
 .consultations-table tbody tr:hover {
-  background-color: rgba(29,122,80,.05);
+  background-color: rgba(29, 122, 80, 0.05);
 }
 
 .consultations-table tbody tr:last-child {
@@ -246,7 +286,7 @@ a { text-decoration: none; color: inherit; }
 
 .consultations-table td:nth-child(3) {
   color: var(--dark);
-  background: rgba(29,122,80,.04);
+  background: rgba(29, 122, 80, 0.04);
   border-radius: 6px;
   font-weight: 500;
 }
@@ -261,7 +301,7 @@ a { text-decoration: none; color: inherit; }
 .empty-state svg {
   width: 48px;
   height: 48px;
-  opacity: .25;
+  opacity: 0.25;
   margin: 0 auto 1rem;
 }
 
@@ -269,20 +309,24 @@ a { text-decoration: none; color: inherit; }
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 768px) {
-  .page-hero { padding: 3rem 1.5rem 2.5rem; }
-  .consultation-section { padding: 2rem 1.5rem 4rem; }
-  
-  .consultations-table {
-    font-size: .85rem;
+  .page-hero {
+    padding: 3rem 1.5rem 2.5rem;
   }
-  
+  .consultation-section {
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .consultations-table {
+    font-size: 0.85rem;
+  }
+
   .consultations-table th,
   .consultations-table td {
     padding: 0.8rem 1rem;
   }
-  
+
   .consultations-table th {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -290,12 +334,12 @@ a { text-decoration: none; color: inherit; }
   .consultations-table-wrapper {
     overflow-x: auto;
   }
-  
+
   .consultations-table {
     min-width: 320px;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
-  
+
   .consultations-table th,
   .consultations-table td {
     padding: 0.7rem 0.8rem;

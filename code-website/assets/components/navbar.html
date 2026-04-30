@@ -102,7 +102,7 @@
       <a href="priem-1-klas.html">Прием в I клас</a>
       <a href="priem-5-klas.html">Прием в V клас</a>
       <a href="priem-8-klas.html">Прием в VIII клас</a>
-      <a href="dokumenti.html">Необходими документи</a>
+      <a href="dokumenti-priem.html">Необходими документи</a>
       <a href="faq.html">Често задавани въпроси</a>
     </div>
   </div>
@@ -151,5 +151,42 @@
   <div class="mobile-menu-actions">
     <a href="priem-1-klas.html" class="btn-green">Прием I клас</a>
     <a href="priem-8-klas.html" class="btn-gold">Прием VIII клас</a>
+  </div>
+</div>
+
+<!-- Search Modal -->
+<div class="search-modal" id="searchModal" role="dialog" aria-label="Търсене">
+
+  <div class="search-modal-overlay" id="searchOverlay"></div>
+
+  <div class="search-modal-content">
+
+    <button class="search-modal-close" id="searchClose" aria-label="Затвори">
+      ✕
+    </button>
+
+    <div class="search-modal-inner">
+
+      <h2>Търсене</h2>
+
+      <div class="search-input-wrapper">
+        <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+
+        <input
+          type="text"
+          id="globalSearch"
+          class="search-input-field"
+          placeholder="Търси новини, събития, страници..."
+          autocomplete="off"
+        >
+      </div>
+
+      <div id="searchResults" class="search-results"></div>
+
+    </div>
+
   </div>
 </div>
