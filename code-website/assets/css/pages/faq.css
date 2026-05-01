@@ -1,6 +1,8 @@
 :root {
   --green: #1d7a50;
+  --green-dark: #0f5438;
   --green-light: #e1f5ee;
+  --gold: #c9a84c;
   --dark: #1a2e24;
   --gray: #555;
   --light: #f0f7f3;
@@ -44,6 +46,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+
 nav {
   position: fixed;
   top: 0;
@@ -129,11 +133,7 @@ nav {
   margin: 0 auto;
   padding: 0 6vw;
 }
-/* PAGE HERO */
-:root {
-  --green-dark: #0f5438;
-  --gold: #c9a84c;
-}
+
 .page-hero {
   margin-top: var(--nav-h);
   background: var(--green-dark);
