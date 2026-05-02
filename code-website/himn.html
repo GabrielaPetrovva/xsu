@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
-<link rel="stylesheet" href="assets/css/titleAnim.css">
+  <link rel="stylesheet" href="assets/css/titleAnim.css">
   <link rel="stylesheet" href="assets/css/pages/himn.css">
 
   <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96"/>
@@ -156,7 +156,7 @@
             </div>
             <div>
               <div class="creator-role">Текст</div>
-              <div class="creator-name">— въведете автора —</div>
+              <div class="creator-name">Христо Батинков</div>
               <div class="creator-note">Автор на думите на химна</div>
             </div>
           </div>
@@ -166,7 +166,7 @@
             </div>
             <div>
               <div class="creator-role">Музика</div>
-              <div class="creator-name">— въведете автора —</div>
+              <div class="creator-name">Иван Кавръков</div>
               <div class="creator-note">Композитор на мелодията</div>
             </div>
           </div>
@@ -182,7 +182,7 @@
                 <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 <svg class="pause-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
               </button>
-              <div class="audio-progress-wrap" id="progressWrap" onclick="seekAudio(event)">
+              <div class="audio-progress-wrap" id="progressWrap">
                 <div class="audio-progress-track">
                   <div class="audio-progress-fill" id="progressFill"></div>
                 </div>
@@ -195,14 +195,6 @@
               </button>
               <input type="range" class="audio-volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="setVolume(this.value)">
             </div>
-          </div>
-          <div class="audio-no-file" id="noFileMsg">
-            <p><strong>Аудио файлът не е качен.</strong><br>Добавете MP3 файл с химна и задайте пътя.</p>
-            <label class="audio-upload-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-              Качи аудио файл
-              <input type="file" accept="audio/*" style="display:none" onchange="loadAudioFile(event)">
-            </label>
           </div>
         </div>
 
