@@ -23,6 +23,8 @@
   border: 2px solid var(--green);
   border-radius: 50px;
   transition: background 0.3s, color 0.3s;
+  text-align: center;
+  white-space: normal;
 }
 
 .btn-green:hover,
@@ -46,6 +48,8 @@
   border: 2px solid var(--gold);
   border-radius: 50px;
   transition: background 0.3s, color 0.3s;
+  text-align: center;
+  white-space: normal;
 }
 
 .btn-gold:hover {
@@ -58,4 +62,14 @@
   border: 1px solid #e8efeb;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .btn-green,
+  .btn-red,
+  .btn-gold {
+    width: 100%;
+    padding: 0.78rem 1.2rem;
+    font-size: 0.78rem;
+  }
 }

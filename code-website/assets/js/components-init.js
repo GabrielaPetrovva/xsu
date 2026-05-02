@@ -14,6 +14,7 @@ function initMobileMenu() {
     hamburger.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
     mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
@@ -22,6 +23,7 @@ function initMobileMenu() {
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
@@ -38,6 +40,16 @@ function initMobileMenu() {
       closeMenu();
     }
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (menuOpen && e.key === 'Escape') closeMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && menuOpen) closeMenu();
+  });
+
+  mobileMenu.setAttribute('aria-hidden', 'true');
 }
 
 /**

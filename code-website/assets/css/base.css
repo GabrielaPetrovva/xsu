@@ -3,6 +3,8 @@ body {
   color: var(--dark);
   background: var(--white);
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -11,7 +13,7 @@ a {
 }
 
 .section {
-  padding: 5rem 8vw;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 8vw, 8rem);
 }
 
 .section-label {
@@ -41,10 +43,21 @@ a {
 }
 
 .section-subtitle {
-  font-size: 0.95rem;
+  font-size: clamp(0.92rem, 1.4vw, 1rem);
   color: var(--gray);
   line-height: 1.75;
   max-width: 620px;
+}
+
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+iframe {
+  width: 100%;
 }
 
 .reveal {
@@ -56,4 +69,14 @@ a {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .section-label {
+    letter-spacing: 0.18em;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
 }

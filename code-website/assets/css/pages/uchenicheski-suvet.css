@@ -214,24 +214,36 @@ img {
   align-items: center;
 }
 .mission-strip p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-style: italic;
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 300;
   position: relative;
-  padding-left: 2rem;
+  margin: 0;
+  max-width: 74ch;
+  padding: 0.1rem 0.8rem 0.2rem 2rem;
 }
 .mission-strip p::before {
-  content: '"';
+  content: "„";
   position: absolute;
-  left: 0;
-  top: -0.5rem;
-  font-size: 4rem;
+  left: 1.10rem;
+  top: -0.15rem;
+  font-size: 1.95rem;
   color: var(--gold);
   line-height: 1;
-  opacity: 0.6;
+  opacity: 0.82;
   font-family: Georgia, serif;
+}
+.mission-strip p::after {
+  content: "“";
+  margin-left: 0.15rem;
+  font-size: 1.95rem;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.82;
+  font-family: Georgia, serif;
+  vertical-align: -0.22em;
 }
 .mission-pills {
   display: flex;
@@ -882,6 +894,9 @@ img {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .mission-strip p {
+    max-width: 100%;
+  }
 }
 @media (max-width: 768px) {
   .nav-links {
@@ -902,9 +917,42 @@ img {
   .hero-meta {
     gap: 1.5rem;
   }
+  .mission-strip {
+    padding: 2.7rem 5vw;
+    gap: 1.4rem;
+  }
+  .mission-strip p {
+    padding: 0 0.45rem 0.1rem 1.5rem;
+    line-height: 1.65;
+  }
+  .mission-strip p::before {
+    left: 0.45rem;
+    top: -0.35rem;
+    font-size: 2rem;
+  }
+  .mission-strip p::after {
+    font-size: 1.65rem;
+    vertical-align: -0.18em;
+  }
+  .mission-pill {
+    white-space: normal;
+  }
 }
 @media (max-width: 480px) {
   .members-grid {
     grid-template-columns: 1fr;
+  }
+  .mission-strip {
+    padding: 2.2rem 4.5vw;
+  }
+  .mission-strip p {
+    padding-left: 1.2rem;
+  }
+  .mission-strip p::before {
+    top: -0.2rem;
+    font-size: 1.7rem;
+  }
+  .mission-strip p::after {
+    font-size: 1.45rem;
   }
 }

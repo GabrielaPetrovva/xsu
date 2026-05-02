@@ -35,51 +35,6 @@ a {
 }
 
 /* ═══════════════════════════════════════
-   АНИМАЦИИ
-═══════════════════════════════════════ */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-breadcrumb {
-  animation: slideDown 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.15s both;
-}
-.hero-eyebrow {
-  animation: fadeUp 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.3s both;
-}
-.hero-title {
-  animation: fadeUp 0.65s cubic-bezier(0.22, 0.68, 0, 1.2) 0.45s both;
-}
-.hero-desc {
-  animation: fadeUp 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) 0.62s both;
-}
-
-/* ═══════════════════════════════════════
    PAGE HERO
 ═══════════════════════════════════════ */
 .page-hero {
@@ -103,9 +58,17 @@ a {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
+  margin-bottom: 0.8rem;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
+}
+.page-hero-eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
 }
 
 .page-hero h1 {
