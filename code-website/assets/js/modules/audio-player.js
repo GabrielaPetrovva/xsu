@@ -3,7 +3,7 @@ export function initAudioPlayer() {
   let isMuted = false;
   let lastVol = 0.8;
 
-  const AUDIO_PATH = "/audio/himn.mp3"; // ← change this to your real path
+  const AUDIO_PATH = "../../assets/audio/himn-xsu.mp3";
 
   function updateVolIcon(v) {
     const icon = document.getElementById('volIcon');
@@ -45,7 +45,7 @@ export function initAudioPlayer() {
   }
 
   // Initialize immediately with file path
-  initAudio('../../assets/audio/himn-xsu.mp3');
+  initAudio(AUDIO_PATH);
 
   window.togglePlay = function () {
     if (!audio) return;
