@@ -241,9 +241,6 @@ img {
     grid-template-columns: 1fr 1fr;
   }
   .nav-links,
-  .nav-search {
-    display: none;
-  }
   .hamburger {
     display: flex;
   }

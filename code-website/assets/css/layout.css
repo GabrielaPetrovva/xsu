@@ -431,7 +431,6 @@ footer {
   .priem-side-nav,
   .priem-side-nav.is-stopped,
   .side-nav,
-  .history-sidebar,
   .filter-section {
     position: static !important;
     top: auto !important;

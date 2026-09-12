@@ -453,9 +453,6 @@ img {
     padding: 0 1.2rem;
   }
   .nav-links,
-  .nav-search {
-    display: none;
-  }
   .hamburger {
     display: flex;
   }

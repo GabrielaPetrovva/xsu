@@ -1,3 +1,9 @@
+/* overflow-x: hidden on html/body breaks position:sticky — clip avoids that */
+html:has(.history-layout),
+body:has(.history-layout) {
+  overflow-x: clip;
+}
+
 :root {
   --green: #1d7a50;
   --green-dark: #0f5438;
@@ -164,14 +170,24 @@ img {
 
 .history-sidebar {
   background: var(--dark);
-
-  position: relative;
-  height: auto;
-  min-height: 100%;
-
-  padding: 3rem 1.8rem;
-
   align-self: stretch;
+}
+
+.history-sidebar-inner {
+  position: sticky;
+  position: -webkit-sticky;
+  top: calc(var(--top-bar-h, 46px) + var(--nav-h, 72px));
+  z-index: 10;
+  padding: 3rem 1.8rem;
+  max-height: calc(100vh - var(--top-bar-h, 46px) - var(--nav-h, 72px));
+  overflow-y: auto;
+}
+
+@media (min-width: 769px) {
+  .history-sidebar-inner {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+  }
 }
 
 .history-main {
@@ -559,12 +575,17 @@ img {
 
 @media (max-width: 1100px) {
   .history-layout {
-    grid-template-columns: 1fr;
+    display: block;
   }
   .history-sidebar {
-    position: relative;
-    height: auto;
-    top: 0;
+    position: static;
+    width: 100%;
+    background: var(--dark);
+  }
+  .history-sidebar-inner {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
     padding: 1.5rem 2rem;
     display: flex;
     flex-wrap: wrap;
@@ -598,11 +619,8 @@ img {
     bottom: -0.7rem;
     top: auto;
   }
-  .history-main {
-    padding: 1.5rem 1rem 3rem;
-  }
   .history-sidebar {
-    padding: 0.8rem 0.8rem 1rem;
+    display: none;  
   }
   .decade-nav {
     flex-wrap: nowrap;
