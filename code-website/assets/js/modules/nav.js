@@ -52,7 +52,7 @@ export function initNav() {
     if (!trigger) return;
 
     trigger.addEventListener("click", (event) => {
-      if (!touchMedia.matches || window.innerWidth <= 768) return;
+      if (!touchMedia.matches || window.innerWidth <= 1100) return;
       const isOpen = item.classList.contains("touch-open");
       if (!isOpen) {
         event.preventDefault();
@@ -63,12 +63,12 @@ export function initNav() {
   });
 
   document.addEventListener("click", (event) => {
-    if (!touchMedia.matches || window.innerWidth <= 768) return;
+    if (!touchMedia.matches || window.innerWidth <= 1100) return;
     if (!navbar.contains(event.target)) closeTouchMenus();
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth <= 768) closeTouchMenus();
+    if (window.innerWidth <= 1100) closeTouchMenus();
   });
 
   document.addEventListener("keydown", (event) => {

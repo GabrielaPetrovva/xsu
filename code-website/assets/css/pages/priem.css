@@ -240,13 +240,6 @@ img {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
-  .nav-links,
-  .hamburger {
-    display: flex;
-  }
-  .mobile-menu {
-    display: flex;
-  }
 }
 @media (max-width: 768px) {
   :root {
