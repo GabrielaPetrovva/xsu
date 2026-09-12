@@ -323,17 +323,15 @@ function buildBotMarkup(kb) {
     .join('');
 
   wrapper.innerHTML = `
-    <!--
-<button class="faq-bot-toggle" id="faqBotToggle" type="button" aria-expanded="false" aria-controls="faqBotPanel">
-  <span class="faq-bot-toggle-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
-      <path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
-      <path d="M8 9h8M8 13h5"/>
-    </svg>
-  </span>
-  <span class="faq-bot-toggle-text">Помощ</span>
-</button>
--->
+    <button class="faq-bot-toggle" id="faqBotToggle" type="button" aria-expanded="false" aria-controls="faqBotPanel">
+      <span class="faq-bot-toggle-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+          <path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+          <path d="M8 9h8M8 13h5"/>
+        </svg>
+      </span>
+      <span class="faq-bot-toggle-text">Помощ</span>
+    </button>
 
     <section class="faq-bot-panel" id="faqBotPanel" aria-hidden="true">
       <header class="faq-bot-head">
@@ -357,7 +355,7 @@ function buildBotMarkup(kb) {
       </div>
 
       <form class="faq-bot-form" id="faqBotForm">
-        <input class="faq-bot-input" id="faqBotInput" type="search" autocomplete="off" placeholder="Напиши въпрос...">
+        <input class="faq-bot-input" id="faqBotInput" type="search" autocomplete="off" placeholder="Напиши въпрос..." aria-label="Въпрос към асистента">
         <button class="faq-bot-send" id="faqBotSend" type="submit" aria-label="Изпрати">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
             <line x1="22" y1="2" x2="11" y2="13"/>

@@ -4,6 +4,7 @@
 import { initNav }    from './modules/nav.js';
 import { initReveal } from './modules/reveal.js';
 import { initFaqBot } from './modules/faq-bot.js';
+import { initSiteRuntime } from './modules/site-runtime.js';
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -31,6 +32,7 @@ function syncMobileBreadcrumbWraps() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSiteRuntime();
   initNav();
   initReveal();
   initFaqBot();

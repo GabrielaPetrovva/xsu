@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /razrabotva-se.html
+Disallow: /404.html
+Disallow: /assets/components/
+
+Sitemap: sitemap.xml
+
+# © 2026 СУ „Йордан Йовков“ – Сливен. Всички права запазени.

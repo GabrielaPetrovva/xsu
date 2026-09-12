@@ -2,11 +2,11 @@ const MOBILE_BREAKPOINT = 768;
 const MOBILE_DEFAULT_ITEMS = 3;
 
 const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
-
 const normalize = (value) => value.trim().toLowerCase();
 
 const newsGrid = document.getElementById('newsGrid');
 const categorySelect = document.getElementById('newsCategorySelect');
+const categoryList = document.getElementById('newsCategoryList');
 
 if (newsGrid && categorySelect) {
   const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
@@ -20,7 +20,6 @@ if (newsGrid && categorySelect) {
     return bDate - aDate;
   });
 
-  // Render cards in newest-first order once.
   sortedCards.forEach((card) => newsGrid.appendChild(card));
 
   const categories = Array.from(
@@ -37,26 +36,37 @@ if (newsGrid && categorySelect) {
     option.value = normalize(category);
     option.textContent = category;
     categorySelect.appendChild(option);
+
+    if (categoryList) {
+      const item = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.category = normalize(category);
+      button.textContent = category;
+      item.appendChild(button);
+      categoryList.appendChild(item);
+    }
   });
 
-  const applyMobileFilter = () => {
+  const setActiveButton = (value) => {
+    if (!categoryList) return;
+    categoryList.querySelectorAll('button').forEach((button) => {
+      button.classList.toggle('active', button.dataset.category === value);
+    });
+  };
+
+  const applyFilter = () => {
     updateSelectAccent();
-
-    if (!isMobile()) {
-      sortedCards.forEach((card) => {
-        card.style.display = '';
-      });
-      return;
-    }
-
     const selected = categorySelect.value;
+    setActiveButton(selected);
     let shownCount = 0;
 
     sortedCards.forEach((card) => {
       const cardTag = normalize(card.querySelector('.tag')?.textContent || '');
       const matchesCategory = selected === 'all' || cardTag === selected;
+      const mobileLimitReached = isMobile() && shownCount >= MOBILE_DEFAULT_ITEMS;
 
-      if (matchesCategory && shownCount < MOBILE_DEFAULT_ITEMS) {
+      if (matchesCategory && !mobileLimitReached) {
         card.style.display = '';
         shownCount += 1;
       } else {
@@ -65,7 +75,13 @@ if (newsGrid && categorySelect) {
     });
   };
 
-  categorySelect.addEventListener('change', applyMobileFilter);
-  window.addEventListener('resize', applyMobileFilter);
-  applyMobileFilter();
+  categorySelect.addEventListener('change', applyFilter);
+  categoryList?.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-category]');
+    if (!button) return;
+    categorySelect.value = button.dataset.category;
+    applyFilter();
+  });
+  window.addEventListener('resize', applyFilter);
+  applyFilter();
 }

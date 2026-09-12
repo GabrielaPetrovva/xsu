@@ -269,6 +269,26 @@ a {
   transition: color 0.2s;
 }
 
+/* Card whose file has not been uploaded yet */
+.download-card--missing.download-card--missing {
+  border-color: #e3e8e5;
+}
+.download-card--missing .download-icon,
+.download-card--missing:hover .download-icon {
+  background: rgba(107, 124, 116, 0.12);
+}
+.download-card--missing .download-icon svg {
+  color: #6b7c74;
+}
+.download-card--missing .download-action,
+.download-card--missing:hover .download-action {
+  background: #6b7c74;
+}
+.download-card--missing:hover .download-action svg,
+.download-card--missing .download-action svg {
+  color: #fff;
+}
+
 /* NOTE */
 .note-box {
   background: rgba(201, 168, 76, 0.08);

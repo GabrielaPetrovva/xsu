@@ -6,6 +6,8 @@
   //  tourUrl → пътят до твоята equirectangular
   //  снимка (напр. 'assets/images/panoramas/fasada.jpg')
   //  Остави null докато нямаш снимка за стаята.
+  //  Ако Pannellum (CDN) не зареди, всички стаи
+  //  показват placeholder вместо да счупят страницата.
   // ─────────────────────────────────────────────
   const rooms = [
     {
@@ -13,63 +15,63 @@
       desc: 'Добре дошли в СУ „Йордан Йовков"! Разгледайте фасадата на нашето училище и просторния двор, където учениците прекарват почивките си.',
       features: ['Просторен двор', 'Спортна площадка', 'Зелени площи', 'Паркинг'],
       emoji: ['🏫', '🌳', '⚽'],
-      tourUrl: 'images/tour-test.jpg'   // ← смени с реалния файл
+      tourUrl: null   // ← смени с реалния файл
     },
     {
       id: 1, label: 'Учебна дейност', title: 'Класна стая', badge: 'I–XII клас',
       desc: 'Нашите класни стаи са просветли, удобни и оборудвани с модерни учебни помагала. Интерактивни дъски, проектори и комфортни чинове създават идеална среда за учене.',
       features: ['Интерактивна дъска', 'Проектор', 'Климатик', 'Натурална светлина'],
       emoji: ['📖', '✏️', '📐'],
-      tourUrl: 'assets/images/panoramas/klasa.jpg'
+      tourUrl: null
     },
     {
       id: 2, label: 'Учебна дейност', title: 'Компютърен кабинет', badge: 'ИТ & Програмиране',
       desc: 'Модерно оборудван компютърен кабинет с нови машини и бърз интернет. Тук се провеждат часовете по информационни технологии и програмиране.',
       features: ['30 работни места', 'Бърз интернет', 'Нови компютри', 'Специализиран софтуер'],
       emoji: ['💻', '🖥️', '⌨️'],
-      tourUrl: 'assets/images/panoramas/kompyutaren.jpg'
+      tourUrl: null
     },
     {
       id: 3, label: 'Учебна дейност', title: 'Кабинети по науки', badge: 'Физика · Химия · Биология',
       desc: 'Напълно оборудвани лаборатории за практически опити по физика, химия и биология.',
       features: ['Лабораторно оборудване', 'Демонстрационна маса', 'Защитно оборудване', 'Реактиви и препарати'],
       emoji: ['🔬', '⚗️', '🧪'],
-      tourUrl: 'assets/images/panoramas/nauki.jpg'
+      tourUrl: null
     },
     {
       id: 4, label: 'Спорт', title: 'Физкултурен салон', badge: 'Спорт & Здраве',
       desc: 'Просторен физкултурен салон с модерен инвентар за различни спортове.',
       features: ['Паркет под', 'Оборудване за гимнастика', 'Баскетбол & Волейбол', 'Съблекални'],
       emoji: ['🏃', '⚽', '🏀'],
-      tourUrl: 'assets/images/panoramas/salon.jpg'
+      tourUrl: null
     },
     {
       id: 5, label: 'Изкуство & Тържества', title: 'Актова зала', badge: 'Сцена & Концерти',
       desc: 'Красива актова зала с голяма сцена и зрителна зала. Тук се провеждат училищни тържества, театрални представления и концерти.',
       features: ['Голяма сцена', 'Озвучителна система', 'Прожекционен екран', '300 места'],
       emoji: ['🎭', '🎤', '🎬'],
-      tourUrl: 'assets/images/panoramas/aktova.jpg'
+      tourUrl: null
     },
     {
       id: 6, label: 'Изкуство', title: 'Творческо ателие', badge: 'Извънкласни дейности',
       desc: 'Пространство за творческо изразяване — рисуване, приложни изкуства и ръчна изработка.',
       features: ['Арт материали', 'Грънчарско колело', 'Изложбено пространство', 'Студио'],
       emoji: ['🎨', '✂️', '🖌️'],
-      tourUrl: 'assets/images/panoramas/atelier.jpg'
+      tourUrl: null
     },
     {
       id: 7, label: 'Общи пространства', title: 'Библиотека', badge: 'Знание & Четене',
       desc: 'Уютна библиотека с богат книжен фонд и тиха зона за самоподготовка.',
       features: ['5000+ книги', 'Компютри с интернет', 'Тиха зона', 'Читалня'],
       emoji: ['📚', '📖', '🗂️'],
-      tourUrl: 'assets/images/panoramas/biblioteka.jpg'
+      tourUrl: null
     },
     {
       id: 8, label: 'Общи пространства', title: 'Стол / Бюфет', badge: 'Хранене & Почивка',
       desc: 'Светлото хранилище предлага разнообразно и балансирано меню всеки ден.',
       features: ['Топла храна', 'Разнообразно меню', 'Чисто пространство', 'Бюфет с лека закуска'],
       emoji: ['🍽️', '🥗', '☕'],
-      tourUrl: 'assets/images/panoramas/stol.jpg'
+      tourUrl: null
     },
     {
       id: 9, label: 'Администрация', title: 'Канцелария', badge: 'Администрация',
@@ -103,14 +105,22 @@
       _viewer = null;
     }
 
-    if (!room.tourUrl) {
-      // Няма снимка → покажи placeholder
+    // CDN на Pannellum не е зареден (офлайн / блокиран схрипт)
+    const hasPannellum = typeof window.pannellum === 'object' && typeof window.pannellum.viewer === 'function';
+
+    if (!room.tourUrl || !hasPannellum) {
+      // Няма снимка или Pannellum → покажи placeholder
       if (viewerEl)    viewerEl.style.display    = 'none';
-      if (placeholder) placeholder.style.display = 'flex';
-      const t = document.getElementById('placeholderTitle');
-      const d = document.getElementById('placeholderDesc');
-      if (t) t.textContent = room.title;
-      if (d) d.textContent = `360° панорамата за „${room.title}" предстои да бъде добавена.`;
+      if (loading)     loading.classList.remove('active');
+      if (placeholder) {
+        placeholder.style.display = 'flex';
+        const t = document.getElementById('placeholderTitle');
+        const d = document.getElementById('placeholderDesc');
+        if (t) t.textContent = room.title;
+        if (d) d.textContent = hasPannellum
+          ? `360° панорамата за „${room.title}" предстои да бъде добавена.`
+          : '3D панорамите не могат да се заредят в момента. Опитайте по-късно или се свържете с канцеларията.';
+      }
       return;
     }
 
@@ -149,6 +159,13 @@
     // Скрий loader и при грешка (да не виси вечно)
     _viewer.on('error', function () {
       if (loading) loading.classList.remove('active');
+      if (placeholder) {
+        placeholder.style.display = 'flex';
+        const t = document.getElementById('placeholderTitle');
+        const d = document.getElementById('placeholderDesc');
+        if (t) t.textContent = room.title;
+        if (d) d.textContent = `Панорамата за „${room.title}" не можа да се зареди. Моля, опитайте по-късно.`;
+      }
     });
   }
 
@@ -302,15 +319,17 @@
 
   window.shareRoom = function () {
     const room = rooms[currentRoom];
+    const shareData = {
+      title: `СУ „Йордан Йовков" – ${room.title}`,
+      url: window.location.href
+    };
     if (navigator.share) {
-      navigator.share({
-        title: `СУ „Йордан Йовков" – ${room.title}`,
-        url: window.location.href
-      });
-    } else {
+      navigator.share(shareData).catch(function () {});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard
         .writeText(window.location.href)
-        .then(() => alert('Линкът е копиран!'));
+        .then(() => alert('Линкът е копиран!'))
+        .catch(function () {});
     }
   };
 

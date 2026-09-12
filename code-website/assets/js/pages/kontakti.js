@@ -39,25 +39,62 @@
     document.body.removeChild(ta);
   }
   
-  // Contact form submit handler
-  window.handleFormSubmit = function (e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.textContent = 'Изпращане...';
-    btn.disabled = true;
-  
-    setTimeout(() => {
-      btn.textContent = 'Изпратено ✓';
-      btn.style.background = '#12a063';
-      const success = document.getElementById('formSuccess');
-      if (success) success.style.display = 'flex';
-      e.target.reset();
-  
-      setTimeout(() => {
-        btn.textContent = 'Изпратете';
-        btn.disabled = false;
-        btn.style.background = '';
-        if (success) success.style.display = 'none';
-      }, 5000);
-    }, 1200);
-  };
+  // Contact form: validate locally, then open the school mailbox.
+  // There is no server endpoint in this project.
+  function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const success = document.getElementById('formSuccess');
+    const errorBox = document.getElementById('formError');
+    const schoolEmail = 'info-2000114@edu.mon.bg';
+
+    const showError = (message) => {
+      if (!errorBox) return;
+      errorBox.hidden = false;
+      errorBox.textContent = message;
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (errorBox) errorBox.hidden = true;
+      if (success) success.hidden = true;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        showError('Моля, попълнете задължителните полета коректно.');
+        return;
+      }
+
+      const fname = form.fname.value.trim();
+      const lname = form.lname.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const subject = form.subject.value.trim();
+      const message = form.message.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        showError('Въведете валиден имейл адрес.');
+        return;
+      }
+
+      const body = [
+        `Име: ${fname} ${lname}`,
+        `Имейл: ${email}`,
+        phone ? `Телефон: ${phone}` : null,
+        '',
+        message
+      ].filter(Boolean).join('\n');
+
+      const mailto = `mailto:${schoolEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      if (success) success.hidden = false;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }

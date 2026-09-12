@@ -227,6 +227,7 @@ nav.scrolled {
 }
 
 .nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown,
 .nav-item.touch-open .dropdown {
   opacity: 1;
   pointer-events: all;

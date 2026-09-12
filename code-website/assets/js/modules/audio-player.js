@@ -3,7 +3,7 @@ export function initAudioPlayer() {
   let isMuted = false;
   let lastVol = 0.8;
 
-  const AUDIO_PATH = "../../assets/audio/himn-xsu.mp3";
+  const AUDIO_PATH = "assets/audio/himn-xsu.mp3";
 
   function updateVolIcon(v) {
     const icon = document.getElementById('volIcon');
