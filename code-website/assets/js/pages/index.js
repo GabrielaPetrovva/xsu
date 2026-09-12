@@ -45,14 +45,19 @@ const videoModalFrame = document.getElementById('videoModalFrame');
 
 function closeVideoModal() {
   if (!videoModal || !videoModalFrame) return;
+  if (!videoModal.classList.contains('is-open')) return;
   videoModal.classList.remove('is-open');
   videoModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('video-modal-open');
   videoModalFrame.innerHTML = '';
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
 }
+
+let lastFocus = null;
 
 function openVideoModal(embedUrl) {
   if (!videoModal || !videoModalFrame) return;
+  lastFocus = videoTrigger || document.activeElement;
   const src = `${embedUrl}?autoplay=1&rel=0&modestbranding=1`;
   videoModalFrame.innerHTML = `
     <iframe

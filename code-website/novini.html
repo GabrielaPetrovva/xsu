@@ -3,9 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Новини | СУ „Йордан Йовков“ - Сливен</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Новини | СУ „Йордан Йовков“ – Сливен</title>
+  <!-- site-seo:start -->
+  <meta name="description" content="Новини, събития и постижения от живота на СУ „Йордан Йовков“ – Сливен.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="novini.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="bg_BG">
+  <meta property="og:site_name" content="СУ „Йордан Йовков“ – Сливен">
+  <meta property="og:title" content="Новини | СУ „Йордан Йовков“ – Сливен">
+  <meta property="og:description" content="Новини, събития и постижения от живота на СУ „Йордан Йовков“ – Сливен.">
+  <meta property="og:url" content="novini.html">
+  <meta property="og:image" content="images/og-share.jpg">
+  <meta property="og:image:alt" content="СУ „Йордан Йовков“ – Сливен">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Новини | СУ „Йордан Йовков“ – Сливен">
+  <meta name="twitter:description" content="Новини, събития и постижения от живота на СУ „Йордан Йовков“ – Сливен.">
+  <meta name="twitter:image" content="images/og-share.jpg">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+  <link rel="shortcut icon" href="images/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <meta name="theme-color" content="#0f5438">
+  <meta name="apple-mobile-web-app-title" content="СУ Йордан Йовков">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["EducationalOrganization","School"],"name":"СУ „Йордан Йовков“ – Сливен","alternateName":"СУ Йордан Йовков Сливен","address":{"@type":"PostalAddress","streetAddress":"кв. „Българка“","addressLocality":"Сливен","postalCode":"8808","addressCountry":"BG"},"telephone":"+35944667244","email":"info-2000114@edu.mon.bg","sameAs":["https://www.facebook.com/SUYordanYovkov","https://www.youtube.com/@%D0%A1%D0%A3%D0%99%D0%BE%D1%80%D0%B4%D0%B0%D0%BD%D0%99%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2","https://www.tiktok.com/@x_su_sliven"]},{"@type":"WebPage","name":"Новини | СУ „Йордан Йовков“ – Сливен","headline":"Новини | СУ „Йордан Йовков“ – Сливен","description":"Новини, събития и постижения от живота на СУ „Йордан Йовков“ – Сливен.","inLanguage":"bg","isPartOf":{"@type":"WebSite","name":"СУ „Йордан Йовков“ – Сливен"},"about":{"@type":["EducationalOrganization","School"],"name":"СУ „Йордан Йовков“ – Сливен","alternateName":"СУ Йордан Йовков Сливен","address":{"@type":"PostalAddress","streetAddress":"кв. „Българка“","addressLocality":"Сливен","postalCode":"8808","addressCountry":"BG"},"telephone":"+35944667244","email":"info-2000114@edu.mon.bg","sameAs":["https://www.facebook.com/SUYordanYovkov","https://www.youtube.com/@%D0%A1%D0%A3%D0%99%D0%BE%D1%80%D0%B4%D0%B0%D0%BD%D0%99%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2","https://www.tiktok.com/@x_su_sliven"]}}]}</script>
+  <!-- site-seo:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/reset.css">
@@ -15,12 +41,7 @@
   <link rel="stylesheet" href="assets/css/titleAnim.css">
   <link rel="stylesheet" href="assets/css/pages/novini.css">
 
-  <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96"/>
-  <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg"/>
-  <link rel="shortcut icon" href="/images/favicon/favicon.ico"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
-  <link rel="manifest" href="/images/favicon/site.webmanifest"/>
-</head>
+  </head>
 <body>
 
   <div id="navbar-container"></div>
@@ -43,31 +64,16 @@
       <select id="newsCategorySelect" class="mobile-category-select" aria-label="Филтър по категория новини">
         <option value="all">Всички категории</option>
       </select>
-      <ul>
-        <li><a href="#" class="active">Новини</a></li>
-        <li><a href="#">Олимпиади, състезания и конкурси</a></li>
-        <li><a href="#">Постижения</a></li>
-        <li><a href="#">Съобщения</a></li>
-        <li><a href="#">Твоят час</a></li>
-        <li><a href="#">Занимания по интереси</a></li>
-        <li><a href="#">Събития</a></li>
-        <li><a href="#">Твоят час</a></li>
+      <ul id="newsCategoryList">
+        <li><button type="button" class="active" data-category="all">Всички</button></li>
       </ul>
       <hr class="side-divider">
       <div class="latest">
-        <h4>Последни 3 новини</h4>
+        <h4>Статии с пълно съдържание</h4>
         <div class="latest-list">
-          <a href="#" class="latest-item">
-            <span class="t">Начало на кампанията за прием</span>
-            <span class="d">Днес</span>
-          </a>
-          <a href="#" class="latest-item">
-            <span class="t">Отлично представяне на областен кръг</span>
-            <span class="d">Вчера</span>
-          </a>
-          <a href="#" class="latest-item">
-            <span class="t">Награда за иновативен проект</span>
-            <span class="d">Преди 3 дни</span>
+          <a href="statiq.html" class="latest-item">
+            <span class="t">Национално отличие за ученици</span>
+            <span class="d">Пълна статия</span>
           </a>
         </div>
       </div>
@@ -75,7 +81,7 @@
     <main>
       <section class="news-grid" id="newsGrid">
         <article class="news-card" data-date="2026-05-05">
-          <div class="news-media"><img src="images/concurs.jpg" alt="Новини"></div>
+          <div class="news-media"><img src="images/concurs.jpg" alt="Ученици от СУ „Йордан Йовков“ на национален конкурс за изкуствен интелект"></div>
           <div class="news-body">
             <span class="tag">Новини</span>
             <h3>Национално отличие за ученици от СУ „Йордан Йовков“ – Сливен</h3>
@@ -84,47 +90,36 @@
           </div>
         </article>
         <article class="news-card" data-date="2026-05-04">
-          <div class="news-media"><img src="images/3-mart.jpg" alt="Олимпиади"></div>
+          <div class="news-media"><img src="images/3-mart.jpg" alt="Училищно отбелязване на националния празник Трети март"></div>
           <div class="news-body">
             <span class="tag">Олимпиади</span>
             <h3>Отлично представяне на областен кръг</h3>
             <p>Ученици от училището се класираха за националния етап.</p>
-            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </article>
         <article class="news-card" data-date="2026-05-02">
-          <div class="news-media"><img src="images/levski.jpg" alt="Постижения"></div>
+          <div class="news-media"><img src="images/levski.jpg" alt="Училищно тържество в памет на Васил Левски"></div>
           <div class="news-body">
             <span class="tag">Постижения</span>
             <h3>Награда за иновативен проект</h3>
             <p>Екипът по информатика спечели награда за ученическа разработка.</p>
-            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </article>
         <article class="news-card" data-date="2026-04-28">
-          <div class="news-media"><img src="images/concurs.jpg" alt="Събития"></div>
+          <div class="news-media"><img src="images/concurs.jpg" alt="Ден на отворените врати в СУ „Йордан Йовков“"></div>
           <div class="news-body">
             <span class="tag">Събития</span>
             <h3>Ден на отворените врати</h3>
             <p>Посрещаме родители и бъдещи ученици с демонстрации и срещи.</p>
-            <a href="#" class="btn-more">Научи повече<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </article>
       </section>
-      <nav class="pagination" aria-label="Страници">
-        <a href="#" aria-label="Предишна">&#8592;</a>
-        <span class="active" aria-current="page">1</span>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <span class="dots">…</span>
-        <a href="#">8</a>
-        <a href="#" aria-label="Следваща">&#8594;</a>
-      </nav>
     </main>
   </div>
 
   <div id="footer-container"></div>
 
+  <script src="assets/js/site-config.js"></script>
   <script type="module" src="assets/js/main.js"></script>
   <script type="module" src="assets/js/pages/novini.js"></script>
   <script src="assets/js/components-init.js"></script>

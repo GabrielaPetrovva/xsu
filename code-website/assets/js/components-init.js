@@ -511,14 +511,11 @@ function initGlobalSearch() {
     
     const href = link.getAttribute('href');
     if (!href || href === '#') {
-      console.warn('Invalid href in search suggestion:', href);
       return;
     }
     
     // Use data-title first (the suggestion title), then fallback to data-target-text
     const targetText = link.getAttribute('data-title') || link.getAttribute('data-target-text') || '';
-    
-    console.log('Search suggestion clicked:', { href, targetText });
     
     storePendingSearchForPage(href, input.value, targetText);
     
@@ -607,6 +604,7 @@ async function loadComponents() {
     const navbarContainer = document.getElementById('navbar-container');
     if (navbarContainer) {
       const navbarResponse = await fetch('assets/components/navbar.html');
+      if (!navbarResponse.ok) throw new Error('navbar request failed');
       const navbarHTML = await navbarResponse.text();
       navbarContainer.innerHTML = navbarHTML;
       document.dispatchEvent(new CustomEvent('components:navbar-loaded'));
@@ -620,6 +618,7 @@ async function loadComponents() {
     const footerContainer = document.getElementById('footer-container');
     if (footerContainer) {
       const footerResponse = await fetch('assets/components/footer.html');
+      if (!footerResponse.ok) throw new Error('footer request failed');
       const footerHTML = await footerResponse.text();
       footerContainer.innerHTML = footerHTML;
     }

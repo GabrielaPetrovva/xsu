@@ -5,30 +5,36 @@ export function initSlider() {
 
   let cur = 0;
   let sliderTimer;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function goTo(idx) {
     slides[cur].classList.remove('active');
     slides[cur].classList.remove('first-load');
     dots[cur].classList.remove('active');
+    dots[cur].setAttribute('aria-pressed', 'false');
     cur = idx;
     slides[cur].classList.add('active');
     slides[cur].classList.add('first-load');
     dots[cur].classList.add('active');
-    // Премахни first-load след 3.2s (продължителност на анимацията)
+    dots[cur].setAttribute('aria-pressed', 'true');
     setTimeout(() => {
       slides[cur].classList.remove('first-load');
     }, 3200);
   }
 
   function startSlider() {
+    if (reduceMotion) return;
     sliderTimer = setInterval(() => goTo((cur + 1) % slides.length), 5500);
   }
 
-  dots.forEach(d => d.addEventListener('click', () => {
-    clearInterval(sliderTimer);
-    goTo(+d.dataset.idx);
-    startSlider();
-  }));
+  dots.forEach((d, index) => {
+    d.setAttribute('aria-pressed', d.classList.contains('active') ? 'true' : 'false');
+    d.addEventListener('click', () => {
+      clearInterval(sliderTimer);
+      goTo(Number(d.dataset.idx ?? index));
+      startSlider();
+    });
+  });
 
   startSlider();
 }

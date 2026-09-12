@@ -799,3 +799,34 @@ img {
     padding: 3rem 5vw;
   }
 }
+
+.form-backend-note {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--gray);
+  margin: 0 0 1rem;
+}
+
+.form-status {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.form-status--success {
+  background: #e1f5ee;
+  border: 1.5px solid rgba(29, 122, 80, 0.25);
+  color: var(--green);
+}
+
+.form-status--error {
+  background: #fdecec;
+  border: 1.5px solid rgba(176, 0, 32, 0.2);
+  color: #8a1f1f;
+}
+
+.doc-download--missing {
+  background: #6b7c74;
+}

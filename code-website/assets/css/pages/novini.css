@@ -88,15 +88,25 @@ a {
   flex-direction: column;
   gap: 0.35rem;
 }
-.side-nav a {
+.side-nav a,
+.side-nav button {
   display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: none;
+  cursor: pointer;
   padding: 0.55rem 0.7rem;
   border-radius: 8px;
+  font: inherit;
   font-size: 0.88rem;
+  color: inherit;
   transition: background 0.2s, color 0.2s;
 }
 .side-nav a:hover,
-.side-nav a.active {
+.side-nav a.active,
+.side-nav button:hover,
+.side-nav button.active {
   background: var(--green-light);
   color: var(--green);
   font-weight: 600;

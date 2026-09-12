@@ -169,6 +169,27 @@
   transform: translateY(-3px);
 }
 
+/* PDF material not uploaded yet */
+.intel-card--missing {
+  border-color: #e3e8e5;
+}
+.intel-card--missing .intel-card-icon {
+  background: rgba(107, 124, 116, 0.12);
+  color: #6b7c74;
+}
+.intel-card--missing:hover {
+  border-color: #6b7c74;
+  box-shadow: 0 6px 28px rgba(107, 124, 116, 0.14);
+}
+.intel-card--missing .intel-card-arrow {
+  background: #6b7c74;
+  color: #fff;
+}
+.intel-card--missing:hover .intel-card-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
 /* left icon */
 .intel-card-icon {
   flex-shrink: 0;

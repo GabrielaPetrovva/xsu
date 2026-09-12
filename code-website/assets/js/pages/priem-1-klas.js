@@ -17,8 +17,27 @@ if (img1 && img2) {
 
 // Modal
 window.openBrochure = function () {
-  document.getElementById('brochureModal')?.classList.add('open');
+  const modal = document.getElementById('brochureModal');
+  if (!modal) return;
+  modal.classList.add('open');
+  const btn = modal.querySelector('.close-btn');
+  if (btn) btn.focus();
 };
 window.closeBrochure = function () {
-  document.getElementById('brochureModal')?.classList.remove('open');
+  const modal = document.getElementById('brochureModal');
+  if (!modal) return;
+  if (!modal.classList.contains('open')) return;
+  modal.classList.remove('open');
+  const banner = document.querySelector('.brochure-banner');
+  if (banner && banner.focus) {
+    banner.setAttribute('tabindex', '-1');
+    banner.focus();
+    banner.removeAttribute('tabindex');
+  }
 };
+
+document.addEventListener('keydown', function (e) {
+  const modal = document.getElementById('brochureModal');
+  if (!modal || !modal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeBrochure();
+});
