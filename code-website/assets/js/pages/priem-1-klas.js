@@ -17,37 +17,27 @@ if (img1 && img2) {
 
 // Modal
 window.openBrochure = function () {
-  if (window.innerWidth <= 600) {
-    document.getElementById('brochureLightbox')?.classList.add('open');
-  } else {
-    document.getElementById('brochureModal')?.classList.add('open');
-  }
-  document.body.style.overflow = 'hidden';
+  const modal = document.getElementById('brochureModal');
+  if (!modal) return;
+  modal.classList.add('open');
+  const btn = modal.querySelector('.close-btn');
+  if (btn) btn.focus();
 };
 window.closeBrochure = function () {
-  document.getElementById('brochureModal')?.classList.remove('open');
-  document.getElementById('brochureLightbox')?.classList.remove('open');
-  document.body.style.overflow = '';
-};
-// Lightbox navigation
-(function() {
-  const lb = document.getElementById('brochureLightbox');
-  if (!lb) return;
-  const imgs = lb.querySelectorAll('.lightbox-img');
-  let current = 0;
-  function showImg(i) {
-    imgs.forEach((img, idx) => img.classList.toggle('active', idx === i));
-    lb.querySelector('.lightbox-counter').textContent = (i + 1) + ' / ' + imgs.length;
+  const modal = document.getElementById('brochureModal');
+  if (!modal) return;
+  if (!modal.classList.contains('open')) return;
+  modal.classList.remove('open');
+  const banner = document.querySelector('.brochure-banner');
+  if (banner && banner.focus) {
+    banner.setAttribute('tabindex', '-1');
+    banner.focus();
+    banner.removeAttribute('tabindex');
   }
-  lb.querySelector('.lightbox-prev').addEventListener('click', function(e) {
-    e.stopPropagation();
-    current = (current - 1 + imgs.length) % imgs.length;
-    showImg(current);
-  });
-  lb.querySelector('.lightbox-next').addEventListener('click', function(e) {
-    e.stopPropagation();
-    current = (current + 1) % imgs.length;
-    showImg(current);
-  });
-  showImg(0);
-})();
+};
+
+document.addEventListener('keydown', function (e) {
+  const modal = document.getElementById('brochureModal');
+  if (!modal || !modal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeBrochure();
+});

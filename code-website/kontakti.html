@@ -3,9 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Контакти | СУ „Йордан Йовков“ - Сливен</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Контакти | СУ „Йордан Йовков“ – Сливен</title>
+  <!-- site-seo:start -->
+  <meta name="description" content="Адрес, телефони, имейл и контактна форма на СУ „Йордан Йовков“ – Сливен, кв. „Българка“.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="kontakti.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="bg_BG">
+  <meta property="og:site_name" content="СУ „Йордан Йовков“ – Сливен">
+  <meta property="og:title" content="Контакти | СУ „Йордан Йовков“ – Сливен">
+  <meta property="og:description" content="Адрес, телефони, имейл и контактна форма на СУ „Йордан Йовков“ – Сливен, кв. „Българка“.">
+  <meta property="og:url" content="kontakti.html">
+  <meta property="og:image" content="images/og-share.jpg">
+  <meta property="og:image:alt" content="СУ „Йордан Йовков“ – Сливен">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Контакти | СУ „Йордан Йовков“ – Сливен">
+  <meta name="twitter:description" content="Адрес, телефони, имейл и контактна форма на СУ „Йордан Йовков“ – Сливен, кв. „Българка“.">
+  <meta name="twitter:image" content="images/og-share.jpg">
+  <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+  <link rel="shortcut icon" href="images/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <meta name="theme-color" content="#0f5438">
+  <meta name="apple-mobile-web-app-title" content="СУ Йордан Йовков">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["EducationalOrganization","School"],"name":"СУ „Йордан Йовков“ – Сливен","alternateName":"СУ Йордан Йовков Сливен","address":{"@type":"PostalAddress","streetAddress":"кв. „Българка“","addressLocality":"Сливен","postalCode":"8808","addressCountry":"BG"},"telephone":"+35944667244","email":"info-2000114@edu.mon.bg","sameAs":["https://www.facebook.com/SUYordanYovkov","https://www.youtube.com/@%D0%A1%D0%A3%D0%99%D0%BE%D1%80%D0%B4%D0%B0%D0%BD%D0%99%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2","https://www.tiktok.com/@x_su_sliven"]},{"@type":"WebPage","name":"Контакти | СУ „Йордан Йовков“ – Сливен","headline":"Контакти | СУ „Йордан Йовков“ – Сливен","description":"Адрес, телефони, имейл и контактна форма на СУ „Йордан Йовков“ – Сливен, кв. „Българка“.","inLanguage":"bg","isPartOf":{"@type":"WebSite","name":"СУ „Йордан Йовков“ – Сливен"},"about":{"@type":["EducationalOrganization","School"],"name":"СУ „Йордан Йовков“ – Сливен","alternateName":"СУ Йордан Йовков Сливен","address":{"@type":"PostalAddress","streetAddress":"кв. „Българка“","addressLocality":"Сливен","postalCode":"8808","addressCountry":"BG"},"telephone":"+35944667244","email":"info-2000114@edu.mon.bg","sameAs":["https://www.facebook.com/SUYordanYovkov","https://www.youtube.com/@%D0%A1%D0%A3%D0%99%D0%BE%D1%80%D0%B4%D0%B0%D0%BD%D0%99%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2","https://www.tiktok.com/@x_su_sliven"]}}]}</script>
+  <!-- site-seo:end -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/reset.css">
@@ -15,15 +41,11 @@
   <link rel="stylesheet" href="assets/css/titleAnim.css">
   <link rel="stylesheet" href="assets/css/pages/kontakti.css">
 
-  <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96"/>
-  <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg"/>
-  <link rel="shortcut icon" href="/images/favicon/favicon.ico"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
-  <link rel="manifest" href="/images/favicon/site.webmanifest"/>
-</head>
+  </head>
 <body>
 
   <div id="navbar-container"></div>
+  <main id="main-content" tabindex="-1">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -257,30 +279,30 @@
         </div>
       </div>
 
-      <form class="contact-form reveal-right" onsubmit="handleFormSubmit(event)">
+      <form class="contact-form reveal-right" id="contactForm" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label for="fname">Собствено име</label>
-            <input type="text" id="fname" placeholder="Иван" required>
+            <input type="text" id="fname" name="fname" autocomplete="given-name" required minlength="2">
           </div>
           <div class="form-group">
             <label for="lname">Фамилия</label>
-            <input type="text" id="lname" placeholder="Петров" required>
+            <input type="text" id="lname" name="lname" autocomplete="family-name" required minlength="2">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="email">Имейл адрес</label>
-            <input type="email" id="email" placeholder="ivan@gmail.com" required>
+            <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
           <div class="form-group">
             <label for="phone">Телефон (незадължително)</label>
-            <input type="tel" id="phone" placeholder="088 / XXX XXXX">
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="088 / XXX XXXX">
           </div>
         </div>
         <div class="form-group">
           <label for="subject">Относно</label>
-          <select id="subject" required>
+          <select id="subject" name="subject" required>
             <option value="" disabled selected>Изберете тема...</option>
             <option>Прием в I клас</option>
             <option>Прием в V клас</option>
@@ -295,8 +317,9 @@
         </div>
         <div class="form-group">
           <label for="message">Съобщение</label>
-          <textarea id="message" placeholder="Опишете вашия въпрос или коментар..." required></textarea>
+          <textarea id="message" name="message" required minlength="10" placeholder="Опишете вашия въпрос или коментар..."></textarea>
         </div>
+        <p class="form-backend-note">Формата отваря вашата имейл програма към <a href="mailto:info-2000114@edu.mon.bg">info-2000114@edu.mon.bg</a>, защото на сайта няма свързан сървър за изпращане. При проблем се обадете на <a href="tel:+35944667244">044/ 66 72 44</a>.</p>
         <div class="form-submit-row">
           <button type="submit" class="btn-green">
             Изпратете
@@ -307,16 +330,19 @@
             Данните ви са защитени
           </div>
         </div>
-        <div id="formSuccess" style="display:none;margin-top:1rem;padding:1rem 1.2rem;background:#e1f5ee;border-radius:12px;border:1.5px solid rgba(29,122,80,.25);color:var(--green);font-size:.88rem;font-weight:600;display:none;align-items:center;gap:8px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Вашето съобщение беше изпратено успешно. Ще се свържем с вас скоро!
+        <div id="formError" class="form-status form-status--error" role="alert" hidden></div>
+        <div id="formSuccess" class="form-status form-status--success" role="status" hidden>
+          Отворете имейл програмата си, за да изпратите съобщението. Ако това не се случи, пишете директно на info-2000114@edu.mon.bg.
         </div>
       </form>
     </div>
   </section>
 
-  <div id="footer-container"></div>
+  
+</main>
+<div id="footer-container"></div>
 
+  <script src="assets/js/site-config.js"></script>
   <script type="module" src="assets/js/main.js"></script>
   <script src="assets/js/components-init.js"></script>
   <script type="module" src="assets/js/pages/kontakti.js" defer></script>

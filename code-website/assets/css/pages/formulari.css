@@ -296,6 +296,36 @@
   color: var(--green);
 }
 
+/* Download button (uniform with .formular-download) */
+.formular-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.95rem;
+  border-radius: 50px;
+  transition: background 0.25s, color 0.25s;
+  border: 2px solid var(--green);
+  white-space: nowrap;
+}
+.formular-download-btn:hover {
+  background: transparent;
+  color: var(--green);
+}
+
+/* Card whose file has not been uploaded yet */
+.formular-card--missing .formular-download-btn,
+.formular-card--missing:hover .formular-download-btn {
+  background: #6b7c74;
+  border-color: #6b7c74;
+  color: #fff;
+}
+
 /* EMPTY STATE */
 .formulari-empty {
   text-align: center;

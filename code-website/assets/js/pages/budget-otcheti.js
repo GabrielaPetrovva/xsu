@@ -6,29 +6,39 @@
     ───────────────────────────────────────────── */
     function initAccordion() {
       const headers = document.querySelectorAll('.year-header');
-  
+
       headers.forEach(function (header) {
-        header.addEventListener('click', function () {
-          const targetId = this.getAttribute('data-target');
-          const docs     = document.getElementById(targetId);
-          if (!docs) return;
-  
+        const docs = document.getElementById(header.getAttribute('data-target'));
+        if (!docs) return;
+
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        header.setAttribute('aria-expanded', docs.classList.contains('year-docs--closed') ? 'false' : 'true');
+        header.setAttribute('aria-controls', header.getAttribute('data-target'));
+
+        const toggle = function () {
           const isOpen = !docs.classList.contains('year-docs--closed');
-  
+
           if (isOpen) {
-            // Close
             docs.classList.add('year-docs--closed');
-            this.classList.remove('year-header--open');
-  
-            const chevron = this.querySelector('.year-chevron');
+            header.classList.remove('year-header--open');
+            header.setAttribute('aria-expanded', 'false');
+            const chevron = header.querySelector('.year-chevron');
             if (chevron) chevron.classList.remove('year-chevron--open');
           } else {
-            // Open
             docs.classList.remove('year-docs--closed');
-            this.classList.add('year-header--open');
-  
-            const chevron = this.querySelector('.year-chevron');
+            header.classList.add('year-header--open');
+            header.setAttribute('aria-expanded', 'true');
+            const chevron = header.querySelector('.year-chevron');
             if (chevron) chevron.classList.add('year-chevron--open');
+          }
+        };
+
+        header.addEventListener('click', toggle);
+        header.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
           }
         });
       });

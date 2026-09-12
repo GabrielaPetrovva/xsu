@@ -374,6 +374,10 @@
   transform: translateY(-1px);
 }
 
+.doc-download--missing {
+  background: #6b7c74;
+}
+
 /* ── LEGACY / TRANSPARENCY BANNER ── */
 .legacy-banner {
   background: var(--green);
