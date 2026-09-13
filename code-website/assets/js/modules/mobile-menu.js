@@ -40,7 +40,7 @@ export function initMobileMenu() {
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && menuOpen) closeMenu();
+    if (window.innerWidth > 1100 && menuOpen) closeMenu();
   });
 
   mobileMenu.setAttribute("aria-hidden", "true");

@@ -437,13 +437,6 @@ img {
   nav {
     padding: 0 1.2rem;
   }
-  .nav-links,
-  .hamburger {
-    display: flex;
-  }
-  .mobile-menu {
-    display: flex;
-  }
   .nav-logo img {
     height: 44px;
   }
